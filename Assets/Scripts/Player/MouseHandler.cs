@@ -19,8 +19,8 @@ namespace Player
         
         private void OnDisable()
         {
-            grabAction.action.started += TryGrab;
-            grabAction.action.canceled += StopGrab;
+            grabAction.action.started -= TryGrab;
+            grabAction.action.canceled -= StopGrab;
         }
 
         private void TryGrab(InputAction.CallbackContext callbackContext)
@@ -51,7 +51,7 @@ namespace Player
             
             var camRay = mainCamera.ScreenPointToRay(Pointer.current.position.ReadValue());
             if (Physics.Raycast(camRay, out var hit, 100, ~0, QueryTriggerInteraction.Collide)
-                && hit.transform.TryGetComponent(out IMouseGrabbable grabbable))
+                && hit.collider.TryGetComponent(out IMouseGrabbable grabbable))
             {
                 ChangeHovered(grabbable);
             }
