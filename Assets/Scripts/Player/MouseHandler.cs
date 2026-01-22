@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Utility;
 
 namespace Player
 {
     public class MouseHandler : MonoBehaviour
     {
         [SerializeField] private InputActionReference grabAction;
-        [SerializeField] private Camera mainCamera;
+        private Camera MainCamera => GlobalObjects.MainCamera;
 
         private IMouseGrabbable currentHovered;
         private IMouseGrabbable currentGrabbed;
@@ -49,7 +50,7 @@ namespace Player
         {
             if (currentGrabbed != null) return;
             
-            var camRay = mainCamera.ScreenPointToRay(Pointer.current.position.ReadValue());
+            var camRay = MainCamera.ScreenPointToRay(Pointer.current.position.ReadValue());
             if (Physics.Raycast(camRay, out var hit, 100, ~0, QueryTriggerInteraction.Collide)
                 && hit.collider.TryGetComponent(out IMouseGrabbable grabbable))
             {
