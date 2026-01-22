@@ -8,9 +8,19 @@ namespace Player
     {
         [SerializeField] private InputActionReference grabAction;
         private Camera MainCamera => GlobalObjects.MainCamera;
+        
+        public static MouseHandler Instance { get; private set; }
+
+        public IMouseGrabbable CurrentHovered => currentHovered;
+        public IMouseGrabbable CurrentGrabbed => currentGrabbed;
 
         private IMouseGrabbable currentHovered;
         private IMouseGrabbable currentGrabbed;
+
+        private void Awake()
+        {
+            Instance = this;
+        }
 
         private void OnEnable()
         {

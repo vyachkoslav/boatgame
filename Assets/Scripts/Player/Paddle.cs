@@ -1,10 +1,12 @@
+using FishNet.Connection;
+using Network;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Utility;
 
 namespace Player
 {
-    public class Paddle : MonoBehaviour, IMouseGrabbable
+    public class Paddle : NetworkGrabbable, IMouseGrabbable
     {
         [Header("Components")]
         [SerializeField] private MeshRenderer mesh;
@@ -19,8 +21,10 @@ namespace Player
         [SerializeField] private Material defaultMaterial;
         [SerializeField] private Material hoverMaterial;
         [SerializeField] private Material dragMaterial;
+        [SerializeField] private Material grabbedByOtherMaterial;
 
         private bool grabbed = false;
+        private bool grabbedByOther = false;
         private Plane horPlane;
         private Vector3 initPosition;
         private float currentSpeed;
@@ -47,28 +51,54 @@ namespace Player
         
         public void Hover()
         {
+            if (grabbedByOther) return;
             mesh.material = hoverMaterial;
         }
 
         public void Unhover()
         {
+            if (grabbedByOther) return;
             mesh.material = defaultMaterial;
         }
 
-        public void Grab()
+        protected override void OnGrab()
         {
+            if (grabbedByOther) return;
             mesh.material = dragMaterial;
             grabbed = true;
             rigidbody.useGravity = false;
         }
 
-        public void Ungrab()
+        protected override void OnUngrab()
         {
             mesh.material = defaultMaterial;
             grabbed = false;
             rigidbody.useGravity = true;
             transform.localPosition = initPosition;
             targetPosition = initPosition;
+        }
+        
+        public override void OnOwnershipServer(NetworkConnection prevOwner)
+        {
+            base.OnOwnershipServer(prevOwner);
+            if (!Owner.IsValid)
+                transform.localPosition = initPosition;
+        }
+
+        protected override void OnGrabbedByOther()
+        {
+            if (grabbedByOther) return;
+            if (grabbed) Ungrab();
+            
+            grabbedByOther = true;
+            mesh.material = grabbedByOtherMaterial;
+        }
+
+        protected override void OnUngrabbedByOther()
+        {
+            if (!grabbedByOther) return;
+            grabbedByOther = false;
+            mesh.material = MouseHandler.Instance.CurrentHovered == this ? hoverMaterial : defaultMaterial;
         }
 
         private void Update()
