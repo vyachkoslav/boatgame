@@ -458,11 +458,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player.MouseGrabbablePaddle
   mesh: {fileID: 417777465}
-  pivotParent: {fileID: 7001020988886983745}
   rigidbody: {fileID: 7001020988886983749}
   maxDragRadius: 0.1
-  airSpeed: 0
-  waterSpeed: 0
+  airSpeed: 300
+  waterSpeed: 100
   defaultMaterial: {fileID: 2100000, guid: 79f911c414a0d2d43bf081a68087794f, type: 2}
   hoverMaterial: {fileID: 2100000, guid: 973e315e6114ee24ba7442966e4b44f9, type: 2}
   dragMaterial: {fileID: 2100000, guid: bd9268b0e3e85134388e3ee91ed33110, type: 2}
@@ -971,7 +970,8 @@ GameObject:
   - component: {fileID: 1167373293}
   - component: {fileID: 1167373292}
   - component: {fileID: 1167373291}
-  m_Layer: 0
+  - component: {fileID: 1167373295}
+  m_Layer: 4
   m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1072,6 +1072,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1167373295
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167373290}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 2.220446e-16, z: 10}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1278979754
 GameObject:
   m_ObjectHideFlags: 0
@@ -1120,11 +1141,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player.MouseGrabbablePaddle
   mesh: {fileID: 1278979758}
-  pivotParent: {fileID: 1663265053}
   rigidbody: {fileID: 1663265057}
   maxDragRadius: 0.1
-  airSpeed: 0
-  waterSpeed: 0
+  airSpeed: 300
+  waterSpeed: 100
   defaultMaterial: {fileID: 2100000, guid: 79f911c414a0d2d43bf081a68087794f, type: 2}
   hoverMaterial: {fileID: 2100000, guid: 973e315e6114ee24ba7442966e4b44f9, type: 2}
   dragMaterial: {fileID: 2100000, guid: bd9268b0e3e85134388e3ee91ed33110, type: 2}
@@ -1354,6 +1374,10 @@ PrefabInstance:
       propertyPath: WasActiveDuringEdit
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 831474105563853022, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
+      propertyPath: paddle
+      value: 
+      objectReference: {fileID: 1278979756}
     - target: {fileID: 4469457575690710460, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
       propertyPath: SceneId
       value: 2013191474
@@ -1380,15 +1404,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5416296445328210538, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.6532815
+      value: -0.27059805
       objectReference: {fileID: 0}
     - target: {fileID: 5416296445328210538, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.27059805
+      value: 0.6532815
       objectReference: {fileID: 0}
     - target: {fileID: 5416296445328210538, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.27059805
+      value: 0.27059805
       objectReference: {fileID: 0}
     - target: {fileID: 5416296445328210538, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1400,7 +1424,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5416296445328210538, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8276943052633552184, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
       propertyPath: m_Name
@@ -1581,6 +1605,10 @@ PrefabInstance:
       propertyPath: WasActiveDuringEdit
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 831474105563853022, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
+      propertyPath: paddle
+      value: 
+      objectReference: {fileID: 417777463}
     - target: {fileID: 3665797915882944133, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
       propertyPath: _addedNetworkObject
       value: 
@@ -1599,7 +1627,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5416296445328210538, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.6532815
+      value: 0.27059805
       objectReference: {fileID: 0}
     - target: {fileID: 5416296445328210538, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1607,11 +1635,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5416296445328210538, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.27059805
+      value: 0.27059805
       objectReference: {fileID: 0}
     - target: {fileID: 5416296445328210538, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.27059805
+      value: 0.6532815
       objectReference: {fileID: 0}
     - target: {fileID: 5416296445328210538, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1623,7 +1651,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5416296445328210538, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 90
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 8276943052633552184, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
       propertyPath: m_Name

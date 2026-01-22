@@ -1,0 +1,39 @@
+using System;
+using Player;
+using UnityEngine;
+using UnityEngine.Events;
+
+namespace Utility
+{
+    public class OnWaterCollision : MonoBehaviour
+    {
+        private static int waterLayer;
+
+        [SerializeField] private Paddle paddle;
+        
+        public UnityEvent OnWaterCollisionEnter = new();
+        public UnityEvent OnWaterCollisionExit = new();
+
+        private void Awake()
+        {
+            waterLayer = LayerMask.NameToLayer("Water");
+            if (paddle != null)
+            {
+                OnWaterCollisionEnter.AddListener(paddle.EnterWater);
+                OnWaterCollisionExit.AddListener(paddle.ExitWater);
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.layer == waterLayer)
+                OnWaterCollisionEnter.Invoke();
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.gameObject.layer == waterLayer)
+                OnWaterCollisionExit.Invoke();
+        }
+    }
+}

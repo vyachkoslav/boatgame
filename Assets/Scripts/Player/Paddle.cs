@@ -21,15 +21,27 @@ namespace Player
         [SerializeField] private Material dragMaterial;
 
         private bool grabbed = false;
-        private Plane controlPlane;
+        private Plane horPlane;
         private Vector3 initPosition;
+        private float currentSpeed;
 
         private Camera MainCamera => GlobalObjects.MainCamera;
 
         private void Awake()
         {
-            controlPlane = new Plane(Vector3.up, transform.position);
+            horPlane = new Plane(Vector3.up, transform.position);
             initPosition = transform.localPosition;
+            currentSpeed = airSpeed;
+        }
+
+        public void EnterWater()
+        {
+            currentSpeed = waterSpeed;
+        }
+
+        public void ExitWater()
+        {
+            currentSpeed = airSpeed;
         }
         
         public void Hover()
@@ -72,7 +84,7 @@ namespace Player
         private void UpdateHandlePosition()
         {
             var camRay = MainCamera.ScreenPointToRay(Pointer.current.position.ReadValue());
-            if (!controlPlane.Raycast(camRay, out var distance))
+            if (!horPlane.Raycast(camRay, out var distance))
             {
                 Debug.LogWarning("Didn't hit drag raycast, camera under plane?");
                 return;
@@ -82,9 +94,14 @@ namespace Player
             
             var target = endPos;
             var dir = endPos - initPosition;
-            var distanceFromStart = dir.magnitude;
-            if (distanceFromStart > maxDragRadius)
-                target = initPosition + (dir/distanceFromStart)*maxDragRadius;
+            distance = dir.magnitude;
+            if (distance > maxDragRadius)
+            {
+                target = initPosition + (dir/distance)*maxDragRadius;
+                distance = maxDragRadius;
+            }
+
+            target.y += distance - (maxDragRadius/3);
             
             transform.localPosition = target;
         }
@@ -95,6 +112,7 @@ namespace Player
             var selfPos = transform.position;
             var dir = selfPos - padPos;
             var rot = Quaternion.LookRotation(dir);
+            rot = Quaternion.RotateTowards(rigidbody.rotation, rot, currentSpeed * Time.deltaTime);
             rigidbody.MoveRotation(rot);
         }
     }
