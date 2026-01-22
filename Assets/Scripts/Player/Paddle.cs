@@ -98,7 +98,7 @@ namespace Player
         {
             if (!grabbedByOther) return;
             grabbedByOther = false;
-            mesh.material = MouseHandler.Instance.CurrentHovered == this ? hoverMaterial : defaultMaterial;
+            mesh.material = ReferenceEquals(MouseHandler.Instance.CurrentHovered, this) ? hoverMaterial : defaultMaterial;
         }
 
         private void Update()
