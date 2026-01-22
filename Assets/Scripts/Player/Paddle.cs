@@ -24,6 +24,7 @@ namespace Player
         private Plane horPlane;
         private Vector3 initPosition;
         private float currentSpeed;
+        private Vector3 targetPosition;
 
         private Camera MainCamera => GlobalObjects.MainCamera;
 
@@ -67,6 +68,7 @@ namespace Player
             grabbed = false;
             rigidbody.useGravity = true;
             transform.localPosition = initPosition;
+            targetPosition = initPosition;
         }
 
         private void Update()
@@ -101,16 +103,16 @@ namespace Player
                 distance = maxDragRadius;
             }
 
-            target.y += distance - (maxDragRadius/3);
+            targetPosition = target;
+            targetPosition.y += (distance - (maxDragRadius/2))*2;
             
             transform.localPosition = target;
         }
 
         private void DragPaddleToHandle()
         {
-            var padPos = transform.parent.TransformPoint(initPosition);
-            var selfPos = transform.position;
-            var dir = selfPos - padPos;
+            var selfPos = targetPosition;
+            var dir = selfPos - initPosition;
             var rot = Quaternion.LookRotation(dir);
             rot = Quaternion.RotateTowards(rigidbody.rotation, rot, currentSpeed * Time.deltaTime);
             rigidbody.MoveRotation(rot);
