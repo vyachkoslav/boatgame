@@ -2,7 +2,6 @@ using FishNet.Connection;
 using Network;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Utility;
 
 namespace Player
 {
@@ -11,11 +10,12 @@ namespace Player
         [Header("Components")]
         [SerializeField] private MeshRenderer mesh;
         [SerializeField] private new Rigidbody rigidbody;
+        [SerializeField] private Transform blade;
+        [SerializeField] private Rigidbody boatRb;
 
         [Header("Settings")] 
-        [SerializeField] private float maxDragRadius;
-        [SerializeField] private float airSpeed;
-        [SerializeField] private float waterSpeed;
+        [SerializeField] private InputActionReference raiseAction;
+        [SerializeField] private float waterDrag;
         
         [Header("Visual")]
         [SerializeField] private Material defaultMaterial;
@@ -25,28 +25,46 @@ namespace Player
 
         private bool grabbed = false;
         private bool grabbedByOther = false;
-        private Plane horPlane;
         private Vector3 initPosition;
-        private float currentSpeed;
-        private Vector3 targetPosition;
-
-        private Camera MainCamera => GlobalObjects.MainCamera;
+        private float xRot = 0;
+        private float zRot;
+        private Vector3 bladeLastPos;
 
         private void Awake()
         {
-            horPlane = new Plane(Vector3.up, transform.position);
             initPosition = transform.localPosition;
-            currentSpeed = airSpeed;
+            bladeLastPos = blade.transform.position;
+            zRot = rigidbody.transform.localRotation.eulerAngles.z;
         }
 
-        public void EnterWater()
+        private void OnEnable()
         {
-            currentSpeed = waterSpeed;
+            raiseAction.action.started += EnterWater;
+            raiseAction.action.canceled += ExitWater;
         }
 
-        public void ExitWater()
+        private void OnDisable()
         {
-            currentSpeed = airSpeed;
+            raiseAction.action.started -= EnterWater;
+            raiseAction.action.canceled -= ExitWater;
+        }
+
+        private void EnterWater(InputAction.CallbackContext callbackContext)
+        {
+            if (!grabbed) return;
+            SetRotation(-45);
+        }
+
+        private void ExitWater(InputAction.CallbackContext callbackContext)
+        {
+            if (!grabbed) return;
+            SetRotation(0);
+        }
+
+        private void SetRotation(float x)
+        {
+            rigidbody.angularVelocity = Vector3.zero;
+            xRot = x;
         }
         
         public void Hover()
@@ -66,16 +84,17 @@ namespace Player
             if (grabbedByOther) return;
             mesh.material = dragMaterial;
             grabbed = true;
-            rigidbody.useGravity = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         protected override void OnUngrab()
         {
             mesh.material = defaultMaterial;
             grabbed = false;
-            rigidbody.useGravity = true;
             transform.localPosition = initPosition;
-            targetPosition = initPosition;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
         
         public override void OnOwnershipServer(NetworkConnection prevOwner)
@@ -101,51 +120,27 @@ namespace Player
             mesh.material = ReferenceEquals(MouseHandler.Instance.CurrentHovered, this) ? hoverMaterial : defaultMaterial;
         }
 
-        private void Update()
-        {
-            if (!grabbed) return;
-            UpdateHandlePosition();
-        }
-
         private void FixedUpdate()
         {
             if (!grabbed) return;
-            DragPaddleToHandle();
-        }
-        
-        private void UpdateHandlePosition()
-        {
-            var camRay = MainCamera.ScreenPointToRay(Pointer.current.position.ReadValue());
-            if (!horPlane.Raycast(camRay, out var distance))
-            {
-                Debug.LogWarning("Didn't hit drag raycast, camera under plane?");
-                return;
-            }
-            var pos = camRay.GetPoint(distance);
-            var endPos = transform.parent.InverseTransformPoint(pos);
             
-            var target = endPos;
-            var dir = endPos - initPosition;
-            distance = dir.magnitude;
-            if (distance > maxDragRadius)
+            var delta = Pointer.current.delta.value;
+            var targetVel = new Vector3(0, -delta.y, 0);
+            rigidbody.AddRelativeTorque(targetVel, ForceMode.Acceleration);
+
+            var bladePos = blade.transform.position;
+            if (bladePos.y < 0 && bladeLastPos.y < 0) 
             {
-                target = initPosition + (dir/distance)*maxDragRadius;
-                distance = maxDragRadius;
+                var velocity = (bladePos - bladeLastPos) / Time.fixedDeltaTime;
+                var force = -velocity * waterDrag;
+                boatRb.AddForceAtPosition(force, bladePos, ForceMode.Force);
             }
+            bladeLastPos = blade.transform.position;
 
-            targetPosition = target;
-            targetPosition.y += (distance - (maxDragRadius/2))*2;
-            
-            transform.localPosition = target;
-        }
-
-        private void DragPaddleToHandle()
-        {
-            var selfPos = targetPosition;
-            var dir = selfPos - initPosition;
-            var rot = Quaternion.LookRotation(dir);
-            rot = Quaternion.RotateTowards(rigidbody.rotation, rot, currentSpeed * Time.deltaTime);
-            rigidbody.MoveRotation(rot);
+            var rot = rigidbody.transform.localEulerAngles;
+            rot.x = xRot;
+            rot.z = zRot;
+            rigidbody.rotation = rigidbody.transform.parent.rotation * Quaternion.Euler(rot);
         }
     }
 }

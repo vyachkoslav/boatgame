@@ -133,6 +133,8 @@ MonoBehaviour:
   takeOwnershipOf: {fileID: 0}
   mesh: {fileID: 2691385483283573265}
   rigidbody: {fileID: 0}
+  forcePos: {fileID: 0}
+  raiseAction: {fileID: 0}
   maxDragRadius: 0.1
   airSpeed: 300
   waterSpeed: 100
