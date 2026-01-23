@@ -122,20 +122,22 @@ namespace Player
 
         private void FixedUpdate()
         {
+            if (grabbed || grabbedByOther && IsServerInitialized)
+            {
+                var bladePos = blade.transform.position;
+                if (bladePos.y < 0 && bladeLastPos.y < 0) 
+                {
+                    var velocity = (bladePos - bladeLastPos) / Time.fixedDeltaTime;
+                    var force = -velocity * waterDrag;
+                    boatRb.AddForceAtPosition(force, bladePos, ForceMode.Force);
+                }
+                bladeLastPos = blade.transform.position;
+            }
             if (!grabbed) return;
             
             var delta = Pointer.current.delta.value;
             var targetVel = new Vector3(0, -delta.y, 0);
             rigidbody.AddRelativeTorque(targetVel, ForceMode.Acceleration);
-
-            var bladePos = blade.transform.position;
-            if (bladePos.y < 0 && bladeLastPos.y < 0) 
-            {
-                var velocity = (bladePos - bladeLastPos) / Time.fixedDeltaTime;
-                var force = -velocity * waterDrag;
-                boatRb.AddForceAtPosition(force, bladePos, ForceMode.Force);
-            }
-            bladeLastPos = blade.transform.position;
 
             var rot = rigidbody.transform.localEulerAngles;
             rot.x = xRot;

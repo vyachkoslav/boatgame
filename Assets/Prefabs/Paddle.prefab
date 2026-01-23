@@ -440,7 +440,7 @@ MonoBehaviour:
   _componentIndexCache: 255
   _addedNetworkObject: {fileID: 353962006689454552}
   _networkObjectCache: {fileID: 0}
-  _componentConfiguration: 2
+  _componentConfiguration: 0
   _synchronizeParent: 0
   _packing:
     Position: 1
@@ -502,7 +502,7 @@ MonoBehaviour:
   _defaultDespawnType: 0
   _initializedTimestamp: 0
   NetworkObserver: {fileID: 0}
-  _enablePrediction: 1
+  _enablePrediction: 0
   _predictionType: 1
   _localReconcileCorrectionType: 1
   _graphicalObject: {fileID: 0}
