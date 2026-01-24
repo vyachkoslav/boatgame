@@ -133,6 +133,9 @@ namespace Network
         [Replicate]
         private void PerformReplicate(ReplicateData rd, ReplicateState state = ReplicateState.Invalid, Channel channel = Channel.Unreliable)
         {
+            if (state.IsFuture())
+                return;
+            
             var xRot = rd.State switch
             {
                 PaddleState.Middle => 0,
@@ -141,7 +144,8 @@ namespace Network
             };
             
             var rot = paddleRb.transform.localEulerAngles;
-            rot.x = xRot;
+            if (!state.IsTickedNonCreated())
+                rot.x = xRot;
             rot.z = zRot;
             paddle.MoveRotation(paddleRb.transform.parent.rotation * Quaternion.Euler(rot));
             
