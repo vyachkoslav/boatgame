@@ -1,5 +1,6 @@
 using System;
 using FishNet.Object.Prediction;
+using FishNet.Serializing;
 using FishNet.Transporting;
 using FishNet.Utility.Template;
 using UnityEngine;
@@ -74,7 +75,7 @@ namespace Network
         private void Awake()
         {
             zRot = paddleRb.transform.localRotation.eulerAngles.z;
-            paddle.Initialize(paddleRb);
+            paddle.Initialize(paddleRb, AutoPackType.Unpacked);
         }
 
         private void OnEnable()
@@ -91,11 +92,13 @@ namespace Network
 
         private void LowerPaddle(InputAction.CallbackContext callbackContext)
         {
+            if (!IsOwner) return;
             currentState = PaddleState.Down;
         }
         
         private void RaisePaddle(InputAction.CallbackContext callbackContext)
         {
+            if (!IsOwner) return;
             currentState = PaddleState.Middle;
         }
         
@@ -108,9 +111,13 @@ namespace Network
         protected override void TimeManager_OnTick()
         {
             PerformReplicate(BuildMoveData());
+        }
+
+        protected override void TimeManager_OnPostTick()
+        {
             CreateReconcile();
         }
-        
+
         /// <summary>
         /// Returns replicate data to send as the controller.
         /// </summary>
@@ -126,9 +133,6 @@ namespace Network
         [Replicate]
         private void PerformReplicate(ReplicateData rd, ReplicateState state = ReplicateState.Invalid, Channel channel = Channel.Unreliable)
         {
-            var vel = new Vector3(0, rd.Delta, 0);
-            paddle.AddRelativeTorque(vel, ForceMode.Acceleration);
-
             var xRot = rd.State switch
             {
                 PaddleState.Middle => 0,
@@ -139,8 +143,11 @@ namespace Network
             var rot = paddleRb.transform.localEulerAngles;
             rot.x = xRot;
             rot.z = zRot;
-            
             paddle.MoveRotation(paddleRb.transform.parent.rotation * Quaternion.Euler(rot));
+            
+            var vel = new Vector3(0, rd.Delta, 0);
+            paddle.AddRelativeTorque(vel, ForceMode.Acceleration);
+            
             paddle.Simulate();
         }
         
