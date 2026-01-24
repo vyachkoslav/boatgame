@@ -1,0 +1,162 @@
+using System;
+using FishNet.Object.Prediction;
+using FishNet.Transporting;
+using FishNet.Utility.Template;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+namespace Network
+{
+    public class PaddlePrediction : TickNetworkBehaviour
+    {
+        #region Types.
+
+        private enum PaddleState
+        {
+            Middle,
+            Down
+        }
+        
+        private struct ReplicateData : IReplicateData
+        {
+            public ReplicateData(float delta, PaddleState state)
+            {
+                State = state;
+                Delta = delta;
+                tick = 0;
+            }
+
+            /// <summary>
+            /// Which state is paddle in
+            /// </summary>
+            public PaddleState State;
+            
+            /// <summary>
+            /// Mouse movement to move paddle
+            /// </summary>
+            public float Delta;
+
+            private uint tick;
+
+            public void Dispose() { }
+            public uint GetTick() => tick;
+            public void SetTick(uint value) => tick = value;
+        }
+
+        private struct ReconcileData : IReconcileData
+        {
+            public ReconcileData(PredictionRigidbody paddle)
+            {
+                Paddle = paddle;
+                tick = 0;
+            }
+
+            public PredictionRigidbody Paddle;
+
+            private uint tick;
+
+            public void Dispose() { }
+            public uint GetTick() => tick;
+            public void SetTick(uint value) => tick = value;
+        }
+
+        #endregion
+
+        [SerializeField] private InputActionReference lowerPaddleAction;
+        
+        [SerializeField] private Rigidbody paddleRb;
+        [SerializeField] private Transform blade;
+
+        private readonly PredictionRigidbody paddle = new();
+        private PaddleState currentState = PaddleState.Middle;
+        private float zRot;
+
+        private void Awake()
+        {
+            zRot = paddleRb.transform.localRotation.eulerAngles.z;
+            paddle.Initialize(paddleRb);
+        }
+
+        private void OnEnable()
+        {
+            lowerPaddleAction.action.started += LowerPaddle;
+            lowerPaddleAction.action.canceled += RaisePaddle;
+        }
+        
+        private void OnDisable()
+        {
+            lowerPaddleAction.action.started -= LowerPaddle;
+            lowerPaddleAction.action.canceled -= RaisePaddle;
+        }
+
+        private void LowerPaddle(InputAction.CallbackContext callbackContext)
+        {
+            currentState = PaddleState.Down;
+        }
+        
+        private void RaisePaddle(InputAction.CallbackContext callbackContext)
+        {
+            currentState = PaddleState.Middle;
+        }
+        
+        public override void OnStartNetwork()
+        {
+            // Rigidbodies need tick and postTick.
+            SetTickCallbacks(TickCallback.Tick | TickCallback.PostTick);
+        }
+
+        protected override void TimeManager_OnTick()
+        {
+            PerformReplicate(BuildMoveData());
+            CreateReconcile();
+        }
+        
+        /// <summary>
+        /// Returns replicate data to send as the controller.
+        /// </summary>
+        private ReplicateData BuildMoveData()
+        {
+            if (!IsOwner) return default;
+
+            var delta = -Pointer.current.delta.value.y;
+            ReplicateData md = new(delta, currentState);
+            return md;
+        }
+        
+        [Replicate]
+        private void PerformReplicate(ReplicateData rd, ReplicateState state = ReplicateState.Invalid, Channel channel = Channel.Unreliable)
+        {
+            var vel = new Vector3(0, rd.Delta, 0);
+            paddle.AddRelativeTorque(vel, ForceMode.Acceleration);
+
+            var xRot = rd.State switch
+            {
+                PaddleState.Middle => 0,
+                PaddleState.Down => -45,
+                _ => throw new ArgumentOutOfRangeException()
+            };
+            
+            var rot = paddleRb.transform.localEulerAngles;
+            rot.x = xRot;
+            rot.z = zRot;
+            
+            paddle.MoveRotation(paddleRb.transform.parent.rotation * Quaternion.Euler(rot));
+            paddle.Simulate();
+        }
+        
+        /// <summary>
+        /// Creates a reconcile that is sent to clients.
+        /// </summary>
+        public override void CreateReconcile()
+        {
+            ReconcileData rd = new(paddle);
+            PerformReconcile(rd);
+        }
+        
+        [Reconcile]
+        private void PerformReconcile(ReconcileData rd, Channel channel = Channel.Unreliable)
+        {
+            paddle.Reconcile(rd.Paddle);
+        }
+    }
+}
