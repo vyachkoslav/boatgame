@@ -64,8 +64,12 @@ namespace Network.Voice
 
         void OnDestroy()
         {
-            Participant.ParticipantMuteStateChanged -= UpdateChatStateImage;
-            Participant.ParticipantSpeechDetected -= UpdateChatStateImage;
+            if (Participant != null)
+            {
+                Participant.ParticipantMuteStateChanged -= UpdateChatStateImage;
+                Participant.ParticipantSpeechDetected -= UpdateChatStateImage;
+            }
+
             MuteButton.onClick.RemoveAllListeners();
             ParticipantVolumeSlider.onValueChanged.RemoveAllListeners();
         }

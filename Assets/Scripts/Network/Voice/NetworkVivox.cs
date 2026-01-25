@@ -72,6 +72,8 @@ namespace Network.Voice
 
         public override void OnStopClient()
         {
+            if (VivoxService.Instance == null) return;
+            
             VivoxService.Instance.ChannelJoined -= OnJoinedChannel;
             VivoxService.Instance.ParticipantAddedToChannel -= OnMemberJoin;
         }
