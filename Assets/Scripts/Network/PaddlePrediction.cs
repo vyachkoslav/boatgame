@@ -70,10 +70,15 @@ namespace Network
         [SerializeField] private float lowerMinAngle;
         [SerializeField] private float lowerMaxAngle;
         [SerializeField] private bool isLeft;
+
+        [SerializeField] private float mouseSensitivity = 0.01f;
+        [SerializeField] private float maxDelta = 100;
         
         private readonly PredictionRigidbody paddle = new();
         private PaddleState currentState = PaddleState.Middle;
         private float zRot;
+        
+        private float deltaPending;
 
         private void Awake()
         {
@@ -91,6 +96,11 @@ namespace Network
         {
             lowerPaddleAction.action.started -= LowerPaddle;
             lowerPaddleAction.action.canceled -= RaisePaddle;
+        }
+
+        private void Update()
+        {
+            deltaPending += Pointer.current.delta.value.y;
         }
 
         private void LowerPaddle(InputAction.CallbackContext callbackContext)
@@ -131,8 +141,8 @@ namespace Network
         {
             if (!IsOwner) return default;
 
-            var delta = -Pointer.current.delta.value.y;
-            ReplicateData md = new(delta, currentState);
+            ReplicateData md = new(-deltaPending * mouseSensitivity, currentState);
+            deltaPending = 0;
             return md;
         }
         
@@ -182,9 +192,10 @@ namespace Network
                     return;
                 }
             }
-            
-            var vel = new Vector3(0, rd.Delta, 0);
-            paddle.AddRelativeTorque(vel, ForceMode.Acceleration);
+
+            var mdelta = Mathf.Clamp((float)(rd.Delta / TimeManager.TickDelta), -maxDelta, maxDelta);
+            var vel = new Vector3(0, mdelta, 0);
+            paddle.AddRelativeTorque(vel, ForceMode.Force);
             
             paddle.Simulate();
         }
