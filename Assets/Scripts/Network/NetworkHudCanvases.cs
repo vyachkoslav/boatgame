@@ -87,19 +87,16 @@ namespace Network
 
         private void Start()
         {
-            _networkManager = FindObjectOfType<NetworkManager>();
+            _networkManager = FindAnyObjectByType<NetworkManager>();
             if (_networkManager == null)
             {
                 Debug.LogError("NetworkManager not found, HUD will not function.");
                 return;
             }
-            else
-            {
-                UpdateColor(LocalConnectionState.Stopped, ref _serverIndicator);
-                UpdateColor(LocalConnectionState.Stopped, ref _clientIndicator);
-                _networkManager.ServerManager.OnServerConnectionState += ServerManager_OnServerConnectionState;
-                _networkManager.ClientManager.OnClientConnectionState += ClientManager_OnClientConnectionState;
-            }
+            UpdateColor(LocalConnectionState.Stopped, ref _serverIndicator);
+            UpdateColor(LocalConnectionState.Stopped, ref _clientIndicator);
+            _networkManager.ServerManager.OnServerConnectionState += ServerManager_OnServerConnectionState;
+            _networkManager.ClientManager.OnClientConnectionState += ClientManager_OnClientConnectionState;
 
             if (_autoStartType == AutoStartType.Host || _autoStartType == AutoStartType.Server)
                 OnClick_Server();
@@ -138,14 +135,14 @@ namespace Network
         {
             _clientState = obj.ConnectionState;
             UpdateColor(obj.ConnectionState, ref _clientIndicator);
-            inputParent.gameObject.SetActive(_networkManager.IsOffline);
+            inputParent.gameObject.SetActive(obj.ConnectionState.IsStoppedOrStopping() && _networkManager.IsOffline);
         }
 
         private void ServerManager_OnServerConnectionState(ServerConnectionStateArgs obj)
         {
             _serverState = obj.ConnectionState;
             UpdateColor(obj.ConnectionState, ref _serverIndicator);
-            inputParent.gameObject.SetActive(_networkManager.IsOffline);
+            inputParent.gameObject.SetActive(obj.ConnectionState.IsStoppedOrStopping() && _networkManager.IsOffline);
         }
 
         public void OnClick_Server()
