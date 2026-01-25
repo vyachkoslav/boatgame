@@ -342,6 +342,8 @@ MonoBehaviour:
   lowerPaddleAction: {fileID: 0}
   paddleRb: {fileID: 8872086712544964959}
   blade: {fileID: 1250109379497908225}
+  lowerMinAngle: 15
+  lowerMaxAngle: 165
 --- !u!114 &2896369764640804545
 MonoBehaviour:
   m_ObjectHideFlags: 0

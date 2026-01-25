@@ -67,7 +67,10 @@ namespace Network
         
         [SerializeField] private Rigidbody paddleRb;
         [SerializeField] private Transform blade;
-
+        [SerializeField] private float lowerMinAngle;
+        [SerializeField] private float lowerMaxAngle;
+        [SerializeField] private bool isLeft;
+        
         private readonly PredictionRigidbody paddle = new();
         private PaddleState currentState = PaddleState.Middle;
         private float zRot;
@@ -93,6 +96,9 @@ namespace Network
         private void LowerPaddle(InputAction.CallbackContext callbackContext)
         {
             if (!IsOwner) return;
+            var angle = paddleRb.transform.localEulerAngles.y;
+            if (angle < lowerMinAngle || angle > lowerMaxAngle) return;
+            
             currentState = PaddleState.Down;
         }
         
@@ -146,8 +152,36 @@ namespace Network
             var rot = paddleRb.transform.localEulerAngles;
             if (!state.IsTickedNonCreated())
                 rot.x = xRot;
+            
+            var wasHigher = false;
+            var wasLower = false;
+            if (rd.State == PaddleState.Down)
+            {
+                if (rot.y < lowerMinAngle)
+                {
+                    rot.y = lowerMinAngle+1;
+                    wasLower = true;
+                }
+                else if (rot.y > lowerMaxAngle)
+                {
+                    rot.y = lowerMaxAngle-1;
+                    wasHigher = true;
+                }
+            }
             rot.z = zRot;
             paddle.MoveRotation(paddleRb.transform.parent.rotation * Quaternion.Euler(rot));
+            // if hit bounds, reset to bound and stop
+            if (wasLower || wasHigher)
+            {
+                paddle.AngularVelocity(Vector3.zero);
+                var delta = isLeft ? rd.Delta : -rd.Delta;
+                // if force directed into bound, return
+                if (wasLower && delta <= 0 || wasHigher && delta >= 0)
+                {
+                    paddle.Simulate();
+                    return;
+                }
+            }
             
             var vel = new Vector3(0, rd.Delta, 0);
             paddle.AddRelativeTorque(vel, ForceMode.Acceleration);

@@ -854,8 +854,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player.BoatMovement
   boat: {fileID: 730947926}
   rBlade: {fileID: 627817605}
+  rPaddle: {fileID: 7001020988886983745}
   lBlade: {fileID: 241309344}
+  lPaddle: {fileID: 1663265053}
   waterDrag: 1000
+  minAngleDelta: 0.3
 --- !u!114 &730947930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -896,7 +899,7 @@ MonoBehaviour:
     X: 0
     Y: 0
     Z: 0
-  _synchronizeScale: 1
+  _synchronizeScale: 0
   _scaleSensitivity: 0.001
   _scaleSnapping:
     X: 0
@@ -1423,6 +1426,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 253125976185486715, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
+      propertyPath: isLeft
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 253125976185486715, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
       propertyPath: lowerPaddleAction
       value: 
       objectReference: {fileID: 1617964572}
@@ -1734,6 +1741,14 @@ PrefabInstance:
     - target: {fileID: -4165748941183903207, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
       propertyPath: WasActiveDuringEdit
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 253125976185486715, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
+      propertyPath: lowerMaxAngle
+      value: 345
+      objectReference: {fileID: 0}
+    - target: {fileID: 253125976185486715, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
+      propertyPath: lowerMinAngle
+      value: 195
       objectReference: {fileID: 0}
     - target: {fileID: 253125976185486715, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
       propertyPath: lowerPaddleAction
