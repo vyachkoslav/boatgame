@@ -24,14 +24,19 @@ namespace Network
                 takeOwnershipOf?.GiveOwnership(sender);
                 RpcOwnershipChanged();
             }
-            else 
+            else
+            {
+                Debug.Log("Grab fail " + sender);
                 RpcGrabFailed(sender);
+            }
         }
 
-        [ObserversRpc(ExcludeOwner = true)]
+        [ObserversRpc(ExcludeOwner = false)]
         private void RpcOwnershipChanged()
         {
-            if (Owner.IsValid)
+            if (IsOwner)
+                OnGrab();
+            else if (Owner.IsValid)
                 OnGrabbedByOther();
             else
                 OnUngrabbedByOther();
@@ -41,7 +46,6 @@ namespace Network
         private void RpcGrabFailed(NetworkConnection target)
         {
             Debug.LogWarning("Grab failed, object already grabbed.");
-            OnUngrab();
         }
         
         [ServerRpc(RequireOwnership = true)]
@@ -55,14 +59,13 @@ namespace Network
 
         public void Grab()
         {
-            if (Owner.IsValid) return;
+            if (Owner.IsValid || !IsClientStarted) return;
             CmdGrab();
-            OnGrab();
         }
 
         public void Ungrab()
         {
-            if (!IsOwner) return;
+            if (!IsOwner || !IsClientStarted) return;
             CmdStopGrab();
             OnUngrab();
         }

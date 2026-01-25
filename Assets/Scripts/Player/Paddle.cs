@@ -15,8 +15,6 @@ namespace Player
         [SerializeField] private Material dragMaterial;
         [SerializeField] private Material grabbedByOtherMaterial;
 
-        private bool grabbed = false;
-        private bool grabbedByOther = false;
         private Vector3 initPosition;
 
         private void Awake()
@@ -26,21 +24,19 @@ namespace Player
         
         public void Hover()
         {
-            if (grabbedByOther) return;
+            if (Owner.IsValid) return;
             mesh.material = hoverMaterial;
         }
 
         public void Unhover()
         {
-            if (grabbedByOther) return;
+            if (Owner.IsValid) return;
             mesh.material = defaultMaterial;
         }
 
         protected override void OnGrab()
         {
-            if (grabbedByOther) return;
             mesh.material = dragMaterial;
-            grabbed = true;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
@@ -48,7 +44,6 @@ namespace Player
         protected override void OnUngrab()
         {
             mesh.material = defaultMaterial;
-            grabbed = false;
             transform.localPosition = initPosition;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -63,17 +58,11 @@ namespace Player
 
         protected override void OnGrabbedByOther()
         {
-            if (grabbedByOther) return;
-            if (grabbed) Ungrab();
-            
-            grabbedByOther = true;
             mesh.material = grabbedByOtherMaterial;
         }
 
         protected override void OnUngrabbedByOther()
         {
-            if (!grabbedByOther) return;
-            grabbedByOther = false;
             mesh.material = ReferenceEquals(MouseHandler.Instance.CurrentHovered, this) ? hoverMaterial : defaultMaterial;
         }
     }
