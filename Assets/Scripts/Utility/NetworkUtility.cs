@@ -1,5 +1,7 @@
 using System;
+#if UNITY_EDITOR
 using Unity.Multiplayer.PlayMode;
+#endif
 
 namespace Utility
 {
@@ -26,6 +28,8 @@ namespace Utility
                 _ => throw new ArgumentException("Unexpected multiplayer tag: " + CurrentPlayer.Tags[0])
             };
         }
+        #else
+        public static MultiplayerRole Role => MultiplayerRole.None;
         #endif
     }
 }
