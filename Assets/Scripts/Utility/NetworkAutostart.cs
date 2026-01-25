@@ -20,7 +20,6 @@ namespace Utility
                 case NetworkUtility.MultiplayerRole.Client:
                     networkManager.ClientManager.StartConnection();
                     break;
-                case NetworkUtility.MultiplayerRole.None:
                 case NetworkUtility.MultiplayerRole.Host:
                     networkManager.ServerManager.StartConnection();
                     networkManager.ClientManager.StartConnection();

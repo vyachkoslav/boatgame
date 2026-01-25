@@ -17,9 +17,9 @@ namespace Network
         [ServerRpc(RequireOwnership = false)]
         private void CmdGrab(NetworkConnection sender = null)
         {
-            Debug.Log("Grab " + sender);
             if (!Owner.IsValid)
             {
+                Debug.Log("Grab " + sender);
                 GiveOwnership(sender);
                 takeOwnershipOf?.GiveOwnership(sender);
                 RpcOwnershipChanged();
@@ -55,7 +55,7 @@ namespace Network
 
         public void Grab()
         {
-            if (IsOwner) return;
+            if (Owner.IsValid) return;
             CmdGrab();
             OnGrab();
         }

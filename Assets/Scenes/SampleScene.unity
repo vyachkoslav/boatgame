@@ -341,11 +341,11 @@ MonoBehaviour:
   RecenteringTarget: 2
   HorizontalAxis:
     Value: 0
-    Center: 0
+    Center: -0
     Range: {x: -180, y: 180}
     Wrap: 1
     Recentering:
-      Enabled: 0
+      Enabled: 1
       Wait: 1
       Time: 2
     Restrictions: 0
@@ -801,13 +801,13 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7443408887813606051, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
       insertIndex: 1
-      addedObject: {fileID: 2013197950}
+      addedObject: {fileID: 2013197958}
     - targetCorrespondingSourceObject: {fileID: 7443408887813606051, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
       insertIndex: 2
-      addedObject: {fileID: 2013197938}
+      addedObject: {fileID: 2013197950}
     - targetCorrespondingSourceObject: {fileID: 7443408887813606051, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
       insertIndex: 3
-      addedObject: {fileID: 2013197940}
+      addedObject: {fileID: 2013197938}
     - targetCorrespondingSourceObject: {fileID: 7443408887813606051, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2013197945}
@@ -978,8 +978,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 730947921}
   serializedVersion: 5
-  m_Mass: 100
-  m_LinearDamping: 0.1
+  m_Mass: 1000
+  m_LinearDamping: 0.2
   m_AngularDamping: 3
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -1068,7 +1068,7 @@ MonoBehaviour:
   rPaddle: {fileID: 7001020988886983745}
   lBlade: {fileID: 241309344}
   lPaddle: {fileID: 1663265053}
-  waterDrag: 1000
+  waterDrag: 2000
   minAngleDelta: 0.3
 --- !u!114 &730947930
 MonoBehaviour:
@@ -1939,18 +1939,6 @@ MonoBehaviour:
   _tickRate: 100
   _pingInterval: 1
   _physicsMode: 1
---- !u!114 &2013197940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2013197933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d9005c1cfb644b7b998def7026841c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Utility.NetworkAutostart
 --- !u!114 &2013197945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1990,7 +1978,7 @@ MonoBehaviour:
   _enableIpv6: 1
   _ipv6BindAddress: 
   _port: 7770
-  _maximumClients: 2
+  _maximumClients: 6
   _clientAddress: localhost
 --- !u!114 &2013197951
 MonoBehaviour:
@@ -2043,6 +2031,18 @@ MonoBehaviour:
     _enableMode: 1
     _updateClient: 1
     _updateServer: 1
+--- !u!114 &2013197958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013197933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d9005c1cfb644b7b998def7026841c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Utility.NetworkAutostart
 --- !u!1001 &7001020988886983744
 PrefabInstance:
   m_ObjectHideFlags: 0
