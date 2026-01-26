@@ -817,13 +817,92 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df61cd0500664023ab07ff18f2d5904a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player.MouseGrabbablePaddle
---- !u!43 &427504487
+--- !u!1001 &429844862
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 167617040255576535, guid: 78db161a31f5485478889e785126fd08, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.80611
+      objectReference: {fileID: 0}
+    - target: {fileID: 167617040255576535, guid: 78db161a31f5485478889e785126fd08, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 167617040255576535, guid: 78db161a31f5485478889e785126fd08, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.55299
+      objectReference: {fileID: 0}
+    - target: {fileID: 167617040255576535, guid: 78db161a31f5485478889e785126fd08, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 167617040255576535, guid: 78db161a31f5485478889e785126fd08, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 167617040255576535, guid: 78db161a31f5485478889e785126fd08, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 167617040255576535, guid: 78db161a31f5485478889e785126fd08, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 167617040255576535, guid: 78db161a31f5485478889e785126fd08, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 167617040255576535, guid: 78db161a31f5485478889e785126fd08, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 167617040255576535, guid: 78db161a31f5485478889e785126fd08, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7344254307765842839, guid: 78db161a31f5485478889e785126fd08, type: 3}
+      propertyPath: m_Name
+      value: NetworkManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7344254307765842839, guid: 78db161a31f5485478889e785126fd08, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 2013197945}
+  m_SourcePrefab: {fileID: 100100000, guid: 78db161a31f5485478889e785126fd08, type: 3}
+--- !u!114 &607381853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
+  m_Name: Player/LookBoat
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
+  m_Asset: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_ActionId: 6b444451-8a00-4d00-a97e-f47457f736a8
+--- !u!4 &627817605 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1250109379497908225, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
+  m_PrefabInstance: {fileID: 7001020988886983744}
+  m_PrefabAsset: {fileID: 0}
+--- !u!43 &633410395
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WaterVolume-86148
+  m_Name: WaterVolume-56042
   serializedVersion: 12
   m_SubMeshes:
   - serializedVersion: 2
@@ -995,85 +1074,6 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
---- !u!1001 &429844862
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 167617040255576535, guid: 78db161a31f5485478889e785126fd08, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.80611
-      objectReference: {fileID: 0}
-    - target: {fileID: 167617040255576535, guid: 78db161a31f5485478889e785126fd08, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 167617040255576535, guid: 78db161a31f5485478889e785126fd08, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.55299
-      objectReference: {fileID: 0}
-    - target: {fileID: 167617040255576535, guid: 78db161a31f5485478889e785126fd08, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 167617040255576535, guid: 78db161a31f5485478889e785126fd08, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 167617040255576535, guid: 78db161a31f5485478889e785126fd08, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 167617040255576535, guid: 78db161a31f5485478889e785126fd08, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 167617040255576535, guid: 78db161a31f5485478889e785126fd08, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 167617040255576535, guid: 78db161a31f5485478889e785126fd08, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 167617040255576535, guid: 78db161a31f5485478889e785126fd08, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7344254307765842839, guid: 78db161a31f5485478889e785126fd08, type: 3}
-      propertyPath: m_Name
-      value: NetworkManager
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7344254307765842839, guid: 78db161a31f5485478889e785126fd08, type: 3}
-      insertIndex: 1
-      addedObject: {fileID: 2013197945}
-  m_SourcePrefab: {fileID: 100100000, guid: 78db161a31f5485478889e785126fd08, type: 3}
---- !u!114 &607381853
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
-  m_Name: Player/LookBoat
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
-  m_Asset: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  m_ActionId: 6b444451-8a00-4d00-a97e-f47457f736a8
---- !u!4 &627817605 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1250109379497908225, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
-  m_PrefabInstance: {fileID: 7001020988886983744}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &665373529
 GameObject:
   m_ObjectHideFlags: 0
@@ -1316,7 +1316,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 730947921}
   serializedVersion: 5
-  m_Mass: 1000
+  m_Mass: 100
   m_LinearDamping: 0.2
   m_AngularDamping: 3
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1406,7 +1406,7 @@ MonoBehaviour:
   rPaddle: {fileID: 7001020988886983745}
   lBlade: {fileID: 241309344}
   lPaddle: {fileID: 1663265053}
-  waterDrag: 2000
+  waterDrag: 200
   minAngleDelta: 0.3
 --- !u!114 &730947930
 MonoBehaviour:
@@ -1760,7 +1760,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1167373290}
-  m_Mesh: {fileID: 427504487}
+  m_Mesh: {fileID: 633410395}
 --- !u!4 &1167373294
 Transform:
   m_ObjectHideFlags: 0
