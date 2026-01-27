@@ -11,6 +11,10 @@ namespace GamePhysics
         [SerializeField] private Transform rPaddle;
         [SerializeField] private Transform lBlade;
         [SerializeField] private Transform lPaddle;
+        
+        [SerializeField] private Transform lPlayer;
+        [SerializeField] private Transform rPlayer;
+        
         [SerializeField] private float waterDrag;
         
         /// <summary>
@@ -27,7 +31,7 @@ namespace GamePhysics
             lLast = lBlade.position;
         }
 
-        private void ApplyForceAtPos(Vector3 last, Vector3 cur, float lAng, float cAng)
+        private void ApplyForceAtPos(Vector3 last, Vector3 cur, Vector3 forcePos, float lAng, float cAng)
         {
             var waterLevel = GlobalObjects.Water.GetWaterPointHeight(cur);
             if (cur.y < waterLevel && last.y < waterLevel && 
@@ -35,7 +39,7 @@ namespace GamePhysics
             {
                 var velocity = (cur - last) / Time.fixedDeltaTime;
                 var force = -velocity * waterDrag;
-                boat.AddForceAtPosition(force, cur, ForceMode.Force);
+                boat.AddForceAtPosition(force, forcePos, ForceMode.Force);
             }
         }
         
@@ -45,13 +49,13 @@ namespace GamePhysics
             
             var cur = rBlade.transform.position;
             var angle = rPaddle.transform.localEulerAngles.y;
-            ApplyForceAtPos(rLast, cur, rAngle, angle);
+            ApplyForceAtPos(rLast, cur, rPlayer.position, rAngle, angle);
             rLast = cur;
             rAngle = angle;
             
             cur = lBlade.transform.position;
             angle = lPaddle.transform.localEulerAngles.y;
-            ApplyForceAtPos(lLast, cur, lAngle, angle);
+            ApplyForceAtPos(lLast, cur, lPlayer.position, lAngle, angle);
             lLast = cur;
             lAngle = angle;
         }
