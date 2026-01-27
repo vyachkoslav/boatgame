@@ -105,6 +105,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
+    - _TimeOffset: -1.69
     - _WaveFrequency: 1.75
     - _WaveScale: 0.04
     - _WaveSpeed: 1.5
