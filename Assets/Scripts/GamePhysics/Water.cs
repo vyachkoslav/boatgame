@@ -8,19 +8,21 @@ namespace GamePhysics
 {
     public class Water : NetworkBehaviour, ISerializationCallbackReceiver
     {
-        private readonly SyncVar<DateTime> timeStarted = new();
+        private readonly SyncStopwatch stopwatch = new();
     
         [SerializeField] private Material waterMat;
         
         [HideInInspector] [SerializeField] private float sFreq;
         [HideInInspector] [SerializeField] private float sSpeed;
         [HideInInspector] [SerializeField] private float sScale;
-        
+
+#if UNITY_EDITOR
         private int freqId;
         private int speedId;
         private int scaleId;
+#endif
         
-        private int timeOffsetId;
+        private int timeId;
 
         private float timeOffset;
         
@@ -34,15 +36,28 @@ namespace GamePhysics
 #endif
         }
 
+#if UNITY_EDITOR
+        private void OnDestroy()
+        {
+            waterMat.SetFloat("_WaveTime", 0);
+        }
+#endif
+
         public override void OnStartServer()
         {
-            timeStarted.Value = DateTime.Now;
+            stopwatch.StartStopwatch();
         }
 
         public override void OnStartClient()
         {
-            timeOffset = (float)(DateTime.Now - timeStarted.Value).TotalSeconds - Time.timeSinceLevelLoad;
-            waterMat.SetFloat("_TimeOffset", timeOffset);
+            timeId = Shader.PropertyToID("_WaveTime");
+        }
+
+        private void Update()
+        {
+            stopwatch.Update(Time.deltaTime);
+            if (IsClientStarted)
+                waterMat.SetFloat(timeId, stopwatch.Elapsed);
         }
 
         public float GetWaterPointHeight(Vector3 pos)
@@ -58,7 +73,7 @@ namespace GamePhysics
             var waveFreq = sFreq;
 #endif
         
-            var waveLoc = waveSpeed * (Time.timeSinceLevelLoad + timeOffset);
+            var waveLoc = waveSpeed * stopwatch.Elapsed;
             var xPos = Mathf.Sin(pos.x * waveFreq + waveLoc);
             var zPos = Mathf.Cos(pos.z * waveFreq + waveLoc);
             var y = (xPos + zPos) * waveScale;
