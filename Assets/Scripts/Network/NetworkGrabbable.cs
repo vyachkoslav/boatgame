@@ -8,6 +8,8 @@ namespace Network
     public abstract class NetworkGrabbable : NetworkBehaviour, IGrabbable
     {
         [SerializeField] private NetworkObject takeOwnershipOf;
+        private bool grabbingPending;
+        
         public override void OnStartClient()
         {
             if (Owner.IsValid)
@@ -35,7 +37,12 @@ namespace Network
         private void RpcOwnershipChanged()
         {
             if (IsOwner)
-                OnGrab();
+            {
+                if (grabbingPending)
+                    OnGrab();
+                else
+                    Ungrab();
+            }
             else if (Owner.IsValid)
                 OnGrabbedByOther();
             else
@@ -60,11 +67,13 @@ namespace Network
         public void Grab()
         {
             if (Owner.IsValid || !IsClientStarted) return;
+            grabbingPending = true;
             CmdGrab();
         }
 
         public void Ungrab()
         {
+            grabbingPending = false;
             if (!IsOwner || !IsClientStarted) return;
             CmdStopGrab();
             OnUngrab();
