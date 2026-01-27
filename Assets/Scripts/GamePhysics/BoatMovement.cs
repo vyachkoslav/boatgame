@@ -1,5 +1,6 @@
 using FishNet;
 using UnityEngine;
+using Utility;
 
 namespace GamePhysics
 {
@@ -28,7 +29,9 @@ namespace GamePhysics
 
         private void ApplyForceAtPos(Vector3 last, Vector3 cur, float lAng, float cAng)
         {
-            if (cur.y < 0 && last.y < 0 && Mathf.Abs(Mathf.DeltaAngle(lAng, cAng)) > minAngleDelta)
+            var waterLevel = GlobalObjects.Water.GetWaterPointHeight(cur);
+            if (cur.y < waterLevel && last.y < waterLevel && 
+                Mathf.Abs(Mathf.DeltaAngle(lAng, cAng)) > minAngleDelta)
             {
                 var velocity = (cur - last) / Time.fixedDeltaTime;
                 var force = -velocity * waterDrag;
