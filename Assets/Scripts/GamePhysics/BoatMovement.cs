@@ -1,7 +1,7 @@
 using FishNet;
 using UnityEngine;
 
-namespace Player
+namespace GamePhysics
 {
     public class BoatMovement : MonoBehaviour
     {

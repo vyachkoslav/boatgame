@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Utility;
 
-namespace Player
+namespace GamePhysics
 {
     [RequireComponent(typeof(Rigidbody))]
     public class FloatingObject : MonoBehaviour
