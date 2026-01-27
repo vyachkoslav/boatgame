@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1114575119671980941}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.12, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -90,7 +90,7 @@ Transform:
   m_GameObject: {fileID: 6284588880405089338}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.76, y: 0, z: 0}
+  m_LocalPosition: {x: 4, y: 0, z: -0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -121,7 +121,7 @@ Transform:
   m_GameObject: {fileID: 7355589918692125837}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.99, y: 0, z: 0}
+  m_LocalPosition: {x: -4, y: 0, z: -0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -137,7 +137,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3090690600648567319, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
       propertyPath: m_Name
-      value: Hole Puzzle Dam Variant
+      value: Hole Dam Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6300091963821210680, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
       propertyPath: m_text
@@ -195,16 +195,43 @@ PrefabInstance:
       propertyPath: puzzleInstructions
       value: Block the holes.
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8261406626542338942, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7392666641093665173, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6744356471728230393}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3090690600648567319, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2577569865679727732}
   m_SourcePrefab: {fileID: 100100000, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
 --- !u!4 &4382473025368035745 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7392666641093665173, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
   m_PrefabInstance: {fileID: 6505921193706500148}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8119421006155897379 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3090690600648567319, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
+  m_PrefabInstance: {fileID: 6505921193706500148}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2577569865679727732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8119421006155897379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b98dac2bc57455742bcfb6f0742367c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HoleDam
+  puzzleInstructions: 
+  holePrefab: {fileID: 967508886099625860, guid: 7b344e6da1f8fbd4a868497b87011bfe, type: 3}
+  holesSpots:
+  - {fileID: 7355589918692125837}
+  - {fileID: 1114575119671980941}
+  - {fileID: 6284588880405089338}

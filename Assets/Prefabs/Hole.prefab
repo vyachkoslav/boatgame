@@ -67,6 +67,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6b5a6f6e86186b45bcd942a447cd5d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hole
+  model: {fileID: 119762329643308642}
+  dam: {fileID: 0}
 --- !u!1 &4752591684422557227
 GameObject:
   m_ObjectHideFlags: 0
@@ -80,7 +82,7 @@ GameObject:
   - component: {fileID: 119762329643308642}
   - component: {fileID: 6115420442061473309}
   m_Layer: 0
-  m_Name: Hole Model
+  m_Name: Hole Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

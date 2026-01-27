@@ -3,15 +3,33 @@ using UnityEngine;
 
 public class Dam : MonoBehaviour
 {
-    [SerializeField] string puzzleInstructions;
-    [SerializeField] TextMeshProUGUI HUD;
+    [SerializeField] protected string puzzleInstructions;
+    protected TextMeshProUGUI HUDNotification;
+    protected bool boatDetected = false;
 
-    private void OnTriggerEnter(Collider other)
+    protected void Awake()
     {
-        //if (other.CompareTag("Boat"))
-        //{
-        //    Debug.Log(other.name + " detected");
-        //    HUD.text = puzzleInstructions;
-        //}
+        //HUDNotification = GameObject.Find("").gameObject.GetComponent<TextMeshProUGUI>;
+    }
+
+    protected void OnTriggerEnter(Collider other)
+    {
+        if (boatDetected == false && other.CompareTag("Boat"))
+        {
+            boatDetected = true;
+
+            StartPuzzle();
+        }
+    }
+
+    protected virtual void StartPuzzle()
+    {
+        //HUDNotification.text = puzzleInstructions;
+    }
+
+    protected virtual void EndPuzzle()
+    {
+        Debug.Log("Puzzle solved!");
+        //HUDNotification.text = "Puzzle solved!";
     }
 }

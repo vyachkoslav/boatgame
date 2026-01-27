@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7392666641093665173}
   - component: {fileID: 8766002941624605064}
-  - component: {fileID: 8261406626542338942}
+  - component: {fileID: 424940178777878307}
   m_Layer: 0
   m_Name: Dam
   m_TagString: Untagged
@@ -62,7 +62,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &8261406626542338942
+--- !u!114 &424940178777878307
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,6 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7622b25fe7142c44794c9a7eb61b797b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Dam
+  puzzleInstructions: 
 --- !u!1 &4753586010776036831
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,7 +195,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 14686b5eb6c04a94c87993cbc72667d3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
