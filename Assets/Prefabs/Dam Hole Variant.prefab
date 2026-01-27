@@ -1,0 +1,249 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1114575119671980941
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1264243970562627118}
+  m_Layer: 0
+  m_Name: Hole Spot 02
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1264243970562627118
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114575119671980941}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.1, z: -0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6744356471728230393}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6042794762107763555
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6744356471728230393}
+  m_Layer: 0
+  m_Name: Holes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6744356471728230393
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6042794762107763555}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2465163074271158137}
+  - {fileID: 1264243970562627118}
+  - {fileID: 6148198547894392675}
+  m_Father: {fileID: 4382473025368035745}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6284588880405089338
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6148198547894392675}
+  m_Layer: 0
+  m_Name: Hole Spot 03
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6148198547894392675
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6284588880405089338}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4, y: 0.1, z: -0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6744356471728230393}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7355589918692125837
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2465163074271158137}
+  m_Layer: 0
+  m_Name: Hole Spot 01
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2465163074271158137
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7355589918692125837}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4, y: 0.1, z: -0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6744356471728230393}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &6505921193706500148
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3090690600648567319, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
+      propertyPath: m_Name
+      value: Dam Hole Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 3090690600648567319, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4753586010776036831, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6133169433796617980, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6300091963821210680, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
+      propertyPath: m_text
+      value: Block the holes
+      objectReference: {fileID: 0}
+    - target: {fileID: 6300091963821210680, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
+      propertyPath: m_fontSize
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 6300091963821210680, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7392666641093665173, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7392666641093665173, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7392666641093665173, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7392666641093665173, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7392666641093665173, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7392666641093665173, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7392666641093665173, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7392666641093665173, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7392666641093665173, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7392666641093665173, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8261406626542338942, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
+      propertyPath: puzzleInstructions
+      value: Block the holes.
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8261406626542338942, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7392666641093665173, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6744356471728230393}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3090690600648567319, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2577569865679727732}
+  m_SourcePrefab: {fileID: 100100000, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
+--- !u!4 &4382473025368035745 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7392666641093665173, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
+  m_PrefabInstance: {fileID: 6505921193706500148}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8119421006155897379 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3090690600648567319, guid: 834bfba1bc20e0241ba1decaa2f53dc7, type: 3}
+  m_PrefabInstance: {fileID: 6505921193706500148}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2577569865679727732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8119421006155897379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b98dac2bc57455742bcfb6f0742367c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HoleDam
+  puzzleInstructions: 
+  holePrefab: {fileID: 967508886099625860, guid: 7b344e6da1f8fbd4a868497b87011bfe, type: 3}
+  holesSpots:
+  - {fileID: 7355589918692125837}
+  - {fileID: 1114575119671980941}
+  - {fileID: 6284588880405089338}
