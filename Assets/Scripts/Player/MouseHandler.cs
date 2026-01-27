@@ -61,7 +61,7 @@ namespace Player
             if (currentGrabbed != null) return;
             
             var camRay = MainCamera.ScreenPointToRay(Pointer.current.position.ReadValue());
-            if (Physics.Raycast(camRay, out var hit, 100, ~0, QueryTriggerInteraction.Collide)
+            if (Physics.Raycast(camRay, out var hit, 100, ~(1<<2), QueryTriggerInteraction.Collide)
                 && hit.collider.TryGetComponent(out IMouseGrabbable grabbable))
             {
                 ChangeHovered(grabbable);
