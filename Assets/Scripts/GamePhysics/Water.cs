@@ -8,7 +8,7 @@ namespace GamePhysics
 {
     public class Water : NetworkBehaviour, ISerializationCallbackReceiver
     {
-        private readonly SyncStopwatch stopwatch = new();
+        private readonly SyncVar<DateTime> timePivot = new();
     
         [SerializeField] private Material waterMat;
         
@@ -24,7 +24,8 @@ namespace GamePhysics
         
         private int timeId;
 
-        private float timeOffset;
+        private float updExtrap;
+        private float time;
         
         private void Awake()
         {
@@ -45,7 +46,7 @@ namespace GamePhysics
 
         public override void OnStartServer()
         {
-            stopwatch.StartStopwatch();
+            timePivot.Value = DateTime.Now;
         }
 
         public override void OnStartClient()
@@ -55,9 +56,15 @@ namespace GamePhysics
 
         private void Update()
         {
-            stopwatch.Update(Time.deltaTime);
+            updExtrap += Time.deltaTime;
             if (IsClientStarted)
-                waterMat.SetFloat(timeId, stopwatch.Elapsed);
+                waterMat.SetFloat(timeId, time + updExtrap);
+        }
+
+        private void FixedUpdate()
+        {
+            time = (float)(DateTime.Now - timePivot.Value).TotalSeconds;
+            updExtrap = 0;
         }
 
         public float GetWaterPointHeight(Vector3 pos)
@@ -73,7 +80,7 @@ namespace GamePhysics
             var waveFreq = sFreq;
 #endif
         
-            var waveLoc = waveSpeed * stopwatch.Elapsed;
+            var waveLoc = waveSpeed * time;
             var xPos = Mathf.Sin(pos.x * waveFreq + waveLoc);
             var zPos = Mathf.Cos(pos.z * waveFreq + waveLoc);
             var y = (xPos + zPos) * waveScale;
