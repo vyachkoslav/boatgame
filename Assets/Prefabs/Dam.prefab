@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7392666641093665173}
   - component: {fileID: 8766002941624605064}
-  - component: {fileID: 424940178777878307}
   m_Layer: 0
   m_Name: Dam
   m_TagString: Untagged
@@ -62,19 +61,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &424940178777878307
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3090690600648567319}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7622b25fe7142c44794c9a7eb61b797b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Dam
-  puzzleInstructions: 
 --- !u!1 &4753586010776036831
 GameObject:
   m_ObjectHideFlags: 0
