@@ -1,28 +1,26 @@
-using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 
 public class WaterCurrent : MonoBehaviour
 {
+    private const float IndicatorMultiplier = 0.01f;
+    
     [SerializeField] private float speed = 15.0f;
-    private float indicatorMultiplier = 0.01f;
-    private Vector3 direction;
-    private bool isPushing = false;
-
     [SerializeField] private float length = 1.0f; // Z
     [SerializeField] private float width = 1.0f; // X
     [SerializeField] private float rotationY;
 
-    Material material;
-
-    private List<Rigidbody> objectsInCurrent = new List<Rigidbody>();
-
+    [SerializeField] private new Renderer renderer;
     
+    private readonly List<Rigidbody> objectsInCurrent = new();
+
+    private Material material;
+    private Vector3 direction;
 
     private void Awake()
     {
         direction = transform.forward;
-        material = GetComponentInChildren<MeshRenderer>().material;
+        material = renderer.material;
     }
 
     private void OnValidate()
@@ -30,18 +28,18 @@ public class WaterCurrent : MonoBehaviour
         UpdateTransform();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         // Moves the texture of direction indicator
-        material.mainTextureOffset += new Vector2(0, 1) * speed * indicatorMultiplier * Time.fixedDeltaTime;
-
-        if (isPushing & objectsInCurrent.Count != 0)
+        material.mainTextureOffset += new Vector2(0, speed * IndicatorMultiplier * Time.deltaTime);
+    }
+    
+    private void FixedUpdate()
+    {
+        // Pushes all objects within the water current in the current's direction
+        foreach (Rigidbody rb in objectsInCurrent)
         {
-            // Pushes all objects within the water current in the current's direction
-            foreach (Rigidbody rb in objectsInCurrent)
-            {
-                rb.AddForce(direction * speed);
-            }
+            rb.AddForce(direction * speed);
         }
     }
 
@@ -51,7 +49,6 @@ public class WaterCurrent : MonoBehaviour
         if (other.gameObject.TryGetComponent(out Rigidbody rb))
         {
             objectsInCurrent.Add(rb);
-            isPushing = true;
         }
     }
 
@@ -61,17 +58,11 @@ public class WaterCurrent : MonoBehaviour
         if (other.gameObject.TryGetComponent(out Rigidbody rb))
         {
             objectsInCurrent.Remove(rb);
-
-            // Checks if there are no more objects left in the list
-            if (objectsInCurrent.Count == 0 )
-            {
-                isPushing = false;
-            }
         }
     }
 
     // Updates object scale and forward direction according to changes in inspector
-    void UpdateTransform()
+    private void UpdateTransform()
     {
         Vector3 scale = transform.localScale;
         scale.z = length;

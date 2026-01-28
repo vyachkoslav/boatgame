@@ -50,6 +50,7 @@ MonoBehaviour:
   length: 1
   width: 1
   rotationY: 0
+  renderer: {fileID: 2379043423899517170}
 --- !u!65 &481459539607564489
 BoxCollider:
   m_ObjectHideFlags: 0
