@@ -1,37 +1,47 @@
 using System.Collections.Generic;
+using FishNet.Object;
+using Network;
 using UnityEngine;
 
-public class HoleDam : Puzzle
+public class HoleDam : NetworkPuzzle
 {
     [SerializeField] private GameObject holePrefab;
-    [SerializeField] private List<GameObject> holesSpots = new List<GameObject>();
-    private List<GameObject> holes = new List<GameObject>();
+    [SerializeField] private List<GameObject> holesSpots = new();
+    
+    private readonly HashSet<GameObject> holes = new();
 
-    protected override void StartPuzzle()
+    protected override void OnPuzzleStart()
     {
-        SpawnHoles();
+        if (IsServerStarted)
+            SpawnHolesServer();
     }
 
-    private void SpawnHoles()
+    protected override void OnPuzzleEnd()
     {
-        GameObject currentHole;
-
-        foreach (GameObject holeSpot in holesSpots)
+        Debug.Log("Puzzle ended");
+    }
+    
+    private void SpawnHolesServer()
+    {
+        foreach (var spot in holesSpots)
         {
-            currentHole = Instantiate(holePrefab, holeSpot.transform.position, holeSpot.transform.rotation);
-            currentHole.GetComponent<Hole>().dam = this; // Sets itself as the dam that the hole belongs to
-
-            holes.Add(currentHole);
+            var holeSpot = spot.transform;
+            var nob = NetworkManager.GetPooledInstantiated(holePrefab, holeSpot.position, holeSpot.rotation, false);
+            nob.GetComponent<Hole>().dam = this; // Sets itself as the dam that the hole belongs to
+            Spawn(nob);
+            holes.Add(nob.gameObject);
         }
     }
 
-    public void RemoveHole(GameObject holeObject)
+    [Server]
+    public void RemoveHole(GameObject holeObject, GameObject blockerObject)
     {
+        Despawn(blockerObject);
+        Despawn(holeObject);
+
         holes.Remove(holeObject);
 
         if (holes.Count == 0)
-        {
             EndPuzzle();
-        }
     }
 }
