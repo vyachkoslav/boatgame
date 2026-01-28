@@ -159,23 +159,20 @@ namespace Network
             if (state.IsFuture())
                 return;
 
+            // keeping z rotation the same and y in bounds
             var rot = paddleRb.transform.localEulerAngles;
             rot.y = YToBounds(rd.State, rot.y, out var wasLower, out var wasHigher);
             rot.z = zRot;
             paddle.MoveRotation(paddleRb.transform.parent.rotation * Quaternion.Euler(rot));
             
-            var xRot = rd.State switch
-            {
-                PaddleState.Middle => 0f,
-                PaddleState.Down => -45f,
-                _ => throw new ArgumentOutOfRangeException()
-            };
-
-            var calculateDeltaForce = true;
             // if hit bounds, reset to bound and stop
+            var calculateDeltaForce = true;
             if (wasLower || wasHigher)
             {
-                paddle.AngularVelocity(Vector3.zero);
+                var angVel = paddleRb.transform.InverseTransformDirection(paddleRb.angularVelocity);
+                angVel.y = 0;
+                angVel = paddleRb.transform.TransformDirection(angVel);
+                paddle.AngularVelocity(angVel);
                 var delta = isLeft ? rd.Delta : -rd.Delta;
                 // if force directed into bound, don't calculate force from mouse delta
                 if (wasLower && delta <= 0 || wasHigher && delta >= 0)
@@ -184,11 +181,19 @@ namespace Network
 
             if (calculateDeltaForce)
             {
+                // player mouse rotation
                 var mDelta = Mathf.Clamp((float)(rd.Delta / TimeManager.TickDelta), -maxDelta, maxDelta);
                 var vel = new Vector3(0, mDelta, 0);
                 paddle.AddRelativeTorque(vel, ForceMode.Force);
             }
             
+            // paddle up/down
+            var xRot = rd.State switch
+            {
+                PaddleState.Middle => 0f,
+                PaddleState.Down => -45f,
+                _ => throw new ArgumentOutOfRangeException()
+            };
             if (!state.IsTickedNonCreated())
             {
                 var xTorq = Mathf.DeltaAngle(rot.x, xRot) * pFactor;
@@ -197,6 +202,7 @@ namespace Network
                 paddle.AddRelativeTorque(new Vector3(xTorq, 0, 0));
             }
             
+            // water drag
             var bladePos = blade.transform.position;
             var waterLevel = GlobalObjects.Water.GetWaterPointHeight(bladePos);
             if (bladePos.y < waterLevel)
