@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HoleDam : Dam
+public class HoleDam : Puzzle
 {
     [SerializeField] private GameObject holePrefab;
     [SerializeField] private List<GameObject> holesSpots = new List<GameObject>();
@@ -9,8 +9,6 @@ public class HoleDam : Dam
 
     protected override void StartPuzzle()
     {
-        base.StartPuzzle();
-
         SpawnHoles();
     }
 
