@@ -1,63 +1,113 @@
+using System;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using UnityEngine;
+using Utility;
 
 namespace Network
 {
     public abstract class NetworkPuzzle : NetworkBehaviour
     {
-        private readonly SyncVar<bool> isPuzzleStarted = new();
-        private readonly SyncVar<bool> isPuzzleEnded = new();
+        [Serializable]
+        public enum State
+        {
+            None,
+            Started,
+            Failed,
+            FailedOnTime,
+            Success,
+        }
+
+        private readonly SyncVar<State> state = new();
+        private readonly SyncTimer timer = new();
+
+        [SerializeField] private float timeToSolve;
+        [SerializeField] private string puzzleInstructions;
         
         [Server]
         protected virtual void OnTriggerEnter(Collider other)
         {
-            if (!isPuzzleStarted.Value && other.CompareTag("Boat"))
+            if (state.Value == State.None && other.CompareTag("Boat"))
                 StartPuzzle();
         }
 
         [Server]
         protected void StartPuzzle()
         {
-            if (isPuzzleStarted.Value || isPuzzleEnded.Value)
+            if (state.Value != State.None)
             {
-                Debug.LogError("Trying to start a puzzle second time");
+                Debug.LogWarning("Trying to start a puzzle second time");
                 return;
             }
             
-            isPuzzleStarted.Value = true;
-            OnPuzzleStart();
+            state.Value = State.Started;
+            timer.StartTimer(timeToSolve);
         }
 
         [Server]
-        protected void EndPuzzle()
+        protected void EndPuzzle(State result)
         {
-            if (!isPuzzleStarted.Value || isPuzzleEnded.Value)
+            if (state.Value != State.Started)
             {
-                Debug.LogError("Trying to end a non-started puzzle or already finished one");
+                Debug.LogWarning("Trying to end a non-started puzzle or already finished one");
                 return;
             }
             
-            isPuzzleEnded.Value = true;
-            OnPuzzleEnd();
+            timer.StopTimer();
+            state.Value = result;
+        }
+
+        private void TimerOnChange(SyncTimerOperation op, float prev, float next, bool asServer)
+        {
+            if (op != SyncTimerOperation.Finished) return;
+            
+            state.Value = State.FailedOnTime;
+        }
+
+        public override void OnStartNetwork()
+        {
+            state.OnChange += StateOnChange;
+        }
+
+        public override void OnStartServer()
+        {
+            timer.OnChange += TimerOnChange;
         }
 
         public override void OnStartClient()
         {
-            // Server handles them separately
-            if (IsServerStarted) return;
+            StateOnChange(default, state.Value, false);
+        }
+
+        private void StateOnChange(State prev, State next, bool asServer)
+        {
+            if (IsHostStarted && asServer) return;
             
-            if (isPuzzleEnded.Value)
-                OnPuzzleEnd();
-            else if (isPuzzleStarted.Value)
-                OnPuzzleStart();
+            switch (next)
+            {
+                case State.None: break;
+                case State.Started:
+                    GlobalObjects.PuzzleHUD.ShowTimer();
+                    GlobalObjects.PuzzleHUD.ShowNotification(puzzleInstructions);
+                    OnPuzzleStart();
+                    break;
+                default:
+                    GlobalObjects.PuzzleHUD.HideTimer();
+                    GlobalObjects.PuzzleHUD.ShowNotification(next == State.Success ? "Done!" : "Failed :(");
+                    OnPuzzleEnd(next);
+                    break;
+            }
+        }
+
+        protected virtual void Update()
+        {
+            if (timer.Paused) return;
             
-            // shouldn't be set to false
-            isPuzzleStarted.OnChange += (_, __, ___) => OnPuzzleStart();
-            isPuzzleEnded.OnChange += (_, __, ___) => OnPuzzleEnd();
+            timer.Update();
+            GlobalObjects.PuzzleHUD.UpdateTimer(timer.Remaining);
         }
 
         protected abstract void OnPuzzleStart();
-        protected abstract void OnPuzzleEnd();
+        protected abstract void OnPuzzleEnd(State result);
     }
 }

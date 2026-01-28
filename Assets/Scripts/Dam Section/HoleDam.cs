@@ -16,9 +16,9 @@ public class HoleDam : NetworkPuzzle
             SpawnHolesServer();
     }
 
-    protected override void OnPuzzleEnd()
+    protected override void OnPuzzleEnd(State state)
     {
-        Debug.Log("Puzzle ended");
+        Debug.Log("Puzzle ended " + state);
     }
     
     private void SpawnHolesServer()
@@ -42,6 +42,6 @@ public class HoleDam : NetworkPuzzle
         holes.Remove(holeObject);
 
         if (holes.Count == 0)
-            EndPuzzle();
+            EndPuzzle(State.Success);
     }
 }
