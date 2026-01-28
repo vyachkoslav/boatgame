@@ -5,6 +5,7 @@ using FishNet.Transporting;
 using FishNet.Utility.Template;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Utility;
 
 namespace Network
 {
@@ -73,11 +74,15 @@ namespace Network
 
         [SerializeField] private float mouseSensitivity = 0.01f;
         [SerializeField] private float maxDelta = 100;
+        [SerializeField] private float waterDrag = 20f;
+        
+        [SerializeField] private float maxPidTorque;
+        [SerializeField] private float pFactor;
         
         private readonly PredictionRigidbody paddle = new();
         private PaddleState currentState = PaddleState.Middle;
         private float zRot;
-        
+
         private float deltaPending;
 
         private void Awake()
@@ -145,59 +150,83 @@ namespace Network
             deltaPending = 0;
             return md;
         }
-        
+
         [Replicate]
-        private void PerformReplicate(ReplicateData rd, ReplicateState state = ReplicateState.Invalid, Channel channel = Channel.Unreliable)
+        private void PerformReplicate(ReplicateData rd, 
+            ReplicateState state = ReplicateState.Invalid,
+            Channel channel = Channel.Unreliable)
         {
             if (state.IsFuture())
                 return;
+
+            var rot = paddleRb.transform.localEulerAngles;
+            rot.y = YToBounds(rd.State, rot.y, out var wasLower, out var wasHigher);
+            rot.z = zRot;
+            paddle.MoveRotation(paddleRb.transform.parent.rotation * Quaternion.Euler(rot));
             
             var xRot = rd.State switch
             {
-                PaddleState.Middle => 0,
-                PaddleState.Down => -45,
+                PaddleState.Middle => 0f,
+                PaddleState.Down => -45f,
                 _ => throw new ArgumentOutOfRangeException()
             };
-            
-            var rot = paddleRb.transform.localEulerAngles;
             if (!state.IsTickedNonCreated())
-                rot.x = xRot;
-            
-            var wasHigher = false;
-            var wasLower = false;
-            if (rd.State == PaddleState.Down)
             {
-                if (rot.y < lowerMinAngle)
-                {
-                    rot.y = lowerMinAngle+1;
-                    wasLower = true;
-                }
-                else if (rot.y > lowerMaxAngle)
-                {
-                    rot.y = lowerMaxAngle-1;
-                    wasHigher = true;
-                }
+                var xTorq = Mathf.DeltaAngle(rot.x, xRot) * -pFactor;
+                xTorq = Mathf.Clamp(xTorq, -maxPidTorque, maxPidTorque);
+                xTorq *= isLeft ? -1 : 1;
+                paddle.AddRelativeTorque(new Vector3(xTorq, 0, 0));
             }
-            rot.z = zRot;
-            paddle.MoveRotation(paddleRb.transform.parent.rotation * Quaternion.Euler(rot));
+
+            var calculateDeltaForce = true;
             // if hit bounds, reset to bound and stop
             if (wasLower || wasHigher)
             {
                 paddle.AngularVelocity(Vector3.zero);
                 var delta = isLeft ? rd.Delta : -rd.Delta;
-                // if force directed into bound, return
+                // if force directed into bound, don't calculate force from mouse delta
                 if (wasLower && delta <= 0 || wasHigher && delta >= 0)
+                    calculateDeltaForce = false;
+            }
+
+            if (calculateDeltaForce)
+            {
+                var mDelta = Mathf.Clamp((float)(rd.Delta / TimeManager.TickDelta), -maxDelta, maxDelta);
+                var vel = new Vector3(0, mDelta, 0);
+                paddle.AddRelativeTorque(vel, ForceMode.Force);
+            }
+            
+            var bladePos = blade.transform.position;
+            var waterLevel = GlobalObjects.Water.GetWaterPointHeight(bladePos);
+            if (bladePos.y < waterLevel)
+            {
+                var vel = paddleRb.GetPointVelocity(bladePos);
+                var force = Vector3.Project(-vel * waterDrag, blade.forward);
+                paddle.AddForceAtPosition(force, bladePos);
+            }
+
+            paddle.Simulate();
+        }
+
+        private float YToBounds(PaddleState state, float y, out bool wasLower, out bool wasHigher)
+        {
+            wasLower = false;
+            wasHigher = false;
+            if (state == PaddleState.Down)
+            {
+                if (y < lowerMinAngle)
                 {
-                    paddle.Simulate();
-                    return;
+                    y = lowerMinAngle;
+                    wasLower = true;
+                }
+                else if (y > lowerMaxAngle)
+                {
+                    y = lowerMaxAngle;
+                    wasHigher = true;
                 }
             }
 
-            var mdelta = Mathf.Clamp((float)(rd.Delta / TimeManager.TickDelta), -maxDelta, maxDelta);
-            var vel = new Vector3(0, mdelta, 0);
-            paddle.AddRelativeTorque(vel, ForceMode.Force);
-            
-            paddle.Simulate();
+            return y;
         }
         
         /// <summary>

@@ -379,6 +379,13 @@ MonoBehaviour:
   isLeft: 0
   mouseSensitivity: 0.01
   maxDelta: 100
+  waterDrag: 200
+  maxPidTorque: 1000
+  pFactor: 0.44
+  pid:
+    pFactor: 0.44
+    iFactor: 0
+    dFactor: 0
 --- !u!114 &2896369764640804545
 MonoBehaviour:
   m_ObjectHideFlags: 0
