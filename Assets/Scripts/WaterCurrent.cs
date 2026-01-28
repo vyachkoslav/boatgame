@@ -5,17 +5,24 @@ using System.Collections.Generic;
 public class WaterCurrent : MonoBehaviour
 {
     [SerializeField] private float speed = 15.0f;
+    private float indicatorMultiplier = 0.01f;
     private Vector3 direction;
     private bool isPushing = false;
-    private List<Rigidbody> objectsInCurrent = new List<Rigidbody>();
 
     [SerializeField] private float length = 1.0f; // Z
     [SerializeField] private float width = 1.0f; // X
     [SerializeField] private float rotationY;
 
+    Material material;
+
+    private List<Rigidbody> objectsInCurrent = new List<Rigidbody>();
+
+    
+
     private void Awake()
     {
         direction = transform.forward;
+        material = GetComponentInChildren<MeshRenderer>().material;
     }
 
     private void OnValidate()
@@ -25,6 +32,9 @@ public class WaterCurrent : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // Moves the texture of direction indicator
+        material.mainTextureOffset += new Vector2(0, 1) * speed * indicatorMultiplier * Time.fixedDeltaTime;
+
         if (isPushing & objectsInCurrent.Count != 0)
         {
             // Pushes all objects within the water current in the current's direction
