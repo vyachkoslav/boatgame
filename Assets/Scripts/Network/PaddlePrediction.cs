@@ -170,13 +170,6 @@ namespace Network
                 PaddleState.Down => -45f,
                 _ => throw new ArgumentOutOfRangeException()
             };
-            if (!state.IsTickedNonCreated())
-            {
-                var xTorq = Mathf.DeltaAngle(rot.x, xRot) * -pFactor;
-                xTorq = Mathf.Clamp(xTorq, -maxPidTorque, maxPidTorque);
-                xTorq *= isLeft ? -1 : 1;
-                paddle.AddRelativeTorque(new Vector3(xTorq, 0, 0));
-            }
 
             var calculateDeltaForce = true;
             // if hit bounds, reset to bound and stop
@@ -194,6 +187,14 @@ namespace Network
                 var mDelta = Mathf.Clamp((float)(rd.Delta / TimeManager.TickDelta), -maxDelta, maxDelta);
                 var vel = new Vector3(0, mDelta, 0);
                 paddle.AddRelativeTorque(vel, ForceMode.Force);
+            }
+            
+            if (!state.IsTickedNonCreated())
+            {
+                var xTorq = Mathf.DeltaAngle(rot.x, xRot) * pFactor;
+                xTorq = Mathf.Clamp(xTorq, -maxPidTorque, maxPidTorque);
+                xTorq *= isLeft ? 1 : -1;
+                paddle.AddRelativeTorque(new Vector3(xTorq, 0, 0));
             }
             
             var bladePos = blade.transform.position;
