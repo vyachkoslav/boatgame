@@ -46,7 +46,7 @@ namespace GamePhysics
 
         public override void OnStartServer()
         {
-            timePivot.Value = DateTime.Now;
+            timePivot.Value = DateTime.UtcNow;
         }
 
         public override void OnStartClient()
@@ -63,7 +63,7 @@ namespace GamePhysics
 
         private void FixedUpdate()
         {
-            time = (float)(DateTime.Now - timePivot.Value).TotalSeconds;
+            time = (float)(DateTime.UtcNow - timePivot.Value).TotalSeconds;
             updExtrap = 0;
         }
 
