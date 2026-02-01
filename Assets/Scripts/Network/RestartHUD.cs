@@ -1,24 +1,19 @@
 using System.Collections.Generic;
+using System.Linq;
 using FishNet.Connection;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Network
 {
-    public class RestartHUD : NetworkBehaviour, ISerializationCallbackReceiver
+    public class RestartHUD : NetworkBehaviour
     {
         [SerializeField] private Button voteButton;
         [SerializeField] private TextMeshProUGUI buttonText;
         [SerializeField] private TextMeshProUGUI votesText;
-
-#if UNITY_EDITOR
-        [SerializeField] private SceneAsset sceneToRestart;
-#endif
-        [HideInInspector] [SerializeField] private string sceneName;
 
         private readonly SyncVar<int> votedCount = new();
         private readonly HashSet<NetworkConnection> votedConns = new();
@@ -71,19 +66,9 @@ namespace Network
         [Server]
         private void Restart()
         {
-            SceneManager.UnloadGlobalScenes(new(sceneName));
-            SceneManager.LoadGlobalScenes(new(sceneName));
-        }
-
-        public void OnBeforeSerialize()
-        {
-#if UNITY_EDITOR
-            sceneName = sceneToRestart.name;
-#endif
-        }
-
-        public void OnAfterDeserialize()
-        {
+            var scene = SceneManager.SceneConnections.First().Key.name;
+            SceneManager.UnloadGlobalScenes(new(scene));
+            SceneManager.LoadGlobalScenes(new(scene));
         }
     }
 }

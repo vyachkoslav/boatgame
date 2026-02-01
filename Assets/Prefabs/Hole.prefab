@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8669111588543506194}
   - component: {fileID: 3556780164014779763}
   - component: {fileID: 5090260998965436668}
+  - component: {fileID: -4597397866118836055}
   m_Layer: 0
   m_Name: Hole
   m_TagString: Untagged
@@ -100,7 +101,7 @@ MonoBehaviour:
   _initializeOrder: 0
   _preventDespawnOnDisconnect: 0
   _defaultDespawnType: 1
-  _initializedTimestamp: -8584319690209342913
+  _initializedTimestamp: -8584316340217751530
   NetworkObserver: {fileID: 0}
   _enablePrediction: 0
   _predictionType: 0
@@ -138,8 +139,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: FishNet.Runtime::FishNet.Object.EmptyNetworkBehaviour
   _componentIndexCache: 0
-  _addedNetworkObject: {fileID: 0}
+  _addedNetworkObject: {fileID: 3556780164014779763}
   _networkObjectCache: {fileID: 3556780164014779763}
+--- !u!114 &-4597397866118836055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 967508886099625860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71fd7f855ec523429999fc4e14a1928, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FishNet.Runtime::FishNet.Observing.NetworkObserver
+  _overrideType: 3
+  _updateHostVisibility: 1
+  _observerConditions: []
 --- !u!1 &4752591684422557227
 GameObject:
   m_ObjectHideFlags: 0
