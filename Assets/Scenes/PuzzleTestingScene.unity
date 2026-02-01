@@ -119,11 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!4 &241309344 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1250109379497908225, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
-  m_PrefabInstance: {fileID: 1663265052}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &324947826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -515,11 +510,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2013197945}
   m_SourcePrefab: {fileID: 100100000, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
---- !u!4 &627817605 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1250109379497908225, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
-  m_PrefabInstance: {fileID: 7001020988886983744}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &665373529
 GameObject:
   m_ObjectHideFlags: 0
@@ -744,13 +734,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb48793e0b434ce8ba85f67c8dff203e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player.BoatMovement
-  boat: {fileID: 730947926}
-  rBlade: {fileID: 627817605}
-  rPaddle: {fileID: 7001020988886983745}
-  lBlade: {fileID: 241309344}
-  lPaddle: {fileID: 1663265053}
-  waterDrag: 1000
-  minAngleDelta: 0.3
 --- !u!114 &730947930
 MonoBehaviour:
   m_ObjectHideFlags: 0
