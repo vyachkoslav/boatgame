@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 167617040255576535}
+  - component: {fileID: 4917159576475069103}
   - component: {fileID: 6599688122168279759}
   - component: {fileID: 9189645345574289719}
   - component: {fileID: 3411232400359287828}
@@ -42,6 +43,18 @@ Transform:
   - {fileID: 2824756435082308723}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4917159576475069103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7344254307765842839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d9005c1cfb644b7b998def7026841c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Utility.NetworkAutostart
 --- !u!114 &6599688122168279759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,7 +146,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _updateHostVisibility: 1
   _maximumTimedObserversDuration: 10
-  _defaultConditions: []
+  _defaultConditions:
+  - {fileID: 11400000, guid: 2033f54fd2794464bae08fa5a55c8996, type: 2}
 --- !u!114 &5117932165221537099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,6 +241,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 167617040255576535}
     m_Modifications:
+    - target: {fileID: 1949984896450816053, guid: 50da942035bab2e449fac5ab491a4e94, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 232.6001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1949984896450816053, guid: 50da942035bab2e449fac5ab491a4e94, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -121.3999
+      objectReference: {fileID: 0}
     - target: {fileID: 2491319485412991724, guid: 50da942035bab2e449fac5ab491a4e94, type: 3}
       propertyPath: m_Name
       value: NetworkHudCanvas
@@ -310,6 +332,10 @@ PrefabInstance:
     - target: {fileID: 2491319485412991729, guid: 50da942035bab2e449fac5ab491a4e94, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3532607713357276145, guid: 50da942035bab2e449fac5ab491a4e94, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -121.3999
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
