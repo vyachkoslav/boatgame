@@ -1,4 +1,5 @@
 using System;
+using FishNet.Managing.Logging;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using UnityEngine;
@@ -24,14 +25,14 @@ namespace Network
         [SerializeField] private float timeToSolve;
         [SerializeField] private string puzzleInstructions;
         
-        [Server]
+        [Server(Logging = LoggingType.Off)]
         protected virtual void OnTriggerEnter(Collider other)
         {
             if (state.Value == State.None && other.CompareTag("Boat"))
                 StartPuzzle();
         }
 
-        [Server]
+        [Server(Logging = LoggingType.Off)]
         protected void StartPuzzle()
         {
             if (state.Value != State.None)
