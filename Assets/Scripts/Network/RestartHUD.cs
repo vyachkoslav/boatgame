@@ -18,7 +18,7 @@ namespace Network
 #if UNITY_EDITOR
         [SerializeField] private SceneAsset sceneToRestart;
 #endif
-        [SerializeField] private string sceneName;
+        [HideInInspector] [SerializeField] private string sceneName;
 
         private readonly SyncVar<int> votedCount = new();
         private readonly HashSet<NetworkConnection> votedConns = new();
