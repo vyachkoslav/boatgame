@@ -77,7 +77,9 @@ namespace Network
 
         public void OnBeforeSerialize()
         {
+#if UNITY_EDITOR
             sceneName = sceneToRestart.name;
+#endif
         }
 
         public void OnAfterDeserialize()
