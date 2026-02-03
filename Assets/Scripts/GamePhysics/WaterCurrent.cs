@@ -5,8 +5,6 @@ namespace GamePhysics
 {
     public class WaterCurrent : MonoBehaviour
     {
-        private const float IndicatorMultiplier = 0.01f;
-    
         [SerializeField] private float speed = 15.0f;
         [SerializeField] private float length = 1.0f; // Z
         [SerializeField] private float width = 1.0f; // X
@@ -17,13 +15,12 @@ namespace GamePhysics
     
         private readonly List<Rigidbody> objectsInCurrent = new();
 
-        private Material material;
         private Vector3 direction;
 
         private void Awake()
         {
             direction = transform.forward;
-            material = renderer.material;
+            renderer.enabled = false;
         }
 
         private void OnValidate()
@@ -31,12 +28,6 @@ namespace GamePhysics
             UpdateTransform();
         }
 
-        private void Update()
-        {
-            // Moves the texture of direction indicator
-            material.mainTextureOffset += new Vector2(0, speed * IndicatorMultiplier * Time.deltaTime);
-        }
-    
         private void FixedUpdate()
         {
             // Pushes all objects within the water current in the current's direction
