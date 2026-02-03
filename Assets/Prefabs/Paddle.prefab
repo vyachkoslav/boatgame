@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8066513546930212999}
   - component: {fileID: 7234749034534256491}
   - component: {fileID: 2131593254828517656}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 1539003828224560434}
   - component: {fileID: 2455038428887583843}
   - component: {fileID: 6902435427585901989}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Blade (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,7 +235,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6294743981863434756}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PaddleMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -268,7 +268,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1250109379497908225}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Blade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 253125976185486715}
   - component: {fileID: 2896369764640804545}
   - component: {fileID: 4974847815687920389}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Paddle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -347,7 +347,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ImplicitCom: 1
   m_ImplicitTensor: 0
   m_UseGravity: 0
@@ -534,7 +534,7 @@ ConfigurableJoint:
   m_SwapBodies: 0
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
-  m_EnableCollision: 1
+  m_EnableCollision: 0
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
