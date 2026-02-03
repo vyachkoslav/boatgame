@@ -13,6 +13,7 @@ namespace GamePhysics
         [SerializeField] private float rotationY;
 
         [SerializeField] private new Renderer renderer;
+        [SerializeField] private ParticleSystem particles;
     
         private readonly List<Rigidbody> objectsInCurrent = new();
 
@@ -76,6 +77,14 @@ namespace GamePhysics
             transform.eulerAngles = rotation;
 
             direction = transform.forward;
+
+            var shape = particles.shape;
+            shape.scale = scale;
+
+            var main = particles.main;
+            main.maxParticles = (int)(length * width * 5);
+            main.startLifetimeMultiplier = 50 / speed;
+            main.startSpeedMultiplier = speed / 50;
         }
     }
 }
