@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using FishNet.Object;
 using FishNet.Transporting;
+using UI;
 using UnityEngine;
 using Utility;
 
@@ -51,5 +52,13 @@ public class Checkpoints : NetworkBehaviour
         
         Debug.Log($"Checkpoint: {scene}-{id}");
         LastCheckpoints[scene] = id;
+        
+        RpcCheckpointReached();
+    }
+
+    [ObserversRpc]
+    private void RpcCheckpointReached()
+    {
+        CheckpointUI.Reached();
     }
 }
