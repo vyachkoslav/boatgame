@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 7252623222013566931}
   - component: {fileID: 467453873232144007}
   m_Layer: 0
-  m_Name: Dam Model
+  m_Name: Dam Physical Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,7 +60,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 12.45, y: 1, z: 1}
+  m_LocalScale: {x: 8.5, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1223968120984105237}
@@ -228,7 +228,8 @@ MonoBehaviour:
   <ComponentIndex>k__BackingField: 0
   <PredictedSpawn>k__BackingField: {fileID: 0}
   <PredictedOwner>k__BackingField: {fileID: 0}
-  NetworkBehaviours: []
+  NetworkBehaviours:
+  - {fileID: 1146339109719280832}
   InitializedParentNetworkBehaviour: {fileID: 0}
   InitializedNestedNetworkObjects: []
   RuntimeParentNetworkBehaviour: {fileID: 0}
@@ -239,7 +240,7 @@ MonoBehaviour:
   _initializeOrder: 0
   _preventDespawnOnDisconnect: 0
   _defaultDespawnType: 0
-  _initializedTimestamp: 0
+  _initializedTimestamp: -8584313340282509583
   NetworkObserver: {fileID: 0}
   _enablePrediction: 0
   _predictionType: 0
@@ -255,15 +256,15 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 65535
+  <PrefabId>k__BackingField: 1
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 9595950490379593597
   SceneId: 0
   SerializedTransformProperties:
-    Position: {x: 0, y: 0, z: 0}
-    Rotation: {x: 0, y: 0, z: 0, w: 0}
-    Scale: {x: 0, y: 0, z: 0}
-    IsValid: 0
+    Position: {x: 0, y: -0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0, w: 1}
+    Scale: {x: 1, y: 1, z: 1}
+    IsValid: 1
 --- !u!114 &1146339109719280832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,10 +277,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b98dac2bc57455742bcfb6f0742367c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HoleDam
-  _componentIndexCache: 255
+  _componentIndexCache: 0
   _addedNetworkObject: {fileID: 3650097082855882352}
-  _networkObjectCache: {fileID: 0}
-  timeToSolve: 60
+  _networkObjectCache: {fileID: 3650097082855882352}
+  timeToSolve: 300
   puzzleInstructions: Fix the holes!
   holePrefab: {fileID: 967508886099625860, guid: 7b344e6da1f8fbd4a868497b87011bfe, type: 3}
   holesSpots:

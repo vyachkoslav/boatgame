@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 1351662379245653843}
   - component: {fileID: 8077440621990491655}
   m_Layer: 0
-  m_Name: Dam Model
+  m_Name: Dam Physical Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -155,7 +155,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 12.45, y: 1, z: 1}
+  m_LocalScale: {x: 8.5, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7392666641093665173}
