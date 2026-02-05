@@ -1,3 +1,4 @@
+using FishNet;
 using UnityEngine;
 using GamePhysics;
 
@@ -28,7 +29,8 @@ public class RiverObstacle : MonoBehaviour
             }
             
             // Destroy this obstacle after it's been hit
-            Destroy(gameObject);
+            if (InstanceFinder.IsServerStarted)
+                InstanceFinder.ServerManager.Despawn(gameObject);
         }
     }
 }

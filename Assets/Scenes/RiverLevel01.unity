@@ -3898,6 +3898,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hazard (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5710345726077529889, guid: be09c51fa3a2f6a4f8e873329311ca8a, type: 3}
+      propertyPath: SceneId
+      value: 4236197311
+      objectReference: {fileID: 0}
+    - target: {fileID: 5710345726077529889, guid: be09c51fa3a2f6a4f8e873329311ca8a, type: 3}
+      propertyPath: WasActiveDuringEdit
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8117575742277953807, guid: be09c51fa3a2f6a4f8e873329311ca8a, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.036666673
@@ -7192,6 +7200,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hazard
       objectReference: {fileID: 0}
+    - target: {fileID: 5710345726077529889, guid: be09c51fa3a2f6a4f8e873329311ca8a, type: 3}
+      propertyPath: SceneId
+      value: 3204411321
+      objectReference: {fileID: 0}
+    - target: {fileID: 5710345726077529889, guid: be09c51fa3a2f6a4f8e873329311ca8a, type: 3}
+      propertyPath: WasActiveDuringEdit
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8117575742277953807, guid: be09c51fa3a2f6a4f8e873329311ca8a, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.036666673
@@ -7287,6 +7303,14 @@ PrefabInstance:
     - target: {fileID: 5412935529164215626, guid: be09c51fa3a2f6a4f8e873329311ca8a, type: 3}
       propertyPath: m_Name
       value: Hazard (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5710345726077529889, guid: be09c51fa3a2f6a4f8e873329311ca8a, type: 3}
+      propertyPath: SceneId
+      value: 1065267193
+      objectReference: {fileID: 0}
+    - target: {fileID: 5710345726077529889, guid: be09c51fa3a2f6a4f8e873329311ca8a, type: 3}
+      propertyPath: WasActiveDuringEdit
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8117575742277953807, guid: be09c51fa3a2f6a4f8e873329311ca8a, type: 3}
       propertyPath: m_LocalScale.x
