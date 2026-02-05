@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - Support
+  - Blocker
+  - Boat
   layers:
   - Default
   - TransparentFX
@@ -12,7 +14,7 @@ TagManager:
   - Grabbable
   - Water
   - UI
-  - 
+  - Paddle
   - 
   - 
   - 

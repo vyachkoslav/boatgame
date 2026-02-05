@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8066513546930212999}
   - component: {fileID: 7234749034534256491}
   - component: {fileID: 2131593254828517656}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 820464667013472741}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.14968, z: 0}
-  m_LocalScale: {x: 0.026921056, y: 0.22205822, z: 0.026921056}
+  m_LocalPosition: {x: 0, y: -0.11062, z: 0}
+  m_LocalScale: {x: 0.026921056, y: 0.26111382, z: 0.026921056}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6294743981863434756}
@@ -114,6 +114,37 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!1 &2187820314242792296
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 452134392142424514}
+  m_Layer: 6
+  m_Name: Hand Pos Edge
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &452134392142424514
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2187820314242792296}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0.1397}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5416296445328210538}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3996730244393699611
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,7 +157,7 @@ GameObject:
   - component: {fileID: 1539003828224560434}
   - component: {fileID: 2455038428887583843}
   - component: {fileID: 6902435427585901989}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Blade (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,7 +266,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6294743981863434756}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PaddleMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -268,7 +299,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1250109379497908225}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Blade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,7 +335,7 @@ GameObject:
   - component: {fileID: 253125976185486715}
   - component: {fileID: 2896369764640804545}
   - component: {fileID: 4974847815687920389}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Paddle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -326,6 +357,8 @@ Transform:
   m_Children:
   - {fileID: 6294743981863434756}
   - {fileID: 1180652914873585190}
+  - {fileID: 9085852383237568657}
+  - {fileID: 452134392142424514}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &8872086712544964959
@@ -347,7 +380,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ImplicitCom: 1
   m_ImplicitTensor: 0
   m_UseGravity: 0
@@ -534,10 +567,41 @@ ConfigurableJoint:
   m_SwapBodies: 0
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
-  m_EnableCollision: 1
+  m_EnableCollision: 0
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!1 &8954075919624839532
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9085852383237568657}
+  m_Layer: 6
+  m_Name: Hand Pos Inner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9085852383237568657
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8954075919624839532}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0.0746}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5416296445328210538}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3741310659764818454
 PrefabInstance:
   m_ObjectHideFlags: 0

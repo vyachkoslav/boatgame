@@ -1,3 +1,4 @@
+using FishNet;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
@@ -17,13 +18,11 @@ public class EscMenuController : MonoBehaviour
     [Header("Category Buttons")]
     [SerializeField] private Button audioButton;
     [SerializeField] private Button graphicsButton;
-    [SerializeField] private Button resolutionButton;
     [SerializeField] private Button controlsButton;
     
     [Header("Category Panels")]
     [SerializeField] private GameObject audioPanel;
     [SerializeField] private GameObject graphicsPanel;
-    [SerializeField] private GameObject resolutionPanel;
     [SerializeField] private GameObject controlsPanel;
     
     private bool isMenuOpen = false;
@@ -48,7 +47,6 @@ public class EscMenuController : MonoBehaviour
         // Category buttons
         audioButton.onClick.AddListener(() => ToggleDropdown(audioPanel));
         graphicsButton.onClick.AddListener(() => ToggleDropdown(graphicsPanel));
-        resolutionButton.onClick.AddListener(() => ToggleDropdown(resolutionPanel));
         controlsButton.onClick.AddListener(() => ToggleDropdown(controlsPanel));
     }
     
@@ -130,14 +128,14 @@ public class EscMenuController : MonoBehaviour
     {
         audioPanel.SetActive(false);
         graphicsPanel.SetActive(false);
-        resolutionPanel.SetActive(false);
         controlsPanel.SetActive(false);
         currentlyOpenPanel = null;
     }
     
     void QuitGame()
     {
-        // Later: SceneManager.LoadScene("MainMenu");
         Debug.Log("Quit to menu");
+        InstanceFinder.ClientManager.StopConnection();
+        InstanceFinder.ServerManager.StopConnection(true);
     }
 }
