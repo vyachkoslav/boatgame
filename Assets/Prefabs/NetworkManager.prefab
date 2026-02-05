@@ -72,7 +72,7 @@ MonoBehaviour:
   _enableGlobalScenes: 1
   _startInOffline: 0
   _offlineScene: Assets/Scenes/OfflineMenu.unity
-  _onlineScene: Assets/Scenes/SampleScene.unity
+  _onlineScene: Assets/Scenes/RiverLevel01.unity
   _replaceScenes: 0
 --- !u!114 &9189645345574289719
 MonoBehaviour:
@@ -247,7 +247,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69c9a62f510d4e58b351a86af2da06f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Network.LoadingScreenSceneProcessor
-  minLoadingTime: 1
 --- !u!114 &349112562969806689
 MonoBehaviour:
   m_ObjectHideFlags: 0
