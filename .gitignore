@@ -98,5 +98,6 @@ InitTestScene*.unity*
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
 
-
 /.idea
+Assets/FishNet/CodeGenerating/cecil-0.11.4/Mono.Cecil.sln.meta
+Assets/FishNet/Runtime/Transporting/Transports/Tugboat/LiteNetLib/LiteNetLib.csproj.meta
