@@ -63,8 +63,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 806981351674283010}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0856977, y: 0, z: 0, w: 0.9963212}
-  m_LocalPosition: {x: 0, y: 0.57735515, z: -1.8311363}
+  m_LocalRotation: {x: 0.0000380267, y: -0.016770173, z: 0.0028719401, w: 0.9998553}
+  m_LocalPosition: {x: 0.06375229, y: 0.2602769, z: -1.9012338}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -101,11 +101,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
+  near clip plane: 0.1
+  far clip plane: 5000
+  field of view: 40
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -206,8 +206,8 @@ MonoBehaviour:
     SplineCurvature: 0.5
   RecenteringTarget: 2
   HorizontalAxis:
-    Value: 0
-    Center: 0
+    Value: -23.507965
+    Center: -23.507965
     Range: {x: -180, y: 180}
     Wrap: 1
     Recentering:
@@ -643,6 +643,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7602409929609499165}
   - component: {fileID: 4295363356068372220}
+  - component: {fileID: 845348574371878350}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -663,6 +664,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5820765389499271305}
   - {fileID: 6682949782227871422}
   - {fileID: 8728140866021547188}
   m_Father: {fileID: 0}
@@ -682,6 +684,19 @@ MonoBehaviour:
   grabAction: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   first: {fileID: 1546964672632307630}
   second: {fileID: 4686387506685516520}
+--- !u!114 &845348574371878350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3041422878301360289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7f00a899ab54781a2f253ffceeb2066, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player.MouseHandler
+  grabAction: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!1 &3357574162988141183
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,6 +986,70 @@ Transform:
   - {fileID: 701097930047405983}
   m_Father: {fileID: 8728140866021547188}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8626540994095558026
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5820765389499271305}
+  - component: {fileID: 8901842829117805925}
+  m_Layer: 0
+  m_Name: CinemachineBrain
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5820765389499271305
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8626540994095558026}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.000015603373, y: -0.016775435, z: 0.0028724684, w: 0.99985516}
+  m_LocalPosition: {x: 0.06381357, y: 0.26024273, z: -1.9012108}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7602409929609499165}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8901842829117805925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8626540994095558026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineBrain
+  ShowDebugText: 0
+  ShowCameraFrustum: 1
+  IgnoreTimeScale: 0
+  WorldUpOverride: {fileID: 0}
+  ChannelMask: -1
+  UpdateMethod: 2
+  BlendUpdateMethod: 1
+  LensModeOverride:
+    Enabled: 0
+    DefaultMode: 2
+  DefaultBlend:
+    Style: 1
+    Time: 2
+    CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  CustomBlends: {fileID: 0}
 --- !u!1 &8853631970435202676
 GameObject:
   m_ObjectHideFlags: 0

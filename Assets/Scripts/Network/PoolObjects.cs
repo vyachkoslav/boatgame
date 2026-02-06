@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using FishNet;
-using FishNet.Managing.Object;
+using FishNet.Connection;
 using FishNet.Object;
 using UnityEngine;
 
 namespace Network
 {
-    public class PoolObjects : MonoBehaviour
+    public class PoolObjects : NetworkBehaviour
     {
         [Serializable]
         public struct ObjectWithCount
@@ -18,11 +18,11 @@ namespace Network
         
         [SerializeField] private List<ObjectWithCount> objects;
 
-        private void Start()
+        public override void OnStartNetwork()
         {
             foreach (var obj in objects)
             {
-                InstanceFinder.NetworkManager.CacheObjects(obj.Object, obj.Count, false);
+                NetworkManager.CacheObjects(obj.Object, obj.Count, false);
             }
         }
     }

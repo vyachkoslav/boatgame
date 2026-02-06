@@ -44,4 +44,12 @@ public class HoleDam : NetworkPuzzle
         if (holes.Count == 0)
             EndPuzzle(State.Success);
     }
+
+    public override void OnStopServer()
+    {
+        foreach (var hole in holes)
+        {
+            Despawn(hole);
+        }
+    }
 }
