@@ -1,6 +1,6 @@
-using System;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
+using FishNet.Transporting;
 using UnityEngine;
 using Utility;
 
@@ -8,7 +8,12 @@ namespace GamePhysics
 {
     public class Water : NetworkBehaviour, ISerializationCallbackReceiver
     {
-        private readonly SyncStopwatch stopwatch = new();
+        private readonly SyncVar<float> timeVal = new(new SyncTypeSettings()
+        {
+            Channel = Channel.Unreliable,
+            WritePermission = WritePermission.ClientUnsynchronized,
+            SendRate = 0.1f
+        });
     
         [SerializeField] private Material waterMat;
         
@@ -24,7 +29,7 @@ namespace GamePhysics
         
         private int timeId;
 
-        private float timeOffset;
+        private float syncedTime => timeVal.Value;
         
         private void Awake()
         {
@@ -43,11 +48,6 @@ namespace GamePhysics
         }
 #endif
 
-        public override void OnStartServer()
-        {
-            stopwatch.StartStopwatch();
-        }
-
         public override void OnStartClient()
         {
             timeId = Shader.PropertyToID("_WaveTime");
@@ -55,9 +55,10 @@ namespace GamePhysics
 
         private void Update()
         {
-            stopwatch.Update(Time.deltaTime);
+            timeVal.Value += Time.deltaTime;
+            
             if (IsClientStarted)
-                waterMat.SetFloat(timeId, stopwatch.Elapsed);
+                waterMat.SetFloat(timeId, syncedTime);
         }
 
         public float GetWaterPointHeight(Vector3 pos)
@@ -73,7 +74,7 @@ namespace GamePhysics
             var waveFreq = sFreq;
 #endif
         
-            var waveLoc = waveSpeed * stopwatch.Elapsed;
+            var waveLoc = waveSpeed * syncedTime;
             var xPos = Mathf.Sin(pos.x * waveFreq + waveLoc);
             var zPos = Mathf.Cos(pos.z * waveFreq + waveLoc);
             var y = (xPos + zPos) * waveScale;
