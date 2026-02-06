@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 167617040255576535}
+  - component: {fileID: 2087017352543137208}
   - component: {fileID: 4917159576475069103}
   - component: {fileID: 6599688122168279759}
   - component: {fileID: 9189645345574289719}
@@ -45,6 +46,21 @@ Transform:
   - {fileID: 2824756435082308723}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2087017352543137208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7344254307765842839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 859294e5d2aaf9a47b1e00bd20772f2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FishNet.Runtime::FishNet.Component.Spawning.ServerSpawner
+  _automaticallySpawn: 1
+  _networkObjects:
+  - {fileID: 8353915300763548780, guid: e8b34fca06104b0448073eebc4ced162, type: 3}
 --- !u!114 &4917159576475069103
 MonoBehaviour:
   m_ObjectHideFlags: 0
