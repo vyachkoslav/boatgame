@@ -269,7 +269,7 @@ MonoBehaviour:
       Owner: {fileID: 5630514443068731896}
       Enabled: 1
       Input:
-        InputAction: {fileID: 0}
+        InputAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
         Gain: -100
         CancelDeltaTime: 0
       InputValue: 0
@@ -280,7 +280,7 @@ MonoBehaviour:
       Owner: {fileID: 5630514443068731896}
       Enabled: 1
       Input:
-        InputAction: {fileID: 0}
+        InputAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
         Gain: -100
         CancelDeltaTime: 0
       InputValue: 0
@@ -291,7 +291,7 @@ MonoBehaviour:
       Owner: {fileID: 5630514443068731896}
       Enabled: 1
       Input:
-        InputAction: {fileID: 0}
+        InputAction: {fileID: 2670143854185807017, guid: 052faaac586de48259a63d0c4782560b, type: 3}
         Gain: -10
         CancelDeltaTime: 0
       InputValue: 0
@@ -644,7 +644,7 @@ GameObject:
   - component: {fileID: 7602409929609499165}
   - component: {fileID: 4295363356068372220}
   m_Layer: 0
-  m_Name: Boat
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
