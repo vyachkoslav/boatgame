@@ -4586,6 +4586,14 @@ PrefabInstance:
       propertyPath: WasActiveDuringEdit
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3858115168105533185, guid: df0249c16a58bfb4ebe45789e7553485, type: 3}
+      propertyPath: anchor.x
+      value: 0.2853999
+      objectReference: {fileID: 0}
+    - target: {fileID: 3858115168105533185, guid: df0249c16a58bfb4ebe45789e7553485, type: 3}
+      propertyPath: anchor.y
+      value: 0.15374732
+      objectReference: {fileID: 0}
     - target: {fileID: 5352246362120739325, guid: df0249c16a58bfb4ebe45789e7553485, type: 3}
       propertyPath: SceneId
       value: 1862119417
@@ -4649,6 +4657,14 @@ PrefabInstance:
     - target: {fileID: 6682949782227871422, guid: df0249c16a58bfb4ebe45789e7553485, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7058354451273755207, guid: df0249c16a58bfb4ebe45789e7553485, type: 3}
+      propertyPath: anchor.x
+      value: -0.2853999
+      objectReference: {fileID: 0}
+    - target: {fileID: 7058354451273755207, guid: df0249c16a58bfb4ebe45789e7553485, type: 3}
+      propertyPath: anchor.y
+      value: 0.15374732
       objectReference: {fileID: 0}
     - target: {fileID: 7602409929609499165, guid: df0249c16a58bfb4ebe45789e7553485, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7634,7 +7650,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1280, y: 720, z: 0}
-  m_LocalScale: {x: 1.3333334, y: 1.3333334, z: 1.3333334}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -7732,6 +7748,9 @@ MonoBehaviour:
   _addedNetworkObject: {fileID: 1595363840}
   _networkObjectCache: {fileID: 0}
   tutorialUI: {fileID: 1595363839}
+  delayBetweenLetters: 0.1
+  delayBeforeEndText: 0.5
+  delayAfterTextRenderedSeconds: 3
 --- !u!1001 &1677580101
 PrefabInstance:
   m_ObjectHideFlags: 0
