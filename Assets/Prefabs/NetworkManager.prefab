@@ -62,6 +62,7 @@ MonoBehaviour:
   _networkObjects:
   - {fileID: 8353915300763548780, guid: e8b34fca06104b0448073eebc4ced162, type: 3}
   - {fileID: 690059184360788900, guid: 86266c3d662a418478dc03176620a213, type: 3}
+  - {fileID: 2711831033724518010, guid: 3e30d5cd694282c43adf0cbb011281f4, type: 3}
 --- !u!114 &4917159576475069103
 MonoBehaviour:
   m_ObjectHideFlags: 0

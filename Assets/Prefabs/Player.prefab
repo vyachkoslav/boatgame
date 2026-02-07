@@ -63,8 +63,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 806981351674283010}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0000380267, y: -0.016770173, z: 0.0028719401, w: 0.9998553}
-  m_LocalPosition: {x: 0.06375229, y: 0.2602769, z: -1.9012338}
+  m_LocalRotation: {x: 0.0856977, y: 0, z: 0, w: 0.9963212}
+  m_LocalPosition: {x: 0, y: 0.57735515, z: -1.8311367}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -206,8 +206,8 @@ MonoBehaviour:
     SplineCurvature: 0.5
   RecenteringTarget: 2
   HorizontalAxis:
-    Value: -23.507965
-    Center: -23.507965
+    Value: 0
+    Center: 0
     Range: {x: -180, y: 180}
     Wrap: 1
     Recentering:
@@ -682,8 +682,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Utility.GrabBoth
   grabAction: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  first: {fileID: 1546964672632307630}
-  second: {fileID: 4686387506685516520}
+  first: {fileID: 0}
+  second: {fileID: 0}
 --- !u!114 &845348574371878350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1011,8 +1011,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8626540994095558026}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000015603373, y: -0.016775435, z: 0.0028724684, w: 0.99985516}
-  m_LocalPosition: {x: 0.06381357, y: 0.26024273, z: -1.9012108}
+  m_LocalRotation: {x: 0.0856977, y: 0, z: 0, w: 0.9963212}
+  m_LocalPosition: {x: 0, y: 0.57735515, z: -1.8311367}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1396,17 +1396,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
---- !u!114 &1546964672632307630 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2557591428039183828, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
-  m_PrefabInstance: {fileID: 3893801639908192890}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df61cd0500664023ab07ff18f2d5904a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Player.MouseGrabbablePaddle
 --- !u!4 &9017054304186402832 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5416296445328210538, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
@@ -1766,6 +1755,10 @@ PrefabInstance:
       propertyPath: paddle
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1129101786779683223, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
+      propertyPath: isLeft
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2557591428039183828, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
       propertyPath: boatRb
       value: 
@@ -1874,17 +1867,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5416296445328210538, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
   m_PrefabInstance: {fileID: 7095147717777528636}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4686387506685516520 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2557591428039183828, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
-  m_PrefabInstance: {fileID: 7095147717777528636}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df61cd0500664023ab07ff18f2d5904a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Player.MouseGrabbablePaddle
 --- !u!4 &7219633679204581118 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 452134392142424514, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}

@@ -1,69 +1,26 @@
+using System;
 using FishNet.Connection;
+using FishNet.Object;
 using Network;
 using UnityEngine;
 
 namespace Player
 {
-    public class Paddle : NetworkGrabbable, IMouseGrabbable
+    public class Paddle : NetworkBehaviour
     {
-        [Header("Components")]
-        [SerializeField] private MeshRenderer mesh;
+        [SerializeField] private bool isLeft;
         
-        [Header("Visual")]
-        [SerializeField] private Material defaultMaterial;
-        [SerializeField] private Material hoverMaterial;
-        [SerializeField] private Material dragMaterial;
-        [SerializeField] private Material grabbedByOtherMaterial;
-
-        private Vector3 initPosition;
-
-        private void Awake()
+        public override void OnStartServer()
         {
-            initPosition = transform.localPosition;
-        }
-        
-        public void Hover()
-        {
-            if (Owner.IsValid) return;
-            mesh.material = hoverMaterial;
+            if (isLeft)
+                PlayerManager.OnLeftPlayerAssigned(GiveOwnership);
+            else
+                PlayerManager.OnRightPlayerAssigned(GiveOwnership);
         }
 
-        public void Unhover()
+        private void OnDestroy()
         {
-            if (Owner.IsValid) return;
-            mesh.material = defaultMaterial;
-        }
-
-        protected override void OnGrab()
-        {
-            mesh.material = dragMaterial;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-
-        protected override void OnUngrab()
-        {
-            mesh.material = defaultMaterial;
-            transform.localPosition = initPosition;
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
-        
-        public override void OnOwnershipServer(NetworkConnection prevOwner)
-        {
-            base.OnOwnershipServer(prevOwner);
-            if (!Owner.IsValid)
-                transform.localPosition = initPosition;
-        }
-
-        protected override void OnGrabbedByOther()
-        {
-            mesh.material = grabbedByOtherMaterial;
-        }
-
-        protected override void OnUngrabbedByOther()
-        {
-            mesh.material = ReferenceEquals(MouseHandler.Instance.CurrentHovered, this) ? hoverMaterial : defaultMaterial;
+            PlayerManager.Unsubscribe(GiveOwnership);
         }
     }
 }

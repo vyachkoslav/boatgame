@@ -67,6 +67,7 @@ namespace Network
         [SerializeField] private InputActionReference lowerPaddleAction;
         
         [SerializeField] private Rigidbody paddleRb;
+        [SerializeField] private ConfigurableJoint joint;
         [SerializeField] private Transform blade;
         [SerializeField] private float lowerMinAngle;
         [SerializeField] private float lowerMaxAngle;
@@ -78,6 +79,8 @@ namespace Network
         
         [SerializeField] private float maxPidTorque;
         [SerializeField] private float pFactor;
+
+        [HideInInspector] [SerializeField] private Vector3 anchor;
         
         private readonly PredictionRigidbody paddle = new();
         private PaddleState currentState = PaddleState.Middle;
@@ -89,6 +92,14 @@ namespace Network
         {
             zRot = paddleRb.transform.localRotation.eulerAngles.z;
             paddle.Initialize(paddleRb, AutoPackType.Unpacked);
+            joint.autoConfigureConnectedAnchor = false;
+            joint.connectedAnchor = anchor;
+        }
+
+        protected override void OnValidate()
+        {
+            base.OnValidate();
+            anchor = joint.connectedAnchor;
         }
 
         private void OnEnable()
