@@ -37,6 +37,11 @@ namespace UI
             PlayerManager.OnLocalPlayerAssigned(OnPlayerAssigned);
         }
 
+        private void OnDestroy()
+        {
+            PlayerManager.Unsubscribe(OnPlayerAssigned);
+        }
+
         private void OnPlayerAssigned(PlayerManager.PlayerType type)
         {
             Assert.IsFalse(type == PlayerManager.PlayerType.None);

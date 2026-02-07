@@ -1,4 +1,3 @@
-using System;
 using FishNet.Connection;
 using FishNet.Object;
 using Network;
@@ -16,6 +15,12 @@ namespace Player
                 PlayerManager.OnLeftPlayerAssigned(GiveOwnership);
             else
                 PlayerManager.OnRightPlayerAssigned(GiveOwnership);
+        }
+
+        public override void OnDespawnServer(NetworkConnection connection)
+        {
+            if (Owner == connection)
+                RemoveOwnership();
         }
 
         private void OnDestroy()
