@@ -12,14 +12,12 @@ namespace UI
         private class Elements
         {
             public readonly VisualElement Root;
-            public readonly VisualElement RightPos;
-            public readonly VisualElement LeftPos;
+            public readonly VisualElement Position;
 
             public Elements(UIDocument document)
             {
                 Root = document.rootVisualElement;
-                RightPos = Root.Q<VisualElement>("Right");
-                LeftPos = Root.Q<VisualElement>("Left");
+                Position = Root.Q<VisualElement>("Position");
             }
         }
 
@@ -40,8 +38,7 @@ namespace UI
             tutorialUI.enabled = true;
             e = new Elements(tutorialUI)
             {
-                LeftPos = { visible = false },
-                RightPos = { visible = false }
+                Position = { visible = false },
             };
             PlayerManager.OnLocalPlayerAssigned(OnPlayerAssigned);
         }
@@ -61,12 +58,15 @@ namespace UI
 
         private IEnumerator ShowPositionRoutine(PlayerManager.PlayerType type)
         {
-            var pos = type == PlayerManager.PlayerType.Left ? e.LeftPos : e.RightPos;
             var endText = type == PlayerManager.PlayerType.Left ? LeftText : RightText;
+            if (type == PlayerManager.PlayerType.Right)
+                e.Position.style.right = new StyleLength(0f);
+            else
+                e.Position.style.right = new StyleLength(StyleKeyword.Auto);
             
-            var text = pos.Q<Label>();
+            var text = e.Position.Q<Label>();
             text.text = "";
-            pos.visible = true;
+            e.Position.visible = true;
             var waitBetween = new WaitForSeconds(delayBetweenLetters);
             foreach (var c in PosTextStart)
             {
@@ -78,7 +78,7 @@ namespace UI
             text.text += endText;
             
             yield return new WaitForSeconds(delayAfterTextRenderedSeconds);
-            pos.visible = false;
+            e.Position.visible = false;
         }
     }
 }
