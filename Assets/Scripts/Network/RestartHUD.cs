@@ -26,6 +26,12 @@ namespace Network
             votedCount.OnChange += VotedCountOnChange;
         }
 
+        public override void OnDespawnServer(NetworkConnection connection)
+        {
+            votedConns.Remove(connection);
+            votedCount.Value = votedConns.Count;
+        }
+
         private void VotedCountOnChange(int prev, int next, bool asServer)
         {
             if (asServer) return;
@@ -53,7 +59,6 @@ namespace Network
         {
             if (vote)
             {
-                votedConns.RemoveWhere(x => !x.IsValid);
                 votedConns.Add(conn);
                 if (votedConns.Count > 1)
                     Restart();
