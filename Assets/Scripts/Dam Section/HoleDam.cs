@@ -36,10 +36,10 @@ public class HoleDam : NetworkPuzzle
     [Server]
     public void RemoveHole(GameObject holeObject, GameObject blockerObject)
     {
+        if (!holes.Remove(holeObject)) return;
+        
         Despawn(blockerObject);
         Despawn(holeObject);
-
-        holes.Remove(holeObject);
 
         if (holes.Count == 0)
             EndPuzzle(State.Success);
