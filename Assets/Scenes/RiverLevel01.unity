@@ -6701,8 +6701,8 @@ Terrain:
   m_HeightmapPixelError: 200
   m_SplatMapDistance: 1000
   m_HeightmapMinimumLODSimplification: 0
-  m_HeightmapMaximumLOD: 5
-  m_ShadowCastingMode: 2
+  m_HeightmapMaximumLOD: 0
+  m_ShadowCastingMode: 0
   m_DrawHeightmap: 1
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
