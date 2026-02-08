@@ -14,6 +14,7 @@ namespace Network.Voice
     {
         [SerializeField] private VoiceStateUI stateUI;
         private readonly SyncVar<Guid> channelGuid = new();
+        private Task initTask;
 
         public override void OnStartServer()
         {
@@ -22,16 +23,22 @@ namespace Network.Voice
 
         public override void OnStartClient()
         {
-            _ = InitVivox();
+            initTask ??= InitVivox();
         }
 
         public override void OnStopClient()
+        {
+            if (VivoxService.Instance != null && VivoxService.Instance.IsLoggedIn)
+                _ = VivoxService.Instance.LeaveAllChannelsAsync();
+        }
+
+        private void OnDestroy()
         {
             if (VivoxService.Instance == null) return;
             
             VivoxService.Instance.ChannelJoined -= OnJoinedChannel;
             VivoxService.Instance.ParticipantAddedToChannel -= OnMemberJoin;
-            _ = VivoxService.Instance.LeaveAllChannelsAsync();
+            VivoxService.Instance.LoggedIn -= OnLoggedIn;
         }
 
         private async Task InitVivox()
@@ -44,12 +51,22 @@ namespace Network.Voice
 
             VivoxService.Instance.ChannelJoined += OnJoinedChannel;
             VivoxService.Instance.ParticipantAddedToChannel += OnMemberJoin;
+            VivoxService.Instance.LoggedIn += OnLoggedIn;
             
             if (!AuthenticationService.Instance.IsSignedIn)
                 await AuthenticationService.Instance.SignInAnonymouslyAsync();
             if (!VivoxService.Instance.IsLoggedIn)
                 await VivoxService.Instance.LoginAsync();
-            
+        }
+
+        private void OnLoggedIn()
+        {
+            if (IsClientStarted)
+                _ = JoinChannel();
+        }
+
+        private async Task JoinChannel()
+        {
             var channel = channelGuid.Value.ToString();
             await VivoxService.Instance.JoinGroupChannelAsync(
                 channel,
