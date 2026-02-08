@@ -79,6 +79,11 @@ namespace Network
             RightPlayer = FishNet.Managing.NetworkManager.EmptyConnection;
         }
 
+        public override void OnStopClient()
+        {
+            CurrentPlayer = PlayerType.None;
+        }
+
         public override void OnSpawnServer(NetworkConnection conn)
         {
             if (LeftPlayer.IsActive && RightPlayer.IsActive)
