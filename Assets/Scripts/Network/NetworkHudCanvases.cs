@@ -154,7 +154,11 @@ namespace Network
             if (_serverState != LocalConnectionState.Stopped)
                 _networkManager.ServerManager.StopConnection(true);
             else
+            {
                 _networkManager.ServerManager.StartConnection();
+                _networkManager.TransportManager.Transport.SetClientAddress("localhost");
+                _networkManager.ClientManager.StartConnection();
+            }
         }
 
         public void OnClick_Client()
