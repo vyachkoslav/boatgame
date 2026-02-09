@@ -1,6 +1,7 @@
 using System.Collections;
 using FishNet.Object;
 using Network;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UIElements;
@@ -13,10 +14,14 @@ namespace UI
         {
             public readonly VisualElement Root;
             public readonly VisualElement Position;
+            
             public readonly VisualElement PaddleControls;
             public readonly Image MouseImage;
+            public readonly Label PaddleControlsDescription;
+            
             public readonly VisualElement CameraControls;
             public readonly Image CameraImage;
+            public readonly Label CameraControlsDescription;
 
             public Elements(UIDocument document)
             {
@@ -25,9 +30,11 @@ namespace UI
                 
                 PaddleControls = Root.Q<VisualElement>("PaddleControls");
                 MouseImage = PaddleControls.Q<Image>("Image");
+                PaddleControlsDescription = PaddleControls.Q<Label>("Description");
                 
                 CameraControls = Root.Q<VisualElement>("CameraControls");
                 CameraImage = CameraControls.Q<Image>("Image");
+                CameraControlsDescription = CameraControls.Q<Label>("Description");
             }
         }
 
@@ -38,6 +45,7 @@ namespace UI
         [SerializeField] private UIDocument tutorialUI;
         
         [SerializeField] private float delayBetweenLetters = 0.1f;
+        [SerializeField] private float delayBetweenDescriptionLetters = 0.03f;
         [SerializeField] private float delayBeforeEndText = 0.5f;
         [SerializeField] private float delayAfterTextRenderedSeconds = 3f;
         [SerializeField] private float displayPaddleControlsTime = 10f;
@@ -86,13 +94,8 @@ namespace UI
             var text = e.Position.Q<Label>();
             text.text = "";
             e.Position.visible = true;
-            var waitBetween = new WaitForSeconds(delayBetweenLetters);
-            foreach (var c in PosTextStart)
-            {
-                yield return waitBetween;
-                text.text += c;
-            }
 
+            yield return DrawText(text, PosTextStart, delayBetweenLetters);
             yield return new WaitForSeconds(delayBeforeEndText);
             text.text += endText;
 
@@ -105,10 +108,40 @@ namespace UI
 
         private IEnumerator DisplayControls()
         {
+            e.PaddleControls.visible = true;
+            StartCoroutine(DrawText(
+                e.PaddleControlsDescription, 
+                e.PaddleControlsDescription.text,
+                delayBetweenDescriptionLetters));
+            yield return AnimateMouse();
+            e.PaddleControls.visible = false;
+            yield return new WaitForSeconds(0.5f);
+            yield return DisplayCameraControls();
+        }
+
+        private IEnumerator DrawText(Label label, string text, float letterDelay)
+        {
+            var waitBetween = new WaitForSeconds(letterDelay);
+            var tag = false;
+            label.text = "";
+            foreach (var c in text)
+            {
+                if (!tag)
+                    yield return waitBetween;
+                
+                label.text += c;
+                if (c == '<')
+                    tag = true;
+                else if (c == '>')
+                    tag = false;
+            }
+        }
+        
+        private IEnumerator AnimateMouse()
+        {
             const float distance = 100f;
             const float speed = 100f;
 
-            e.PaddleControls.visible = true;
             var initialPos = 0f;
             var currentPos = 0f;
             var dir = 1;
@@ -132,15 +165,15 @@ namespace UI
                 }
                 yield return null;
             }
-            
-            e.PaddleControls.visible = false;
-            yield return new WaitForSeconds(0.5f);
-            yield return DisplayCameraControls();
         }
 
         private IEnumerator DisplayCameraControls()
         {
             e.CameraControls.visible = true;
+            StartCoroutine(DrawText(
+                e.CameraControlsDescription,
+                e.CameraControlsDescription.text,
+                delayBetweenDescriptionLetters));
             yield return new WaitForSeconds(displayCameraControlsTime);
             e.CameraControls.visible = false;
         }
