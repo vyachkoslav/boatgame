@@ -3,10 +3,10 @@
         <ui:Label text="You&apos;re on the LEFT" name="PositionText" data-source="" style="width: auto; height: 100%; font-size: 39px; -unity-text-align: middle-left; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0%; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-font-definition: resource(&quot;FlatSkin/Font/Roboto-Medium&quot;); color: rgb(218, 218, 218); -unity-text-outline-width: 2px; -unity-text-outline-color: rgb(0, 0, 0); align-self: center;"/>
     </ui:VisualElement>
     <ui:VisualElement name="Controls" style="height: 400px; top: 337px; left: 1207px; width: 658px; flex-direction: row;">
-        <ui:Image name="Mouse" source="project://database/Assets/Art/UI%20Icons/mouse.png?fileID=2800000&amp;guid=b4077d0b3f7f6b44a99c5af89e7cb53a&amp;type=3#mouse" style="height: 60%; width: 188px; flex-direction: row;"/>
+        <ui:Image name="Mouse" source="project://database/Assets/Art/UI%20Icons/mouse.png?fileID=2800000&amp;guid=b4077d0b3f7f6b44a99c5af89e7cb53a&amp;type=3#mouse" tint-color="rgba(255, 255, 255, 0.61)" style="height: 60%; width: 188px; flex-direction: row;"/>
         <ui:VisualElement name="TextContainer" style="width: 434px; right: 0; background-color: rgba(93, 54, 17, 0.36); justify-content: flex-start; align-items: auto; margin-left: 33px; height: 299px; align-self: center; align-content: auto; border-top-left-radius: 56px; border-top-right-radius: 56px; border-bottom-right-radius: 56px; border-bottom-left-radius: 56px; color: rgb(217, 217, 217); -unity-text-outline-width: 0; -unity-text-outline-color: rgb(0, 0, 0);">
             <ui:Label text="Controls" name="Title" style="align-self: center; height: 56px; width: 100%; font-size: 35px; -unity-text-align: upper-center; -unity-font-style: bold;"/>
-            <ui:Label text="Move your mouse vertically to rotate your paddle. Use right mouse button to lower the paddle into the water. Move it under the water to move the raft." name="Description" style="align-self: center; height: 208px; width: 373px; font-size: 28px; -unity-text-align: upper-left; white-space: normal;"/>
+            <ui:Label text="Move your mouse vertically to rotate your paddle. Use &lt;b&gt;right mouse button to lower the paddle&lt;/b&gt; into the water. Move it under the water to move the raft." name="Description" style="align-self: center; height: 208px; width: 373px; font-size: 28px; -unity-text-align: upper-left; white-space: normal;"/>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
