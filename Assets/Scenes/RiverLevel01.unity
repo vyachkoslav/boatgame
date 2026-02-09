@@ -7633,7 +7633,7 @@ MonoBehaviour:
   delayBeforeEndText: 0.5
   delayAfterTextRenderedSeconds: 3
   displayPaddleControlsTime: 10
-  displayCameraControlsTime: 5
+  displayCameraControlsTime: 7
 --- !u!1001 &1677580101
 PrefabInstance:
   m_ObjectHideFlags: 0

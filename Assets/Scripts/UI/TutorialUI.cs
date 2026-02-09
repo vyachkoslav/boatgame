@@ -39,8 +39,8 @@ namespace UI
         }
 
         private const string PosTextStart = "You're on the ";
-        private const string RightText = "RIGHT";
-        private const string LeftText = "LEFT";
+        private const string RightText = "<b>RIGHT</b>";
+        private const string LeftText = "<b>LEFT</b>";
         
         [SerializeField] private UIDocument tutorialUI;
         
@@ -91,11 +91,11 @@ namespace UI
             else
                 e.Position.style.right = new StyleLength(StyleKeyword.Auto);
             
-            var text = e.Position.Q<Label>();
-            text.text = "";
             e.Position.visible = true;
 
+            var text = e.Position.Q<Label>();
             yield return DrawText(text, PosTextStart, delayBetweenLetters);
+            
             yield return new WaitForSeconds(delayBeforeEndText);
             text.text += endText;
 
