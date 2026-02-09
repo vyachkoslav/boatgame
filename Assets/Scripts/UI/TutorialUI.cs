@@ -13,15 +13,21 @@ namespace UI
         {
             public readonly VisualElement Root;
             public readonly VisualElement Position;
-            public readonly VisualElement Controls;
-            public readonly VisualElement MouseImage;
+            public readonly VisualElement PaddleControls;
+            public readonly Image MouseImage;
+            public readonly VisualElement CameraControls;
+            public readonly Image CameraImage;
 
             public Elements(UIDocument document)
             {
                 Root = document.rootVisualElement;
                 Position = Root.Q<VisualElement>("Position");
-                Controls = Root.Q<VisualElement>("Controls");
-                MouseImage = Controls.Q<VisualElement>("Mouse");
+                
+                PaddleControls = Root.Q<VisualElement>("PaddleControls");
+                MouseImage = PaddleControls.Q<Image>("Image");
+                
+                CameraControls = Root.Q<VisualElement>("CameraControls");
+                CameraImage = CameraControls.Q<Image>("Image");
             }
         }
 
@@ -34,7 +40,8 @@ namespace UI
         [SerializeField] private float delayBetweenLetters = 0.1f;
         [SerializeField] private float delayBeforeEndText = 0.5f;
         [SerializeField] private float delayAfterTextRenderedSeconds = 3f;
-        [SerializeField] private float displayControlsTime = 6f;
+        [SerializeField] private float displayPaddleControlsTime = 10f;
+        [SerializeField] private float displayCameraControlsTime = 5f;
         
         private Elements e;
 
@@ -56,7 +63,8 @@ namespace UI
         private void ResetUI()
         {
             e.Position.visible = false;
-            e.Controls.visible = false;
+            e.PaddleControls.visible = false;
+            e.CameraControls.visible = false;
         }
 
         private void OnPlayerAssigned(PlayerManager.PlayerType type)
@@ -100,14 +108,14 @@ namespace UI
             const float distance = 100f;
             const float speed = 100f;
 
-            e.Controls.visible = true;
+            e.PaddleControls.visible = true;
             var initialPos = 0f;
             var currentPos = 0f;
             var dir = 1;
             var currentTime = 0f;
             
             // animate mouse
-            while (e.Controls.visible && currentTime < displayControlsTime)
+            while (e.PaddleControls.visible && currentTime < displayPaddleControlsTime)
             {
                 currentTime += Time.deltaTime;
                 e.MouseImage.style.top = new StyleLength(Length.Pixels(initialPos + currentPos));
@@ -125,7 +133,16 @@ namespace UI
                 yield return null;
             }
             
-            e.Controls.visible = false;
+            e.PaddleControls.visible = false;
+            yield return new WaitForSeconds(0.5f);
+            yield return DisplayCameraControls();
+        }
+
+        private IEnumerator DisplayCameraControls()
+        {
+            e.CameraControls.visible = true;
+            yield return new WaitForSeconds(displayCameraControlsTime);
+            e.CameraControls.visible = false;
         }
     }
 }
