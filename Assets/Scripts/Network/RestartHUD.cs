@@ -5,12 +5,14 @@ using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace Network
 {
     public class RestartHUD : NetworkBehaviour
     {
+        [SerializeField] private InputActionReference voteAction;
         [SerializeField] private Button voteButton;
         [SerializeField] private TextMeshProUGUI buttonText;
         [SerializeField] private TextMeshProUGUI votesText;
@@ -40,18 +42,28 @@ namespace Network
 
         private void OnEnable()
         {
-            voteButton.onClick.AddListener(Vote);
+            if(voteAction != null)
+                voteAction.action.performed += Vote;
+            voteButton?.onClick.AddListener(Vote);
         }
+
         private void OnDisable()
         {
-            voteButton.onClick.RemoveListener(Vote);
+            if(voteAction != null)
+                voteAction.action.performed -= Vote;
+            voteButton?.onClick.RemoveListener(Vote);
+        }
+
+        private void Vote(InputAction.CallbackContext obj)
+        {
+            Vote();
         }
 
         private void Vote()
         {
             selfVoted = !selfVoted;
             CmdVote(selfVoted);
-            buttonText.text = selfVoted ? "Cancel" : "Restart";
+            buttonText.text = selfVoted ? "<b>P</b> - Cancel" : "<b>P</b> - Restart";
         }
 
         [ServerRpc(RequireOwnership = false)]
