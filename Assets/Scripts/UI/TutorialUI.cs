@@ -96,11 +96,11 @@ namespace UI
             yield return new WaitForSeconds(delayBeforeEndText);
             text.text += endText;
 
-            yield return new WaitForSeconds(1f);
-            StartCoroutine(DisplayControls());
-            
-            yield return new WaitForSeconds(delayAfterTextRenderedSeconds-1f);
+            yield return new WaitForSeconds(delayAfterTextRenderedSeconds);
             e.Position.visible = false;
+            
+            yield return new WaitForSeconds(0.5f);
+            yield return DisplayControls();
         }
 
         private IEnumerator DisplayControls()
