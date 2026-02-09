@@ -79,9 +79,18 @@ namespace Network
             RightPlayer = FishNet.Managing.NetworkManager.EmptyConnection;
         }
 
+        public override void OnStartClient()
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        
         public override void OnStopClient()
         {
             CurrentPlayer = PlayerType.None;
+            
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
         public override void OnSpawnServer(NetworkConnection conn)

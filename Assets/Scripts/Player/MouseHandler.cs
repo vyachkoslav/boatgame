@@ -20,8 +20,6 @@ namespace Player
         private void Awake()
         {
             Instance = this;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
         }
 
         private void OnEnable()

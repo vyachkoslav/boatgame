@@ -84,9 +84,12 @@ public class EscMenuController : MonoBehaviour
         menuPanel.SetActive(false);
         settingsPanel.SetActive(false);
         CloseAllCategoryPanels();
-        
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+
+        if (InstanceFinder.IsClientStarted)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
     
     void OpenSettings()
