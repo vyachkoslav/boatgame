@@ -45,6 +45,8 @@ namespace Network
             if(voteAction != null)
                 voteAction.action.performed += Vote;
             voteButton?.onClick.AddListener(Vote);
+
+            BoatHealth.OnFinishedSinking += Restart;
         }
 
         private void OnDisable()
@@ -52,6 +54,8 @@ namespace Network
             if(voteAction != null)
                 voteAction.action.performed -= Vote;
             voteButton?.onClick.RemoveListener(Vote);
+
+            BoatHealth.OnFinishedSinking -= Restart;
         }
 
         private void Vote(InputAction.CallbackContext obj)
