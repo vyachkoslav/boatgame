@@ -305,17 +305,17 @@ ModelImporter:
     - name: Bone.004
       parentName: Bone.003
       position: {x: -1.2823875e-11, y: 0.003651567, z: -3.2385286e-10}
-      rotation: {x: 0.036451604, y: -0.000025013167, z: -0.016505498, w: 0.9991991}
+      rotation: {x: -0.6920765, y: 0.01183391, z: -0.011506115, w: 0.72163546}
       scale: {x: 1.0000007, y: 1.0000005, z: 1.0000004}
     - name: Bone.005
       parentName: Bone.004
       position: {x: 6.835762e-11, y: 0.0024430393, z: 2.120214e-10}
-      rotation: {x: 0.040221117, y: 0.00008895667, z: -0.004624742, w: 0.9991802}
+      rotation: {x: 0.040221114, y: 0.00008895667, z: -0.0046247416, w: 0.9991802}
       scale: {x: 1.0000005, y: 0.99999994, z: 1.0000005}
     - name: Bone.010
       parentName: Bone.002
       position: {x: -8.039933e-12, y: 0.0063702534, z: -4.4070475e-10}
-      rotation: {x: -0.0047135274, y: 0.0035067822, z: -0.6973768, w: 0.7166806}
+      rotation: {x: -0.004713528, y: 0.0035067822, z: -0.69737685, w: 0.7166806}
       scale: {x: 1.0000001, y: 1.0000004, z: 1}
     - name: Bone.011
       parentName: Bone.010
@@ -330,7 +330,7 @@ ModelImporter:
     - name: Bone.013
       parentName: Bone.012
       position: {x: 1.862645e-10, y: 0.0031812012, z: 7.916242e-11}
-      rotation: {x: -0.11185815, y: -0.05232578, z: -0.0786175, w: 0.98922646}
+      rotation: {x: -0.11185816, y: -0.052325785, z: -0.078617506, w: 0.9892265}
       scale: {x: 0.99999964, y: 0.99999994, z: 0.9999999}
     - name: Bone.014
       parentName: Bone.013
@@ -385,7 +385,7 @@ ModelImporter:
     - name: Bone.024
       parentName: Bone.023
       position: {x: 1.6763806e-10, y: 0.0038106274, z: -5.587935e-10}
-      rotation: {x: -0.08023955, y: -0.02162526, z: -0.04574522, w: 0.9954905}
+      rotation: {x: -0.08023956, y: -0.021625262, z: -0.045745224, w: 0.99549055}
       scale: {x: 1.0000002, y: 1.0000004, z: 1.0000004}
     - name: Bone.025
       parentName: Armature
@@ -410,7 +410,7 @@ ModelImporter:
     - name: Bone.029
       parentName: Bone.028
       position: {x: 1.6763806e-10, y: 0.0038106274, z: -5.587935e-10}
-      rotation: {x: -0.08023955, y: -0.02162526, z: -0.04574522, w: 0.9954905}
+      rotation: {x: -0.08023956, y: -0.021625262, z: -0.045745224, w: 0.99549055}
       scale: {x: 1.0000002, y: 1.0000004, z: 1.0000004}
     - name: Bone.030
       parentName: Armature
@@ -420,7 +420,7 @@ ModelImporter:
     - name: Bone.031
       parentName: Bone.030
       position: {x: -0, y: 0.0051801195, z: 0}
-      rotation: {x: 0.54333955, y: 0.46040794, z: 0.4350151, w: -0.5509705}
+      rotation: {x: 0.5433396, y: 0.46040794, z: 0.43501514, w: -0.5509705}
       scale: {x: 1.0000001, y: 1.0000001, z: 1.0000002}
     - name: Bone.032
       parentName: Bone.031
