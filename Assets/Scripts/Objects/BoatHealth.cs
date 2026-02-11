@@ -9,9 +9,7 @@ public class BoatHealth : MonoBehaviour
 
     private Rigidbody boatRb;
     [SerializeField] private float sinkTime = 4.0f;
-    [SerializeField] private float sinkPerFrame = 0.0005f;
-    private float elapsedTime = 0.0f;
-    private bool isSinking = false;
+    [SerializeField] private float sinkSpeed = 0.05f;
     
     // Events that can be subscribed to by HUD, particle system etc. to trigger effects
     public static event Action<int> OnBoatDamaged;
@@ -34,15 +32,6 @@ public class BoatHealth : MonoBehaviour
         boatRb = GetComponent<Rigidbody>();
     }
 
-    private void FixedUpdate()
-    {
-        if (isSinking)
-        {
-            elapsedTime += Time.fixedDeltaTime;
-            transform.position -= new Vector3(0, sinkPerFrame, 0);
-        }
-    }
-
     public static void TakeDamage(int damage)
     {
         hp -= damage;
@@ -56,14 +45,18 @@ public class BoatHealth : MonoBehaviour
 
     private void SinkBoat()
     {
-        isSinking = true;
-        boatRb.isKinematic = true; // Disables physics
-        StartCoroutine(WaitUntilSunk());
+        StartCoroutine(SinkRoutine());
     }
 
-    private IEnumerator WaitUntilSunk()
+    private IEnumerator SinkRoutine()
     {
-        yield return new WaitUntil(() => elapsedTime >= sinkTime);
+        boatRb.isKinematic = true; // Disables physics
+        var timeGoal = Time.time + sinkTime;
+        while (Time.time < timeGoal)
+        {
+            transform.position -= new Vector3(0, sinkSpeed * Time.deltaTime, 0);
+            yield return null;
+        }
         OnFinishedSinking?.Invoke();
     }
 }
