@@ -441,7 +441,7 @@ Rigidbody:
   serializedVersion: 5
   m_Mass: 100
   m_LinearDamping: 0.2
-  m_AngularDamping: 1
+  m_AngularDamping: 2
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -1114,6 +1114,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7152563536048001191, guid: 67f0c5149fd822c42a8d10a304cc0202, type: 3}
+      propertyPath: lookObj
+      value: 
+      objectReference: {fileID: 4807582272133218344}
+    - target: {fileID: 7152563536048001191, guid: 67f0c5149fd822c42a8d10a304cc0202, type: 3}
       propertyPath: ikActive
       value: 1
       objectReference: {fileID: 0}
@@ -1276,6 +1280,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
+--- !u!4 &1641982271721661806 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2360152128279467796, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
+  m_PrefabInstance: {fileID: 3893801639908192890}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3481214495226682296 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 452134392142424514, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
@@ -1573,6 +1582,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5416296445328210538, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
   m_PrefabInstance: {fileID: 7095147717777528636}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &4807582272133218344 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2360152128279467796, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
+  m_PrefabInstance: {fileID: 7095147717777528636}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7219633679204581118 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 452134392142424514, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
@@ -1637,6 +1651,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7152563536048001191, guid: 67f0c5149fd822c42a8d10a304cc0202, type: 3}
+      propertyPath: lookObj
+      value: 
+      objectReference: {fileID: 1641982271721661806}
     - target: {fileID: 7152563536048001191, guid: 67f0c5149fd822c42a8d10a304cc0202, type: 3}
       propertyPath: ikActive
       value: 1
