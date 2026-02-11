@@ -682,8 +682,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Utility.GrabBoth
   grabAction: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  first: {fileID: 0}
-  second: {fileID: 0}
+  left: {fileID: 7916315865003237035}
+  right: {fileID: 4153145559538777069}
 --- !u!114 &845348574371878350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1396,6 +1396,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
+--- !u!114 &4153145559538777069 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1129101786779683223, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
+  m_PrefabInstance: {fileID: 3893801639908192890}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df61cd0500664023ab07ff18f2d5904a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player.Paddle
 --- !u!4 &9017054304186402832 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5416296445328210538, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
@@ -1872,3 +1883,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 452134392142424514, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
   m_PrefabInstance: {fileID: 7095147717777528636}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7916315865003237035 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1129101786779683223, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
+  m_PrefabInstance: {fileID: 7095147717777528636}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df61cd0500664023ab07ff18f2d5904a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player.Paddle
