@@ -116,6 +116,7 @@ namespace Network
 
         private void Update()
         {
+            if (!IsOwner || Cursor.visible) return;
             deltaPending += Pointer.current.delta.value.y;
         }
 
@@ -155,7 +156,7 @@ namespace Network
         /// </summary>
         private ReplicateData BuildMoveData()
         {
-            if (!IsOwner) return default;
+            if (!IsOwner || Cursor.visible) return default;
 
             ReplicateData md = new(-deltaPending * mouseSensitivity, currentState);
             deltaPending = 0;
