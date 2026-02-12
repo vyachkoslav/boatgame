@@ -9,18 +9,6 @@ public class Hazard : MonoBehaviour
     [SerializeField] private float pushForce = 8f;
     [SerializeField] private int damage = 1;
 
-    public event Action<int> OnHazardTriggered;
-
-    private void OnDisable()
-    {
-        OnHazardTriggered -= BoatHealth.Instance.TakeDamage;
-    }
-
-    private void Start()
-    {
-        OnHazardTriggered += BoatHealth.Instance.TakeDamage;
-    }
-
     void OnTriggerEnter(Collider other)
     {
         // Check if the colliding object is a boat
@@ -30,8 +18,8 @@ public class Hazard : MonoBehaviour
 
             Debug.Log($"BOAT HIT! Obstacle at {transform.position} hit {other.gameObject.name}");
 
-            // Event passes damage dealt to script that handles boat health
-            OnHazardTriggered?.Invoke(damage);
+            // Passes damage dealt to script that handles boat health
+            BoatHealth.Instance.TakeDamage(damage);
 
             // Try to push the boat away from the obstacle
             if (other.TryGetComponent<Rigidbody>(out Rigidbody rb))

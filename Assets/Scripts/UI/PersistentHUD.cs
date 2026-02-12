@@ -2,33 +2,28 @@ using FishNet.Object;
 using TMPro;
 using UnityEngine;
 
-public class PersistentHUD : NetworkBehaviour
+public class PersistentHUD : MonoBehaviour
 {
+    public static PersistentHUD Instance { get; private set; }
+
     [SerializeField] private TextMeshProUGUI boatHpIndicator;
 
     private void Awake()
     {
+        // Sets self as instance if it doesn't exist yet
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+
         boatHpIndicator.text = "Raft HP: " + BoatHealth.MaxHp;
     }
 
-    private void OnEnable()
-    {
-        BoatHealth.OnBoatDamaged += UpdateBoatHp;
-    }
-
-    private void OnDisable()
-    {
-        BoatHealth.OnBoatDamaged -= UpdateBoatHp;
-    }
-
-    [Server]
     public void UpdateBoatHp(int hp)
-    {
-        CmdUpdateBoatHp(hp);
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    private void CmdUpdateBoatHp(int hp)
     {
         boatHpIndicator.text = "Raft HP: " + hp;
     }

@@ -3,6 +3,7 @@ using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BoatHealth : NetworkBehaviour
@@ -25,6 +26,7 @@ public class BoatHealth : NetworkBehaviour
 
     private void Awake()
     {
+        // Sets self as instance if it doesn't exist yet
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -38,9 +40,15 @@ public class BoatHealth : NetworkBehaviour
         boatRb = GetComponent<Rigidbody>();
     }
 
+    public override void OnStartClient()
+    {
+        PersistentHUD.Instance.UpdateBoatHp(hp.Value);
+    }
+
     private void OnEnable()
     {
         OnDeath += SinkBoat;
+        hp.OnChange += OnChangeHealth;
     }
 
     private void OnDisable()
@@ -57,6 +65,11 @@ public class BoatHealth : NetworkBehaviour
         {
             OnDeath?.Invoke();
         }
+    }
+
+    private void OnChangeHealth(int previous, int next, bool asServer)
+    {
+        PersistentHUD.Instance.UpdateBoatHp(hp.Value);
     }
 
     private void SinkBoat()
