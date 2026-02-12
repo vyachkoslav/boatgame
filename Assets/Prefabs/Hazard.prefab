@@ -242,6 +242,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RiverObstacle
   pushForce: 80
+  damage: 1
+  explosionVFXPrefab: {fileID: 7579230685443300824, guid: 15a4c4cfd41e52c499abce759ffce311, type: 3}
+  vfxDestroyDelay: 2
 --- !u!114 &5710345726077529889
 MonoBehaviour:
   m_ObjectHideFlags: 0
