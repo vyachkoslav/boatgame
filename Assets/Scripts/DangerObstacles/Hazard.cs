@@ -2,12 +2,19 @@ using FishNet;
 using UnityEngine;
 using GamePhysics;
 using System;
+using UnityEngine.VFX;
 
 public class Hazard : MonoBehaviour
 {
     // How hard the boat gets pushed when hitting this obstacle
     [SerializeField] private float pushForce = 8f;
     [SerializeField] private int damage = 1;
+
+    [Header("Visual Effects")]
+    [SerializeField] private GameObject explosionVFXPrefab;
+    [SerializeField] private float vfxDestroyDelay = 1f;
+
+
 
     void OnTriggerEnter(Collider other)
     {
@@ -17,6 +24,9 @@ public class Hazard : MonoBehaviour
         {
 
             Debug.Log($"BOAT HIT! Obstacle at {transform.position} hit {other.gameObject.name}");
+
+
+            SpawnExplosionVFX();
 
             // Passes damage dealt to script that handles boat health
             BoatHealth.Instance.TakeDamage(damage);
@@ -38,4 +48,32 @@ public class Hazard : MonoBehaviour
                 InstanceFinder.ServerManager.Despawn(gameObject);
         }
     }
+
+
+    private void SpawnExplosionVFX()
+    {
+        if (explosionVFXPrefab != null)
+        {
+            // Instantiate the explosion prefab at the bomb's position
+            GameObject explosion = Instantiate(explosionVFXPrefab, transform.position, transform.rotation);
+            
+            //Trigger effect via event
+            VisualEffect vfx = explosion.GetComponent<VisualEffect>();
+            if (vfx != null)
+            {
+                vfx.SendEvent("Explosion"); // Send event to start the effect
+            }
+            
+            // Destroy the explosion after it finishes playing
+            Destroy(explosion, vfxDestroyDelay);
+            
+            Debug.Log($"Explosion VFX spawned at {transform.position}");
+        }
+        else
+        {
+            Debug.LogWarning("No explosion VFX prefab assigned to Hazard!");
+        }
+    }
+
+
 }
