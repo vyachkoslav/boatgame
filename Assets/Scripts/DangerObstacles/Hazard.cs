@@ -11,14 +11,14 @@ public class Hazard : MonoBehaviour
 
     public event Action<int> OnHazardTriggered;
 
-    private void OnEnable()
-    {
-        OnHazardTriggered += BoatHealth.TakeDamage; 
-    }
-
     private void OnDisable()
     {
-        OnHazardTriggered -= BoatHealth.TakeDamage;
+        OnHazardTriggered -= BoatHealth.Instance.TakeDamage;
+    }
+
+    private void Start()
+    {
+        OnHazardTriggered += BoatHealth.Instance.TakeDamage;
     }
 
     void OnTriggerEnter(Collider other)

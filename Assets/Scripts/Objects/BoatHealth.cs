@@ -1,11 +1,18 @@
+using FishNet.CodeGenerating;
+using FishNet.Object;
+using FishNet.Object.Synchronizing;
 using System;
 using System.Collections;
 using UnityEngine;
 
-public class BoatHealth : MonoBehaviour
+public class BoatHealth : NetworkBehaviour
 {
+    public static BoatHealth Instance { get; private set; }
+
     private static int maxHp = 2;
-    private static int hp;
+    public static int MaxHp => maxHp;
+    [AllowMutableSyncType]
+    private SyncVar<int> hp = new SyncVar<int>();
 
     private Rigidbody boatRb;
     [SerializeField] private float sinkTime = 4.0f;
@@ -15,6 +22,21 @@ public class BoatHealth : MonoBehaviour
     public static event Action<int> OnBoatDamaged;
     public static event Action OnDeath;
     public static event Action OnFinishedSinking;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+
+        hp.Value = maxHp;
+        boatRb = GetComponent<Rigidbody>();
+    }
 
     private void OnEnable()
     {
@@ -26,18 +48,12 @@ public class BoatHealth : MonoBehaviour
         OnDeath -= SinkBoat;
     }
 
-    private void Awake()
+    public void TakeDamage(int damage)
     {
-        hp = maxHp;
-        boatRb = GetComponent<Rigidbody>();
-    }
+        hp.Value -= damage;
+        OnBoatDamaged?.Invoke(hp.Value);
 
-    public static void TakeDamage(int damage)
-    {
-        hp -= damage;
-        OnBoatDamaged?.Invoke(hp);
-
-        if (hp <= 0)
+        if (hp.Value <= 0)
         {
             OnDeath?.Invoke();
         }
