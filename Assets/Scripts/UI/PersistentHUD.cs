@@ -1,12 +1,14 @@
 using FishNet.Object;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PersistentHUD : MonoBehaviour
 {
     public static PersistentHUD Instance { get; private set; }
 
     [SerializeField] private TextMeshProUGUI boatHpIndicator;
+    [SerializeField] private TextMeshProUGUI holeCountIndicator;
 
     private void Awake()
     {
@@ -27,4 +29,10 @@ public class PersistentHUD : MonoBehaviour
     {
         boatHpIndicator.text = "Raft HP: " + hp;
     }
+
+    public void UpdateHoleCount(int holeCount)
+    {
+        holeCountIndicator.text = "Holes Remaining: " + holeCount;
+    }
+
 }
