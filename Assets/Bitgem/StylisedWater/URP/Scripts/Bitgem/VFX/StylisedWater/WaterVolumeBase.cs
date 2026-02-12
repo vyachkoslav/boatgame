@@ -365,7 +365,8 @@ namespace Bitgem.VFX.StylisedWater
         #region Virtual methods
 
         protected virtual void GenerateTiles(ref bool[,,] _tiles) { }
-        public virtual void Validate() { }
+
+        public virtual bool Validate() => true;
 
         #endregion
 
@@ -377,10 +378,8 @@ namespace Bitgem.VFX.StylisedWater
             TileSize = Mathf.Clamp(TileSize, 0.1f, 100f);
 
             // allow any child class to perform validation
-            Validate();
-
             // flag as needing rebuilding
-            isDirty = true;
+            isDirty = Validate();
         }
 
         void Update()

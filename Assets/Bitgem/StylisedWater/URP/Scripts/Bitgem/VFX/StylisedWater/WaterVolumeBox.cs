@@ -13,6 +13,7 @@ namespace Bitgem.VFX.StylisedWater
     {
         #region Public fields
 
+        [SerializeField] [HideInInspector] private Vector3 PrevDimensions = Vector3.zero;
         public Vector3 Dimensions = Vector3.zero;
 
         #endregion
@@ -39,12 +40,15 @@ namespace Bitgem.VFX.StylisedWater
             }
         }
 
-        public override void Validate()
+        public override bool Validate()
         {
             // keep values sensible
             Dimensions.x = Mathf.Clamp(Dimensions.x, 1, MAX_TILES_X);
             Dimensions.y = Mathf.Clamp(Dimensions.y, 1, MAX_TILES_Y);
             Dimensions.z = Mathf.Clamp(Dimensions.z, 1, MAX_TILES_Z);
+            var dirty = Dimensions != PrevDimensions;
+            PrevDimensions = Dimensions;
+            return dirty;
         }
 
         #endregion
