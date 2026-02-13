@@ -23,7 +23,10 @@ namespace Network.Voice
 
         public override void OnStartClient()
         {
-            initTask ??= InitVivox();
+            if (initTask == null)
+                initTask = InitVivox();
+            else
+                _ = JoinChannel();
         }
 
         public override void OnStopClient()

@@ -43,6 +43,9 @@ namespace Network.Voice
 
         public void Setup(VivoxParticipant participant)
         {
+            MuteButton.onClick.RemoveAllListeners();
+            ParticipantVolumeSlider.onValueChanged.RemoveAllListeners();
+            
             Participant = participant;
             UpdateChatStateImage();
             Participant.ParticipantSpeechDetected += UpdateChatStateImage;
@@ -66,7 +69,6 @@ namespace Network.Voice
         {
             if (Participant != null)
             {
-                Participant.ParticipantMuteStateChanged -= UpdateChatStateImage;
                 Participant.ParticipantSpeechDetected -= UpdateChatStateImage;
             }
 
