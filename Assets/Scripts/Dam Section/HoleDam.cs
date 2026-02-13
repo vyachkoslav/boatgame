@@ -14,7 +14,9 @@ public class HoleDam : NetworkPuzzle
     {
         if (IsServerStarted)
             SpawnHolesServer();
-            PersistentHUD.Instance.UpdateHoleCount(holes.Count);
+            // Updates the hole count on the HUD
+            if (HoleCounterHUD.Instance != null)
+                HoleCounterHUD.Instance.UpdateHoleCount(holes.Count);
     }
 
     protected override void OnPuzzleEnd(State state)
@@ -41,7 +43,8 @@ public class HoleDam : NetworkPuzzle
         
         Despawn(blockerObject);
         Despawn(holeObject);
-        PersistentHUD.Instance.UpdateHoleCount(holes.Count);
+        if (HoleCounterHUD.Instance != null)
+            HoleCounterHUD.Instance.UpdateHoleCount(holes.Count);
 
         if (holes.Count == 0)
             EndPuzzle(State.Success);
@@ -53,5 +56,7 @@ public class HoleDam : NetworkPuzzle
         {
             Despawn(hole);
         }
+        if (HoleCounterHUD.Instance != null)
+            HoleCounterHUD.Instance.ClearHoleCount();
     }
 }
