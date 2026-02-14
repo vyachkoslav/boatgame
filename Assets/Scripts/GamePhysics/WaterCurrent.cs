@@ -33,7 +33,10 @@ namespace GamePhysics
             // Pushes all objects within the water current in the current's direction
             foreach (Rigidbody rb in objectsInCurrent)
             {
-                rb.AddForce(direction * speed);
+                if (!rb.gameObject.CompareTag("Pike"))
+                {
+                    rb.AddForce(direction * speed);
+                }
             }
         }
 
