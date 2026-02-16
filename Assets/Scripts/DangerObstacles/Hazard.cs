@@ -1,10 +1,9 @@
 using FishNet;
 using UnityEngine;
-using GamePhysics;
-using System;
+using FishNet.Object;
 using UnityEngine.VFX;
 
-public class Hazard : MonoBehaviour
+public class Hazard : NetworkBehaviour
 {
     // How hard the boat gets pushed when hitting this obstacle
     [SerializeField] private float pushForce = 8f;
@@ -18,6 +17,8 @@ public class Hazard : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if (IsClientOnlyStarted) return;
+        
         // Check if the colliding object is a boat
         // Boat can be identified by BoatHealth component
         if (other.GetComponent<BoatHealth>() != null)
@@ -26,7 +27,7 @@ public class Hazard : MonoBehaviour
             Debug.Log($"BOAT HIT! Obstacle at {transform.position} hit {other.gameObject.name}");
 
 
-            SpawnExplosionVFX();
+            RpcSpawnExplosionVFX();
 
             // Passes damage dealt to script that handles boat health
             BoatHealth.Instance.TakeDamage(damage);
@@ -44,13 +45,13 @@ public class Hazard : MonoBehaviour
             }
 
             // Destroy this obstacle after it's been hit
-            if (InstanceFinder.IsServerStarted)
-                InstanceFinder.ServerManager.Despawn(gameObject);
+            InstanceFinder.ServerManager.Despawn(gameObject);
         }
     }
 
 
-    private void SpawnExplosionVFX()
+    [ObserversRpc]
+    private void RpcSpawnExplosionVFX()
     {
         if (explosionVFXPrefab != null)
         {
@@ -59,10 +60,7 @@ public class Hazard : MonoBehaviour
             
             //Trigger effect via event
             VisualEffect vfx = explosion.GetComponent<VisualEffect>();
-            if (vfx != null)
-            {
-                vfx.SendEvent("Explosion"); // Send event to start the effect
-            }
+            vfx.SendEvent("Explosion"); // Send event to start the effect
             
             // Destroy the explosion after it finishes playing
             Destroy(explosion, vfxDestroyDelay);
