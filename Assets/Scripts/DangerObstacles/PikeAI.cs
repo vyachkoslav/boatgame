@@ -1,3 +1,4 @@
+using FishNet;
 using UnityEngine;
 
 public class PikeEnemy : MonoBehaviour
@@ -48,6 +49,7 @@ public class PikeEnemy : MonoBehaviour
     
     private void Update()
     {
+        if (InstanceFinder.IsClientOnlyStarted) return;
         if (rb == null) return;
         if (patrolCenter == null) return;
         
