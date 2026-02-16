@@ -22,9 +22,6 @@ public class PikeEnemy : MonoBehaviour
     [SerializeField] private float attackCooldown = 2f;
     [SerializeField] private float knockbackForce = 50f;
     
-    [Header("Water")]
-    [SerializeField] private float waterLevelY = 0.049f;
-    
     private Rigidbody rb;
     private float startAngle;
     private float lastAttackTime;
@@ -58,8 +55,6 @@ public class PikeEnemy : MonoBehaviour
         if (boat == null) return;
         Transform boatTransform = boat.transform;
         
-        KeepAtWaterLevel();
-        
         float distanceToBoat = Vector3.Distance(transform.position, boatTransform.position);
         bool boatInOuterRing = distanceToBoat <= aggroRadius;
         bool boatInVision = IsBoatInVisionCone(boatTransform);
@@ -85,7 +80,7 @@ public class PikeEnemy : MonoBehaviour
                 if (directionToBoat != Vector3.zero)
                 {
                     Quaternion targetRotation = Quaternion.LookRotation(directionToBoat);
-                    transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 180f * Time.deltaTime);
+                    rb.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 180f * Time.deltaTime);
                 }
                 
                 if (isRetreating)
@@ -102,7 +97,7 @@ public class PikeEnemy : MonoBehaviour
                 if (retreatDirection != Vector3.zero)
                 {
                     Quaternion targetRotation = Quaternion.LookRotation(retreatDirection);
-                    transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 180f * Time.deltaTime);
+                    rb.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 180f * Time.deltaTime);
                 }
                 
                 float retreatDistanceTraveled = Vector3.Distance(retreatStartPosition, transform.position);
@@ -123,7 +118,7 @@ public class PikeEnemy : MonoBehaviour
         float rad = currentAngle * Mathf.Deg2Rad;
         
         Vector3 targetPos = patrolCenter.position + new Vector3(Mathf.Sin(rad), 0, Mathf.Cos(rad)) * patrolRadius;
-        targetPos.y = waterLevelY;
+        targetPos.y = transform.position.y;
         
         Vector3 direction = (targetPos - transform.position).normalized;
         rb.linearVelocity = direction * patrolSpeed;
@@ -131,7 +126,7 @@ public class PikeEnemy : MonoBehaviour
         if (direction != Vector3.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 180f * Time.deltaTime);
+            rb.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 180f * Time.deltaTime);
         }
     }
     
@@ -178,19 +173,5 @@ public class PikeEnemy : MonoBehaviour
         Vector3 offset = transform.position - patrolCenter.position;
         offset.y = 0;
         startAngle = Mathf.Atan2(offset.x, offset.z) * Mathf.Rad2Deg;
-    }
-    
-    private void KeepAtWaterLevel()
-    {
-        Vector3 pos = transform.position;
-        pos.y = waterLevelY;
-        transform.position = pos;
-        
-        if (rb != null)
-        {
-            Vector3 rbPos = rb.position;
-            rbPos.y = waterLevelY;
-            rb.position = rbPos;
-        }
     }
 }

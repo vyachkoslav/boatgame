@@ -62,7 +62,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!136 &763859735446821361
 CapsuleCollider:
@@ -112,7 +112,6 @@ MonoBehaviour:
   retreatDistance: 2
   attackCooldown: 2
   knockbackForce: 50
-  waterLevelY: 0.049
 --- !u!114 &3587307139343534417
 MonoBehaviour:
   m_ObjectHideFlags: 0
