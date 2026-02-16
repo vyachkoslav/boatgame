@@ -118,7 +118,7 @@ Transform:
   m_GameObject: {fileID: 3416682518964298800}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.09, z: 0}
+  m_LocalPosition: {x: 0, y: -0.012, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -184,7 +184,7 @@ Transform:
   m_GameObject: {fileID: 4147150515198401443}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.407, z: 0}
+  m_LocalPosition: {x: 0, y: 0.479, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -277,6 +277,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f2186dcdb5f0cb44936214507c7f0a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RiverObstacle
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 5710345726077529889}
+  _networkObjectCache: {fileID: 0}
   pushForce: 80
   damage: 1
   explosionVFXPrefab: {fileID: 7579230685443300824, guid: 15a4c4cfd41e52c499abce759ffce311, type: 3}
