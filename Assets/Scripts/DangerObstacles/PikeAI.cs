@@ -25,7 +25,6 @@ public class PikeEnemy : MonoBehaviour
     private Rigidbody rb;
     private float startAngle;
     private float lastAttackTime;
-    private bool isRetreating = false;
     private Vector3 retreatStartPosition;
     
     private enum PikeState { Patrolling, Chasing, Retreating }
@@ -83,11 +82,6 @@ public class PikeEnemy : MonoBehaviour
                     rb.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 180f * Time.deltaTime);
                 }
                 
-                if (isRetreating)
-                {
-                    currentState = PikeState.Retreating;
-                    retreatStartPosition = transform.position;
-                }
                 break;
                 
             case PikeState.Retreating:
@@ -101,9 +95,9 @@ public class PikeEnemy : MonoBehaviour
                 }
                 
                 float retreatDistanceTraveled = Vector3.Distance(retreatStartPosition, transform.position);
-                float distanceToPatrol = Vector3.Distance(transform.position, patrolCenter.position);
+                // float distanceToPatrol = Vector3.Distance(transform.position, patrolCenter.position);
                 
-                if (retreatDistanceTraveled >= retreatDistance || distanceToPatrol <= patrolRadius)
+                if (retreatDistanceTraveled >= retreatDistance) // || distanceToPatrol <= patrolRadius)
                 {
                     ReturnToPatrol();
                 }
@@ -143,7 +137,7 @@ public class PikeEnemy : MonoBehaviour
         return angleToBoat <= visionAngle * 0.5f;
     }
     
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         if (currentState != PikeState.Chasing) return;
         if (Time.time < lastAttackTime + attackCooldown) return;
@@ -160,15 +154,15 @@ public class PikeEnemy : MonoBehaviour
                 knockbackDirection.y = 0;
                 boatRb.AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
             }
-            
-            isRetreating = true;
+
+            currentState = PikeState.Retreating;
+            retreatStartPosition = transform.position;
         }
     }
     
     private void ReturnToPatrol()
     {
         currentState = PikeState.Patrolling;
-        isRetreating = false;
         
         Vector3 offset = transform.position - patrolCenter.position;
         offset.y = 0;
