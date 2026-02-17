@@ -7693,8 +7693,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 10543865550672279, guid: 7a297bb85b58d494a9754d277ed938a4, type: 3}
+      propertyPath: clockwise
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10543865550672279, guid: 7a297bb85b58d494a9754d277ed938a4, type: 3}
       propertyPath: aggroRadius
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 10543865550672279, guid: 7a297bb85b58d494a9754d277ed938a4, type: 3}
       propertyPath: patrolSpeed
@@ -7706,7 +7710,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 10543865550672279, guid: 7a297bb85b58d494a9754d277ed938a4, type: 3}
       propertyPath: visionRange
-      value: 3.5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 10543865550672279, guid: 7a297bb85b58d494a9754d277ed938a4, type: 3}
       propertyPath: patrolCenter
