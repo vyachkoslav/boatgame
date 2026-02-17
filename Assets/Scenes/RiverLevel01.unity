@@ -3820,7 +3820,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7602409929609499165, guid: df0249c16a58bfb4ebe45789e7553485, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -23.265
+      value: -23.03
       objectReference: {fileID: 0}
     - target: {fileID: 7602409929609499165, guid: df0249c16a58bfb4ebe45789e7553485, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4537,7 +4537,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1747240043744906246, guid: 549a3f0da1ab52f45b50fdcbeff7ba54, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.00000004371139
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1747240043744906246, guid: 549a3f0da1ab52f45b50fdcbeff7ba54, type: 3}
       propertyPath: m_LocalRotation.x
@@ -4545,7 +4545,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1747240043744906246, guid: 549a3f0da1ab52f45b50fdcbeff7ba54, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1747240043744906246, guid: 549a3f0da1ab52f45b50fdcbeff7ba54, type: 3}
       propertyPath: m_LocalRotation.z
@@ -4569,7 +4569,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2367507181382541864, guid: 549a3f0da1ab52f45b50fdcbeff7ba54, type: 3}
       propertyPath: rotationY
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3149460090748860009, guid: 549a3f0da1ab52f45b50fdcbeff7ba54, type: 3}
       propertyPath: ShapeModule.m_Scale.x
@@ -4582,6 +4582,10 @@ PrefabInstance:
     - target: {fileID: 7645234502889805258, guid: 549a3f0da1ab52f45b50fdcbeff7ba54, type: 3}
       propertyPath: m_Name
       value: PikeCurrentRight
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645234502889805258, guid: 549a3f0da1ab52f45b50fdcbeff7ba54, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6869,7 +6873,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1747240043744906246, guid: 549a3f0da1ab52f45b50fdcbeff7ba54, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.00000004371139
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1747240043744906246, guid: 549a3f0da1ab52f45b50fdcbeff7ba54, type: 3}
       propertyPath: m_LocalRotation.x
@@ -6877,7 +6881,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1747240043744906246, guid: 549a3f0da1ab52f45b50fdcbeff7ba54, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1747240043744906246, guid: 549a3f0da1ab52f45b50fdcbeff7ba54, type: 3}
       propertyPath: m_LocalRotation.z
@@ -6901,7 +6905,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2367507181382541864, guid: 549a3f0da1ab52f45b50fdcbeff7ba54, type: 3}
       propertyPath: rotationY
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3149460090748860009, guid: 549a3f0da1ab52f45b50fdcbeff7ba54, type: 3}
       propertyPath: ShapeModule.m_Scale.x
@@ -6914,6 +6918,10 @@ PrefabInstance:
     - target: {fileID: 7645234502889805258, guid: 549a3f0da1ab52f45b50fdcbeff7ba54, type: 3}
       propertyPath: m_Name
       value: PikeCurrentLeft
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645234502889805258, guid: 549a3f0da1ab52f45b50fdcbeff7ba54, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7689,8 +7697,12 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 10543865550672279, guid: 7a297bb85b58d494a9754d277ed938a4, type: 3}
+      propertyPath: patrolSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 10543865550672279, guid: 7a297bb85b58d494a9754d277ed938a4, type: 3}
       propertyPath: visionAngle
-      value: 180
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 10543865550672279, guid: 7a297bb85b58d494a9754d277ed938a4, type: 3}
       propertyPath: visionRange
@@ -7700,6 +7712,18 @@ PrefabInstance:
       propertyPath: patrolCenter
       value: 
       objectReference: {fileID: 978929187}
+    - target: {fileID: 10543865550672279, guid: 7a297bb85b58d494a9754d277ed938a4, type: 3}
+      propertyPath: retreatSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 10543865550672279, guid: 7a297bb85b58d494a9754d277ed938a4, type: 3}
+      propertyPath: attackCooldown
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 10543865550672279, guid: 7a297bb85b58d494a9754d277ed938a4, type: 3}
+      propertyPath: retreatDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1686672734961596084, guid: 7a297bb85b58d494a9754d277ed938a4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.85
