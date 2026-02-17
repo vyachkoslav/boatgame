@@ -330,7 +330,9 @@ GameObject:
   - component: {fileID: 8006874750297244100}
   - component: {fileID: 2957202873649776020}
   - component: {fileID: 7113909787613990896}
-  - component: {fileID: 2653004080946056150}
+  - component: {fileID: 6268252302549216134}
+  - component: {fileID: 4459893049574105131}
+  - component: {fileID: 7188188816420391075}
   m_Layer: 0
   m_Name: OfflineBlockerObject
   m_TagString: MenuFloatingObject
@@ -433,7 +435,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2653004080946056150
+--- !u!114 &6268252302549216134
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -442,9 +444,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 8084096093219108998}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad71e5f0b99a4264280407812889704e, type: 3}
+  m_Script: {fileID: 11500000, guid: b749f90d4c9961c4991179db1130fa4d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GamePhysics.OfflineFloatingObject
+  m_EditorClassIdentifier: FishNet.Runtime::FishNet.Component.Prediction.OfflineRigidbody
+  _rigidbodyType: 0
+  _getInChildren: 0
+--- !u!114 &4459893049574105131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8084096093219108998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7aa620564c5e2548936ea5caa6989d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GamePhysics.FloatingObject
   supportPoints:
   - {fileID: 4656693077750387564}
   - {fileID: 8575463607158151496}
@@ -454,9 +470,21 @@ MonoBehaviour:
   - {fileID: 5425400060377436543}
   - {fileID: 2235333103636918507}
   - {fileID: 2958125748305282579}
-  yOffset: 0
+  yOffset: 1
   buoyancyStrength: 20
   damping: 2
+--- !u!114 &7188188816420391075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8084096093219108998}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a69b93585b1de274c8ac5f376019e485, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EndZoneDetector
 --- !u!1001 &2849425772098773401
 PrefabInstance:
   m_ObjectHideFlags: 0

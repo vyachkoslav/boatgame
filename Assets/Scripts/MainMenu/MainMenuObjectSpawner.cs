@@ -22,8 +22,15 @@ public class ObjectSpawner : MonoBehaviour
     [SerializeField] private bool useRandomIntervals = false;
     [SerializeField] private Vector2 randomIntervalRange = new Vector2(1f, 3f);
 
+
+    [Header("End Zone Settings")]
+    [SerializeField] private List<Collider> endZones = new List<Collider>();
+
+
+    private int currentSpawnPointIndex = -1;
     private List<float> spawnTimers;
     private bool isSpawning = false;
+
 
     void Start()
     {
@@ -70,9 +77,7 @@ public class ObjectSpawner : MonoBehaviour
             
             if (spawnPoint != null && spawnable.prefab != null)
             {
-                // Instantiate the object
-                GameObject spawnedObject = Instantiate(spawnable.prefab, spawnPoint.position, spawnPoint.rotation);
-                spawnedObject.tag = "MenuFloatingObject";
+                ObjectPooler.Instance.SpawnFromPool(spawnable.prefab.name, spawnPoint.position, spawnPoint.rotation);
             }
         }
     }
@@ -93,8 +98,6 @@ public class ObjectSpawner : MonoBehaviour
         }
     }
 
-    private int currentSpawnPointIndex = -1;
-
     public void StartSpawning()
     {
         isSpawning = true;
@@ -107,10 +110,10 @@ public class ObjectSpawner : MonoBehaviour
         }
     }
 
-    public void StopSpawning()
+    /*public void StopSpawning() //For testing
     {
         isSpawning = false;
-    }
+    }*/
 
 
     public void ClearAllSpawnedObjects()
