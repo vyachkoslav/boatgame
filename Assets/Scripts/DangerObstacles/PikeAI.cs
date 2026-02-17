@@ -168,4 +168,19 @@ public class PikeEnemy : MonoBehaviour
         offset.y = 0;
         startAngle = Mathf.Atan2(offset.x, offset.z) * Mathf.Rad2Deg;
     }
+
+    void OnDrawGizmos()
+    {
+        
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, aggroRadius);
+        
+        Vector3 forward = transform.forward * visionRange;
+        Vector3 rightBoundary = Quaternion.Euler(0, visionAngle * 0.5f, 0) * forward;
+        Vector3 leftBoundary = Quaternion.Euler(0, -visionAngle * 0.5f, 0) * forward;
+        
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(transform.position, transform.position + rightBoundary);
+        Gizmos.DrawLine(transform.position, transform.position + leftBoundary);
+    }
 }
