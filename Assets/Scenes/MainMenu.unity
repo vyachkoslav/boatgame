@@ -1232,7 +1232,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1747240043744906246, guid: 549a3f0da1ab52f45b50fdcbeff7ba54, type: 3}
       propertyPath: m_LocalScale.z
-      value: 60
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 1747240043744906246, guid: 549a3f0da1ab52f45b50fdcbeff7ba54, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1280,7 +1280,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2367507181382541864, guid: 549a3f0da1ab52f45b50fdcbeff7ba54, type: 3}
       propertyPath: length
-      value: 60
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 3149460090748860009, guid: 549a3f0da1ab52f45b50fdcbeff7ba54, type: 3}
       propertyPath: ShapeModule.m_Scale.x
@@ -1288,11 +1288,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3149460090748860009, guid: 549a3f0da1ab52f45b50fdcbeff7ba54, type: 3}
       propertyPath: ShapeModule.m_Scale.z
-      value: 60
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 3149460090748860009, guid: 549a3f0da1ab52f45b50fdcbeff7ba54, type: 3}
       propertyPath: InitialModule.maxNumParticles
-      value: 3000
+      value: 3500
       objectReference: {fileID: 0}
     - target: {fileID: 7645234502889805258, guid: 549a3f0da1ab52f45b50fdcbeff7ba54, type: 3}
       propertyPath: m_Name
@@ -2067,7 +2067,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3717486832959654026, guid: fecbecf2566111c40a7acda05a206fac, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -38.09
+      value: -34.22
       objectReference: {fileID: 0}
     - target: {fileID: 3717486832959654026, guid: fecbecf2566111c40a7acda05a206fac, type: 3}
       propertyPath: m_LocalRotation.w
