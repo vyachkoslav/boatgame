@@ -112,9 +112,10 @@ public class ObjectSpawner : MonoBehaviour
         isSpawning = false;
     }
 
+
     public void ClearAllSpawnedObjects()
     {
-        GameObject[] spawnedObjects = GameObject.FindGameObjectsWithTag("FloatingObject");
+        GameObject[] spawnedObjects = GameObject.FindGameObjectsWithTag("MenuFloatingObject");
         foreach (GameObject obj in spawnedObjects)
         {
             Destroy(obj);
