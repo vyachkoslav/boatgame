@@ -1378,7 +1378,7 @@ MonoBehaviour:
   TimerText: {fileID: 171819558}
   TimerBox: {fileID: 302490869}
   typingSpeed: 0.04
-  visibleDuration: 2.5
+  visibleDuration: 4
 --- !u!114 &301262931
 MonoBehaviour:
   m_ObjectHideFlags: 0
