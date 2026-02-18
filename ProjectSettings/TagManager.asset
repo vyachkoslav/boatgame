@@ -8,6 +8,7 @@ TagManager:
   - Blocker
   - Boat
   - Pike
+  - MenuFloatingObject
   layers:
   - Default
   - TransparentFX

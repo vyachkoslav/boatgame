@@ -2,11 +2,12 @@ using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using FishNet.Transporting;
 using UnityEngine;
+using UnityEngine.Assertions;
 using Utility;
 
 namespace GamePhysics
 {
-    public class Water : NetworkBehaviour, ISerializationCallbackReceiver
+    public class Water : NetworkBehaviour, ISerializationCallbackReceiver, IWater
     {
         private readonly SyncVar<float> timeVal = new(new SyncTypeSettings()
         {
@@ -33,6 +34,8 @@ namespace GamePhysics
         
         private void Awake()
         {
+            Assert.IsNull(GlobalObjects.Water);
+            
             GlobalObjects.Water = this;
 #if UNITY_EDITOR
             freqId = Shader.PropertyToID("_WaveFrequency");
@@ -41,12 +44,14 @@ namespace GamePhysics
 #endif
         }
 
-#if UNITY_EDITOR
         private void OnDestroy()
         {
+            if (ReferenceEquals(GlobalObjects.Water, this))
+                GlobalObjects.Water = null;
+#if UNITY_EDITOR
             waterMat.SetFloat("_WaveTime", 0);
-        }
 #endif
+        }
 
         public override void OnStartClient()
         {
