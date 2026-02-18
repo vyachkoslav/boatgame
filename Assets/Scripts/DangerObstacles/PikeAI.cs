@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class PikeEnemy : MonoBehaviour
 {
-    [Header("Patrol Settings - INNER RING")]
+    [Header("Patrol Settings - INNER RING")] 
+    [SerializeField] private float rotationSpeed = 180f;
     [SerializeField] private float patrolRadius = 1.5f;
     [SerializeField] private float patrolSpeed = 0.8f;
     [SerializeField] private bool clockwise = true;
@@ -21,42 +22,30 @@ public class PikeEnemy : MonoBehaviour
     [SerializeField] private float retreatDistance = 2f;
     [SerializeField] private float attackCooldown = 2f;
     [SerializeField] private float knockbackForce = 50f;
-    
-    private Rigidbody rb;
-    private float startAngle;
+
+    private Vector3 linearVelocity;
     private float lastAttackTime;
     private Vector3 retreatStartPosition;
+    private Transform boat;
     
     private enum PikeState { Patrolling, Chasing, Retreating }
     private PikeState currentState = PikeState.Patrolling;
 
-     private void Awake()
-    {
-    rb = GetComponent<Rigidbody>();
-    }
     private void Start()
     {
         if (patrolCenter == null) return;
         
-        Vector3 offset = transform.position - patrolCenter.position;
-        offset.y = 0;
-        startAngle = Mathf.Atan2(offset.x, offset.z) * Mathf.Rad2Deg;
+        boat = GameObject.FindGameObjectWithTag("Boat").transform;
     }
     
     private void Update()
     {
         if (InstanceFinder.IsClientOnlyStarted) return;
-        if (rb == null) return;
         if (patrolCenter == null) return;
         
-        // Find boat if not set
-        GameObject boat = GameObject.FindGameObjectWithTag("Boat");
-        if (boat == null) return;
-        Transform boatTransform = boat.transform;
-        
-        float distanceToBoat = Vector3.Distance(transform.position, boatTransform.position);
-        bool boatInOuterRing = distanceToBoat <= aggroRadius;
-        bool boatInVision = IsBoatInVisionCone(boatTransform);
+        float boatDistanceToCenter = Vector3.Distance(patrolCenter.position, boat.position);
+        bool boatInOuterRing = boatDistanceToCenter <= aggroRadius;
+        bool boatInVision = IsBoatInVisionCone(boat);
         bool shouldChase = boatInOuterRing && boatInVision;
         
         switch (currentState)
@@ -72,26 +61,34 @@ public class PikeEnemy : MonoBehaviour
                     ReturnToPatrol();
                     break;
                 }
-                
-                Vector3 directionToBoat = (boatTransform.position - transform.position).normalized;
-                rb.linearVelocity = directionToBoat * attackSpeed;
+
+                Vector3 directionToBoat = (boat.position - transform.position);
+                directionToBoat.y = 0;
+                linearVelocity = directionToBoat.normalized * attackSpeed;
                 
                 if (directionToBoat != Vector3.zero)
                 {
                     Quaternion targetRotation = Quaternion.LookRotation(directionToBoat);
-                    rb.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 180f * Time.deltaTime);
+                    transform.rotation = Quaternion.RotateTowards(
+                        transform.rotation, 
+                        targetRotation, 
+                        rotationSpeed * Time.deltaTime);
                 }
                 
                 break;
                 
             case PikeState.Retreating:
-                Vector3 retreatDirection = (transform.position - boatTransform.position).normalized;
-                rb.linearVelocity = retreatDirection * retreatSpeed;
+                Vector3 retreatDirection = (transform.position - boat.position);
+                retreatDirection.y = 0;
+                linearVelocity = retreatDirection.normalized * retreatSpeed;
                 
                 if (retreatDirection != Vector3.zero)
                 {
                     Quaternion targetRotation = Quaternion.LookRotation(retreatDirection);
-                    rb.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 180f * Time.deltaTime);
+                    transform.rotation = Quaternion.RotateTowards(
+                        transform.rotation, 
+                        targetRotation, 
+                        rotationSpeed * Time.deltaTime);
                 }
                 
                 float retreatDistanceTraveled = Vector3.Distance(retreatStartPosition, transform.position);
@@ -103,24 +100,33 @@ public class PikeEnemy : MonoBehaviour
                 }
                 break;
         }
+        transform.position += linearVelocity * Time.deltaTime;
     }
     
     private void PatrolCircle()
     {
-        float dir = clockwise ? -1f : 1f;
-        float currentAngle = startAngle + dir * (Time.time * patrolSpeed * 20f) % 360;
-        float rad = currentAngle * Mathf.Deg2Rad;
+        int dir = clockwise ? -1 : 1;
+        // float currentAngle = startAngle + dir * (Time.time * patrolSpeed * 20f) % 360;
+        var pos = transform.position;
+        Vector3 dirFromCenter = pos - patrolCenter.position; 
+        float currentAngle = Mathf.Atan2(dirFromCenter.z, dirFromCenter.x) * Mathf.Rad2Deg;
+        float targetAngle = currentAngle + dir;
+        float rad = targetAngle * Mathf.Deg2Rad;
         
-        Vector3 targetPos = patrolCenter.position + new Vector3(Mathf.Sin(rad), 0, Mathf.Cos(rad)) * patrolRadius;
+        Vector3 targetPos = patrolCenter.position + new Vector3(Mathf.Cos(rad), 0, Mathf.Sin(rad)) * patrolRadius;
         targetPos.y = transform.position.y;
         
-        Vector3 direction = (targetPos - transform.position).normalized;
-        rb.linearVelocity = direction * patrolSpeed;
+        Vector3 direction = (targetPos - transform.position);
+        direction.y = 0;
+        linearVelocity = direction.normalized * patrolSpeed;
         
         if (direction != Vector3.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(direction);
-            rb.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 180f * Time.deltaTime);
+            transform.rotation = Quaternion.RotateTowards(
+                transform.rotation, 
+                targetRotation, 
+                rotationSpeed * Time.deltaTime);
         }
     }
     
@@ -128,7 +134,8 @@ public class PikeEnemy : MonoBehaviour
     {
         if (targetBoat == null) return false;
         
-        Vector3 directionToBoat = (targetBoat.position - transform.position).normalized;
+        Vector3 directionToBoat = (targetBoat.position - transform.position);
+        directionToBoat.y = 0;
         float distanceToBoat = Vector3.Distance(transform.position, targetBoat.position);
         
         if (distanceToBoat > visionRange) return false;
@@ -163,17 +170,15 @@ public class PikeEnemy : MonoBehaviour
     private void ReturnToPatrol()
     {
         currentState = PikeState.Patrolling;
-        
-        Vector3 offset = transform.position - patrolCenter.position;
-        offset.y = 0;
-        startAngle = Mathf.Atan2(offset.x, offset.z) * Mathf.Rad2Deg;
     }
 
     void OnDrawGizmos()
     {
-        
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, aggroRadius);
+        Gizmos.DrawWireSphere(patrolCenter.position, aggroRadius);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(patrolCenter.position, patrolRadius);
         
         Vector3 forward = transform.forward * visionRange;
         Vector3 rightBoundary = Quaternion.Euler(0, visionAngle * 0.5f, 0) * forward;
