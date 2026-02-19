@@ -2053,6 +2053,42 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -25.299927
       objectReference: {fileID: 0}
+    - target: {fileID: 4046478397508451357, guid: 78db161a31f5485478889e785126fd08, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4046478397508451357, guid: 78db161a31f5485478889e785126fd08, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4046478397508451357, guid: 78db161a31f5485478889e785126fd08, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4046478397508451357, guid: 78db161a31f5485478889e785126fd08, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -120
+      objectReference: {fileID: 0}
+    - target: {fileID: 4046478397508451357, guid: 78db161a31f5485478889e785126fd08, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -120
+      objectReference: {fileID: 0}
+    - target: {fileID: 4046478397508451357, guid: 78db161a31f5485478889e785126fd08, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6093554784038057193, guid: 78db161a31f5485478889e785126fd08, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6093554784038057193, guid: 78db161a31f5485478889e785126fd08, type: 3}
+      propertyPath: m_Color.g
+      value: 0.56084824
+      objectReference: {fileID: 0}
+    - target: {fileID: 6093554784038057193, guid: 78db161a31f5485478889e785126fd08, type: 3}
+      propertyPath: m_Color.r
+      value: 0.91764706
+      objectReference: {fileID: 0}
     - target: {fileID: 7344254307765842839, guid: 78db161a31f5485478889e785126fd08, type: 3}
       propertyPath: m_Name
       value: NetworkManager
