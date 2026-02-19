@@ -63,7 +63,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 806981351674283010}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0856977, y: 0, z: 0, w: 0.9963212}
+  m_LocalRotation: {x: 0.08569771, y: 0, z: 0, w: 0.9963212}
   m_LocalPosition: {x: 0, y: 0.57735515, z: -1.8311367}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -356,6 +356,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d50c08438fec4eaea15e7392c4a068c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Utility.MainCamera
+--- !u!1 &1210472593961018174
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5985811041523522088}
+  m_Layer: 0
+  m_Name: WaterChecker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5985811041523522088
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210472593961018174}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8728140866021547188}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1402404997550027602
 GameObject:
   m_ObjectHideFlags: 0
@@ -429,6 +460,7 @@ Transform:
   - {fileID: 2980692092376984918}
   - {fileID: 3038533133870689965}
   - {fileID: 1152753135103931375}
+  - {fileID: 5985811041523522088}
   m_Father: {fileID: 7602409929609499165}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &7425195335919721813
@@ -615,8 +647,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c7b43cbdd6ad954bb8c776765fadf8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoatHealth
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 3175658735188406401}
+  _networkObjectCache: {fileID: 0}
+  hp:
+    NetworkManager: {fileID: 0}
+    NetworkBehaviour: {fileID: 0}
+    _value: 0
+  waterChecker: {fileID: 5985811041523522088}
+  upsideDownLimit: 4
   sinkTime: 4
-  sinkSpeed: 0.05
+  sinkSpeed: 0.075
 --- !u!1 &2584402101303213742
 GameObject:
   m_ObjectHideFlags: 0
@@ -995,8 +1036,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8626540994095558026}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0856977, y: 0, z: 0, w: 0.9963212}
-  m_LocalPosition: {x: 0, y: 0.57735515, z: -1.8311367}
+  m_LocalRotation: {x: 0.08569771, y: 0, z: 0, w: 0.9963212}
+  m_LocalPosition: {x: 0, y: 0.57735515, z: -1.8311365}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

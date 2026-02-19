@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using Utility;
 
 public class BoatHealth : NetworkBehaviour
 {
@@ -16,8 +17,11 @@ public class BoatHealth : NetworkBehaviour
     private SyncVar<int> hp = new SyncVar<int>();
 
     private Rigidbody boatRb;
+    [SerializeField] private Transform waterChecker;
+    private float timeUpsideDown;
+    [SerializeField] private float upsideDownLimit = 4.0f;
     [SerializeField] private float sinkTime = 4.0f;
-    [SerializeField] private float sinkSpeed = 0.05f;
+    [SerializeField] private float sinkSpeed = 0.075f;
     
     // Events that can be subscribed to by HUD, particle system etc. to trigger effects
     public static event Action<int> OnBoatDamaged;
@@ -40,6 +44,29 @@ public class BoatHealth : NetworkBehaviour
         boatRb = GetComponent<Rigidbody>();
     }
 
+    private void Update()
+    {
+        var waterCheckerPos = waterChecker.position;
+        var waterLevel = GlobalObjects.Water.GetWaterPointHeight(waterCheckerPos);
+
+        // Check if raft is upside down
+        if (waterCheckerPos.y < waterLevel)
+        {
+            timeUpsideDown += Time.deltaTime;
+
+            // Raft takes max damage when upside down long enough
+            if (timeUpsideDown >= upsideDownLimit && hp.Value > 0)
+            {
+                TakeDamage(maxHp);
+            }
+        }
+        else
+        {
+            // When water checker is not underwater, the timer ticks back down, with minimum value of 0
+            timeUpsideDown = Mathf.Clamp(timeUpsideDown - Time.deltaTime, 0, upsideDownLimit);
+        }
+    }
+
     public override void OnStartClient()
     {
         PersistentHUD.Instance.UpdateBoatHp(hp.Value);
@@ -54,6 +81,7 @@ public class BoatHealth : NetworkBehaviour
     private void OnDisable()
     {
         OnDeath -= SinkBoat;
+        hp.OnChange -= OnChangeHealth;
     }
 
     public void TakeDamage(int damage)
