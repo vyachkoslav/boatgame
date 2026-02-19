@@ -43,6 +43,7 @@ public class BoatHealth : NetworkBehaviour
         }
 
         hp.Value = maxHp;
+        gameOver.Value = false;
         boatRb = GetComponent<Rigidbody>();
     }
 
@@ -107,7 +108,10 @@ public class BoatHealth : NetworkBehaviour
 
     private void OnGameOver(bool previous, bool next, bool asServer)
     {
-        BoatHealthHUD.Instance.GameOver();
+        if (!asServer)
+        {
+            BoatHealthHUD.Instance.GameOver();
+        }
     }
 
     private void SinkBoat()

@@ -12,6 +12,8 @@ public class BoatHealthHUD : MonoBehaviour
     [SerializeField] private TextMeshProUGUI gameOverText;
     [SerializeField] private TextMeshProUGUI restartText;
 
+    private Coroutine restartRoutine;
+
     private void Awake()
     {
         // Sets self as instance if it doesn't exist yet
@@ -36,7 +38,12 @@ public class BoatHealthHUD : MonoBehaviour
     {
         gameOverText.text = "Game Over";
         string restartText = "Restarting at checkpoint";
-        StartCoroutine(RestartTextRoutine(restartText));
+
+        if (restartRoutine != null)
+        {
+            StopCoroutine(restartRoutine);
+        }
+        restartRoutine = StartCoroutine(RestartTextRoutine(restartText));
     }
 
     private IEnumerator RestartTextRoutine(string text)
