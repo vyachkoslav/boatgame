@@ -654,9 +654,13 @@ MonoBehaviour:
     NetworkManager: {fileID: 0}
     NetworkBehaviour: {fileID: 0}
     _value: 0
+  gameOver:
+    NetworkManager: {fileID: 0}
+    NetworkBehaviour: {fileID: 0}
+    _value: 0
   waterChecker: {fileID: 5985811041523522088}
   upsideDownLimit: 4
-  sinkTime: 4
+  sinkTime: 4.5
   sinkSpeed: 0.075
 --- !u!1 &2584402101303213742
 GameObject:

@@ -15,12 +15,14 @@ public class BoatHealth : NetworkBehaviour
     public static int MaxHp => maxHp;
     [AllowMutableSyncType]
     private SyncVar<int> hp = new SyncVar<int>();
+    [AllowMutableSyncType]
+    private SyncVar<bool> gameOver = new SyncVar<bool>();
 
     private Rigidbody boatRb;
     [SerializeField] private Transform waterChecker;
     private float timeUpsideDown;
     [SerializeField] private float upsideDownLimit = 4.0f;
-    [SerializeField] private float sinkTime = 4.0f;
+    [SerializeField] private float sinkTime = 4.5f;
     [SerializeField] private float sinkSpeed = 0.075f;
     
     // Events that can be subscribed to by HUD, particle system etc. to trigger effects
@@ -69,19 +71,21 @@ public class BoatHealth : NetworkBehaviour
 
     public override void OnStartClient()
     {
-        PersistentHUD.Instance.UpdateBoatHp(hp.Value);
+        BoatHealthHUD.Instance.UpdateBoatHp(hp.Value);
     }
 
     private void OnEnable()
     {
         OnDeath += SinkBoat;
         hp.OnChange += OnChangeHealth;
+        gameOver.OnChange += OnGameOver;
     }
 
     private void OnDisable()
     {
         OnDeath -= SinkBoat;
         hp.OnChange -= OnChangeHealth;
+        gameOver.OnChange -= OnGameOver;
     }
 
     public void TakeDamage(int damage)
@@ -92,12 +96,18 @@ public class BoatHealth : NetworkBehaviour
         if (hp.Value <= 0)
         {
             OnDeath?.Invoke();
+            gameOver.Value = true;
         }
     }
 
     private void OnChangeHealth(int previous, int next, bool asServer)
     {
-        PersistentHUD.Instance.UpdateBoatHp(hp.Value);
+        BoatHealthHUD.Instance.UpdateBoatHp(hp.Value);
+    }
+
+    private void OnGameOver(bool previous, bool next, bool asServer)
+    {
+        BoatHealthHUD.Instance.GameOver();
     }
 
     private void SinkBoat()
