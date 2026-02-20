@@ -9,6 +9,7 @@ public class BoatHealthHUD : MonoBehaviour
     public static BoatHealthHUD Instance { get; private set; }
 
     [SerializeField] private TextMeshProUGUI boatHpIndicator;
+    [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private TextMeshProUGUI gameOverText;
     [SerializeField] private TextMeshProUGUI restartText;
 
@@ -36,6 +37,7 @@ public class BoatHealthHUD : MonoBehaviour
 
     public void GameOver()
     {
+        gameOverPanel.SetActive(true);
         gameOverText.text = "Game Over";
         string restartText = "Restarting at checkpoint";
 
