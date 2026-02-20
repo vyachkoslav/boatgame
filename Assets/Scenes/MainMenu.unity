@@ -3107,7 +3107,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7344254307765842839, guid: 78db161a31f5485478889e785126fd08, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8272016240140776043, guid: 78db161a31f5485478889e785126fd08, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -4463,6 +4463,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ObjectSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 2505230895266122398, guid: 45800f56681275746b3300566a99732b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.93
+      objectReference: {fileID: 0}
     - target: {fileID: 4301685173857860288, guid: 45800f56681275746b3300566a99732b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.90426
@@ -4502,6 +4506,14 @@ PrefabInstance:
     - target: {fileID: 4301685173857860288, guid: 45800f56681275746b3300566a99732b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780511113343617889, guid: 45800f56681275746b3300566a99732b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780511113343617889, guid: 45800f56681275746b3300566a99732b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.77
       objectReference: {fileID: 0}
     - target: {fileID: 8230501236755842410, guid: 45800f56681275746b3300566a99732b, type: 3}
       propertyPath: useRandomIntervals
