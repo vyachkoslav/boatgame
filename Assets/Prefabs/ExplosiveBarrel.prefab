@@ -238,6 +238,7 @@ GameObject:
   - component: {fileID: 5710345726077529889}
   - component: {fileID: -3792315295885718124}
   - component: {fileID: 2597587447556698436}
+  - component: {fileID: 3019382973531227194}
   - component: {fileID: 4803953453221136717}
   - component: {fileID: 2170665568807927882}
   m_Layer: 0
@@ -378,6 +379,29 @@ MonoBehaviour:
   yOffset: 0
   buoyancyStrength: 10
   damping: 2
+--- !u!136 &3019382973531227194
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5412935529164215626}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.26182714
+  m_Height: 0.6595632
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.24614257, z: 0}
 --- !u!54 &4803953453221136717
 Rigidbody:
   m_ObjectHideFlags: 0
