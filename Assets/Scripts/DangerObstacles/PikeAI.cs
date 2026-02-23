@@ -27,6 +27,7 @@ public class PikeEnemy : MonoBehaviour
     private float lastAttackTime;
     private Vector3 retreatStartPosition;
     private Transform boat;
+    private Animator animator;
     
     private enum PikeState { Patrolling, Chasing, Retreating }
     private PikeState currentState = PikeState.Patrolling;
@@ -36,6 +37,7 @@ public class PikeEnemy : MonoBehaviour
         if (patrolCenter == null) return;
         
         boat = GameObject.FindGameObjectWithTag("Boat").transform;
+        animator = GetComponentInChildren<Animator>();
     }
     
     private void Update()
@@ -52,13 +54,18 @@ public class PikeEnemy : MonoBehaviour
         {
             case PikeState.Patrolling:
                 PatrolCircle();
-                if (shouldChase) currentState = PikeState.Chasing;
+                if (shouldChase) 
+                {
+                    currentState = PikeState.Chasing;
+                    animator.SetBool("IsChasing", true);
+                } 
                 break;
                 
             case PikeState.Chasing:
                 if (!shouldChase)
                 {
                     ReturnToPatrol();
+                    animator.SetBool("IsChasing", false);
                     break;
                 }
 
@@ -81,7 +88,8 @@ public class PikeEnemy : MonoBehaviour
                 Vector3 retreatDirection = (transform.position - boat.position);
                 retreatDirection.y = 0;
                 linearVelocity = retreatDirection.normalized * retreatSpeed;
-                
+                animator.SetBool("IsChasing", false);
+
                 if (retreatDirection != Vector3.zero)
                 {
                     Quaternion targetRotation = Quaternion.LookRotation(retreatDirection);
