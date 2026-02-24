@@ -17,8 +17,12 @@ public class BoatHealth : NetworkBehaviour
     private SyncVar<int> hp = new SyncVar<int>();
     [AllowMutableSyncType]
     private SyncVar<bool> gameOver = new SyncVar<bool>();
+    [AllowMutableSyncType]
+    private SyncVar<bool> boatIsDamaged = new SyncVar<bool>();
 
     private Rigidbody boatRb;
+    [SerializeField] private MeshRenderer normalModel;
+    [SerializeField] private MeshRenderer damagedModel;
     [SerializeField] private Transform waterChecker;
     private float timeUpsideDown;
     [SerializeField] private float upsideDownLimit = 4.0f;
@@ -44,6 +48,8 @@ public class BoatHealth : NetworkBehaviour
 
         hp.Value = maxHp;
         gameOver.Value = false;
+        boatIsDamaged.Value = false;
+        damagedModel.enabled = false;
         boatRb = GetComponent<Rigidbody>();
     }
 
@@ -79,6 +85,7 @@ public class BoatHealth : NetworkBehaviour
     {
         OnDeath += SinkBoat;
         hp.OnChange += OnChangeHealth;
+        boatIsDamaged.OnChange += OnDamageTaken;
         gameOver.OnChange += OnGameOver;
     }
 
@@ -86,6 +93,7 @@ public class BoatHealth : NetworkBehaviour
     {
         OnDeath -= SinkBoat;
         hp.OnChange -= OnChangeHealth;
+        boatIsDamaged.OnChange -= OnDamageTaken;
         gameOver.OnChange -= OnGameOver;
     }
 
@@ -93,6 +101,8 @@ public class BoatHealth : NetworkBehaviour
     {
         hp.Value -= damage;
         OnBoatDamaged?.Invoke(hp.Value);
+
+        boatIsDamaged.Value = true;
 
         if (hp.Value <= 0)
         {
@@ -104,6 +114,16 @@ public class BoatHealth : NetworkBehaviour
     private void OnChangeHealth(int previous, int next, bool asServer)
     {
         BoatHealthHUD.Instance.UpdateBoatHp(hp.Value);
+    }
+
+    private void OnDamageTaken(bool previous, bool next, bool asServer)
+    {
+        // Switches the raft model to the damaged one
+        if (normalModel.enabled)
+        {
+            normalModel.enabled = false;
+            damagedModel.enabled = true;
+        }
     }
 
     private void OnGameOver(bool previous, bool next, bool asServer)
