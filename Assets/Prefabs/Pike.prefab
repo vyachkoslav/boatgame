@@ -73,17 +73,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PikeEnemy
   rotationSpeed: 180
   patrolRadius: 1.5
-  patrolSpeed: 0.8
+  patrolSpeed: 0.5
   clockwise: 1
   patrolCenter: {fileID: 0}
-  aggroRadius: 2
+  aggroRadius: 4
   visionAngle: 60
-  visionRange: 2.5
-  attackSpeed: 1
-  retreatSpeed: 1
+  visionRange: 3.25
+  attackSpeed: 0.8
+  retreatSpeed: 0.33
   attackDamage: 1
-  retreatDistance: 2
-  attackCooldown: 2
+  retreatDistance: 3
+  attackCooldown: 4
   knockbackForce: 50
 --- !u!114 &3587307139343534417
 MonoBehaviour:
