@@ -26,7 +26,7 @@ public class Hazard : NetworkBehaviour
 
             Debug.Log($"BOAT HIT! Obstacle at {transform.position} hit {other.gameObject.name}");
 
-
+            SoundManager.Instance.PlaySound2D("Explosion");
             RpcSpawnExplosionVFX();
 
             // Passes damage dealt to script that handles boat health

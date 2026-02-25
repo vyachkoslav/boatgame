@@ -103,7 +103,10 @@ public class BoatHealth : NetworkBehaviour
         OnBoatDamaged?.Invoke(hp.Value);
 
         boatIsDamaged.Value = true;
-
+        
+        //Sound effect is here for now probably better if the sound happens in
+        //the particle system that is triggered when the boat takes damage, but this works for now
+        SoundManager.Instance.PlaySound2D("BoatHit");
         if (hp.Value <= 0)
         {
             OnDeath?.Invoke();

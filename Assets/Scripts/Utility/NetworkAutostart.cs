@@ -25,6 +25,6 @@ namespace Utility
                     networkManager.ClientManager.StartConnection();
                     break;
             }
-        }
+        } 
     }
 }

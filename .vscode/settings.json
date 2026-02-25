@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "GitHub.slnx"
+    "dotnet.defaultSolution": "boatgame.slnx"
 }
