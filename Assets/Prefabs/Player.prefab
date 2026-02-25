@@ -671,6 +671,8 @@ MonoBehaviour:
   upsideDownLimit: 4
   sinkTime: 4.5
   sinkSpeed: 0.075
+  damageVFXPrefab: {fileID: 7222043484929531261, guid: 454cf945803781543bc47f6507282e1b, type: 3}
+  vfxDestroyDelay: 1
 --- !u!1 &2584402101303213742
 GameObject:
   m_ObjectHideFlags: 0

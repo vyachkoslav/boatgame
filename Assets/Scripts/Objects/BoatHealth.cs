@@ -28,7 +28,10 @@ public class BoatHealth : NetworkBehaviour
     [SerializeField] private float upsideDownLimit = 4.0f;
     [SerializeField] private float sinkTime = 4.5f;
     [SerializeField] private float sinkSpeed = 0.075f;
-    
+
+    [SerializeField] private GameObject damageVFXPrefab;
+    [SerializeField] private float vfxDestroyDelay = 1f;
+
     // Events that can be subscribed to by HUD, particle system etc. to trigger effects
     public static event Action<int> OnBoatDamaged;
     public static event Action OnDeath;
@@ -109,6 +112,15 @@ public class BoatHealth : NetworkBehaviour
             OnDeath?.Invoke();
             gameOver.Value = true;
         }
+    }
+
+    [ObserversRpc]
+    public void PlayDamageVFX(Vector3 position)
+    {
+        // Creates the particle effect at the point of collision or where the trigger happened, based on parameter
+        GameObject particleEffect = Instantiate(damageVFXPrefab, position, damageVFXPrefab.transform.rotation);
+
+        Destroy(particleEffect, vfxDestroyDelay);
     }
 
     private void OnChangeHealth(int previous, int next, bool asServer)
