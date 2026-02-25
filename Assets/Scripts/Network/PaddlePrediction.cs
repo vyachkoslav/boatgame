@@ -95,7 +95,10 @@ namespace Network
             joint.autoConfigureConnectedAnchor = false;
             joint.connectedAnchor = anchor;
         }
-
+        public void SetMouseSensitivity(float value)
+        {
+            mouseSensitivity = value;
+        }
         protected override void OnValidate()
         {
             base.OnValidate();
