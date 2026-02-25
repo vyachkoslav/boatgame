@@ -160,7 +160,11 @@ public class PikeEnemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Boat"))
         {
             lastAttackTime = Time.time;
+
             BoatHealth.Instance.TakeDamage(attackDamage);
+
+            // Passes collision point as the position where the damage particle effect should be created
+            BoatHealth.Instance.PlayDamageVFX(collision.GetContact(0).point);
             
             Rigidbody boatRb = collision.rigidbody;
             if (boatRb != null)

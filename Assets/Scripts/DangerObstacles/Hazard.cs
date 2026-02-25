@@ -28,6 +28,8 @@ public class Hazard : NetworkBehaviour
 
 
             RpcSpawnExplosionVFX();
+            // Passes closest point of boat collider as the position where the damage particle effect should be created
+            BoatHealth.Instance.PlayDamageVFX(other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position));
 
             // Passes damage dealt to script that handles boat health
             BoatHealth.Instance.TakeDamage(damage);
