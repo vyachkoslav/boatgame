@@ -89,7 +89,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: FishNet.Runtime::FishNet.Component.Scenes.DefaultScene
   _enableGlobalScenes: 1
   _startInOffline: 0
-  _offlineScene: Assets/Scenes/OfflineMenu.unity
+  _offlineScene: Assets/Scenes/MainMenu.unity
   _onlineScene: Assets/Scenes/RiverLevel01.unity
   _replaceScenes: 0
 --- !u!114 &9189645345574289719
