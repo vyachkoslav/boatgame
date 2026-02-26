@@ -17,6 +17,7 @@ public class BoatHealth : NetworkBehaviour
     private SyncVar<int> hp = new SyncVar<int>();
     [AllowMutableSyncType]
     private SyncVar<bool> gameOver = new SyncVar<bool>();
+    public bool GameOver => gameOver.Value;
     [AllowMutableSyncType]
     private SyncVar<bool> boatIsDamaged = new SyncVar<bool>();
 
