@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using FishNet.Object;
+using FishNet.Object.Synchronizing;
 using FishNet.Transporting;
 using UI;
 using UnityEngine;
@@ -8,15 +9,18 @@ using Utility;
 public class Checkpoints : NetworkBehaviour
 {
     public static Dictionary<string, int> LastCheckpoints = new();
+    public static bool LoadedCheckpoint { get; private set; }
     private static bool registered;
 
     [SerializeField] private Transform player;
     [SerializeField] private List<TriggerCallback> checkpoints = new();
     
     private string scene;
+    private readonly SyncVar<bool> hasCheckpoint = new();
 
     public override void OnStartServer()
     {
+        LoadedCheckpoint = false;
         if (!registered)
         {
             ServerManager.OnServerConnectionState += OnServerConnectionState;
@@ -34,6 +38,13 @@ public class Checkpoints : NetworkBehaviour
         if (!LastCheckpoints.TryGetValue(scene, out var checkpoint)) return;
         Debug.Log($"Loading checkpoint: {scene}-{checkpoint}");
         player.position = checkpoints[checkpoint].transform.position;
+        hasCheckpoint.Value = true;
+        LoadedCheckpoint = true;
+    }
+
+    public override void OnStartClient()
+    {
+        LoadedCheckpoint = hasCheckpoint.Value;
     }
 
     private static void OnServerConnectionState(ServerConnectionStateArgs obj)

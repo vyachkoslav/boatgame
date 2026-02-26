@@ -1,7 +1,6 @@
 using System.Collections;
 using FishNet.Object;
 using Network;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UIElements;
@@ -55,6 +54,7 @@ namespace UI
 
         public override void OnStartClient()
         {
+            if (Checkpoints.LoadedCheckpoint) return;
             tutorialUI.enabled = true;
             e ??= new Elements(tutorialUI);
             ResetUI();
@@ -70,6 +70,7 @@ namespace UI
 
         private void ResetUI()
         {
+            if (e == null) return;
             e.Position.visible = false;
             e.PaddleControls.visible = false;
             e.CameraControls.visible = false;
