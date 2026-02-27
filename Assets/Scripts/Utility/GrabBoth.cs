@@ -9,6 +9,7 @@ namespace Utility
 {
     public class GrabBoth : MonoBehaviour
     {
+#if DEVELOPMENT_BUILD || UNITY_EDITOR
         [SerializeField] private InputActionReference grabAction;
         [SerializeField] private Paddle left;
         [SerializeField] private Paddle right;
@@ -52,5 +53,6 @@ namespace Utility
             grabAction.action.started -= Grab;
             grabAction.action.canceled -= Ungrab;
         }
+#endif
     }
 }
