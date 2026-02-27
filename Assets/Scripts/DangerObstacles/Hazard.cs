@@ -26,7 +26,7 @@ public class Hazard : NetworkBehaviour
 
             Debug.Log($"BOAT HIT! Obstacle at {transform.position} hit {other.gameObject.name}");
 
-
+            SoundManager.Instance.PlaySound2D("Explosion");
             RpcSpawnExplosionVFX();
             // Passes closest point of boat collider as the position where the damage particle effect should be created
             BoatHealth.Instance.PlayDamageVFX(other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position));

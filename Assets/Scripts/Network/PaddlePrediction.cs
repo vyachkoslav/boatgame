@@ -89,6 +89,8 @@ namespace Network
 
         private float deltaPending;
 
+        private float lastSplashTime;
+
         private void Awake()
         {
             zRot = paddleRb.transform.localRotation.eulerAngles.z;
@@ -226,6 +228,8 @@ namespace Network
                 var vel = paddleRb.GetPointVelocity(bladePos);
                 var force = Vector3.Project(-vel * waterDrag, blade.forward);
                 paddle.AddForceAtPosition(force, bladePos);
+
+                PlayWaterSplashSFX();
             }
 
             paddle.Simulate();
@@ -265,6 +269,18 @@ namespace Network
         private void PerformReconcile(ReconcileData rd, Channel channel = Channel.Unreliable)
         {
             paddle.Reconcile(rd.Paddle);
+        }
+
+        private void PlayWaterSplashSFX()
+        {
+            float splashCooldown = 3f;
+            float timeSinceSplash = Time.time - lastSplashTime;
+
+            if (timeSinceSplash >= splashCooldown && !BoatHealth.Instance.GameOver)
+            {
+                SoundManager.Instance.PlaySound2D("WaterSplash");
+                lastSplashTime = Time.time;
+            }
         }
     }
 }
