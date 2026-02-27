@@ -51,21 +51,28 @@ namespace UI
         [SerializeField] private float displayCameraControlsTime = 5f;
         
         private Elements e;
+        private static TutorialUI instance;
 
-        public override void OnStartClient()
+        private void Awake()
         {
-            if (Checkpoints.LoadedCheckpoint) return;
-            tutorialUI.enabled = true;
-            e ??= new Elements(tutorialUI);
-            ResetUI();
-            PlayerManager.OnLocalPlayerAssigned(OnPlayerAssigned);
+            Assert.IsNull(instance);
+            instance = this;
         }
 
         public override void OnStopClient()
         {
-            PlayerManager.Unsubscribe(OnPlayerAssigned);
             StopAllCoroutines();
             ResetUI();
+        }
+
+        public static void StartTutorial()
+        {
+            // show only in first section and don't repeat without load to first section
+            if (instance.e != null || Checkpoints.LoadedCheckpoint) return;
+            instance.tutorialUI.enabled = true;
+            instance.e = new Elements(instance.tutorialUI);
+            instance.ResetUI();
+            instance.StartCoroutine(instance.ShowPositionRoutine(PlayerManager.Instance.CurrentPlayer));
         }
 
         private void ResetUI()
@@ -74,14 +81,6 @@ namespace UI
             e.Position.visible = false;
             e.PaddleControls.visible = false;
             e.CameraControls.visible = false;
-        }
-
-        private void OnPlayerAssigned(PlayerManager.PlayerType type)
-        {
-            Assert.IsFalse(type == PlayerManager.PlayerType.None);
-            if (type == PlayerManager.PlayerType.Spectator) return;
-            
-            StartCoroutine(ShowPositionRoutine(type));
         }
 
         private IEnumerator ShowPositionRoutine(PlayerManager.PlayerType type)

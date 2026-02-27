@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2933119413217009994}
   - component: {fileID: 7627269169953547846}
+  - component: {fileID: 554651534492704680}
   - component: {fileID: 2711831033724518010}
   m_Layer: 0
   m_Name: Managers
@@ -45,6 +46,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 295c86077293f3b4294a6ba5eacf6b3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Network.PlayerManager
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 2711831033724518010}
+  _networkObjectCache: {fileID: 0}
+--- !u!114 &554651534492704680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 707227649140868327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7ad4f1543e48f54db9fca59ca6dd735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Network.WaitForPlayer
   _componentIndexCache: 255
   _addedNetworkObject: {fileID: 2711831033724518010}
   _networkObjectCache: {fileID: 0}

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using FishNet.Connection;
 using FishNet.Object;
+using FishNet.Object.Synchronizing;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -19,8 +20,11 @@ namespace Network
         
         public static PlayerManager Instance { get; private set; }
 
-        public NetworkConnection LeftPlayer { get; private set; }
-        public NetworkConnection RightPlayer { get; private set; }
+        private readonly SyncVar<NetworkConnection> leftPlayer = new();
+        private readonly SyncVar<NetworkConnection> rightPlayer = new();
+        public NetworkConnection LeftPlayer => leftPlayer.Value;
+        public NetworkConnection RightPlayer => rightPlayer.Value;
+        public bool BothPlayersAssigned => LeftPlayer.IsActive && RightPlayer.IsActive;
         
         public readonly Dictionary<NetworkConnection, PlayerType> Players = new();
         
@@ -62,21 +66,34 @@ namespace Network
             onLocalPlayerAssigned -= callback;
         }
 
+        private void OnPlayerAssigned(PlayerType player, NetworkConnection conn, bool asServer)
+        {
+            if (asServer) return;
+            switch (player)
+            {
+                case PlayerType.Left:
+                    onLeftPlayerAssigned?.Invoke(conn);
+                    break;
+                case PlayerType.Right:
+                    onRightPlayerAssigned?.Invoke(conn);
+                    break;
+            }
+        }
+
         private void Awake()
         {
             Assert.IsNull(Instance);
             Instance = this;
+            leftPlayer.SetInitialValues(FishNet.Managing.NetworkManager.EmptyConnection);
+            rightPlayer.SetInitialValues(FishNet.Managing.NetworkManager.EmptyConnection);
+            
+            leftPlayer.OnChange += (_, next, asServer) => OnPlayerAssigned(PlayerType.Left, next, asServer);
+            rightPlayer.OnChange += (_, next, asServer) => OnPlayerAssigned(PlayerType.Right, next, asServer);
         }
 
         private void OnDestroy()
         {
             Instance = null;
-        }
-
-        public override void OnStartServer()
-        {
-            LeftPlayer = FishNet.Managing.NetworkManager.EmptyConnection;
-            RightPlayer = FishNet.Managing.NetworkManager.EmptyConnection;
         }
 
         public override void OnStartClient()
@@ -102,14 +119,12 @@ namespace Network
             else if (!LeftPlayer.IsActive)
             {
                 Players[conn] = PlayerType.Left;
-                LeftPlayer = conn;
-                onLeftPlayerAssigned?.Invoke(LeftPlayer);
+                leftPlayer.Value = conn;
             }
             else
             {
                 Players[conn] = PlayerType.Right;
-                RightPlayer = conn;
-                onRightPlayerAssigned?.Invoke(RightPlayer);
+                rightPlayer.Value = conn;
             }
             RpcSetPlayer(conn, Players[conn]);
             Debug.Log($"Assigned {conn}: {Players[conn]}");
@@ -126,6 +141,10 @@ namespace Network
         {
             Debug.Log("Despawn " + conn);
             Players.Remove(conn, out var type);
+            if (type == PlayerType.Left)
+                leftPlayer.Value = FishNet.Managing.NetworkManager.EmptyConnection;
+            else if (type == PlayerType.Right)
+                rightPlayer.Value = FishNet.Managing.NetworkManager.EmptyConnection;
         }
     }
 }

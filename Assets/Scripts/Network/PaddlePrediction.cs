@@ -15,6 +15,7 @@ namespace Network
 
         private enum PaddleState
         {
+            None,
             Middle,
             Down
         }
@@ -119,7 +120,7 @@ namespace Network
 
         private void Update()
         {
-            if (!IsOwner || Cursor.visible) return;
+            if (!IsOwner || Cursor.visible || WaitForPlayer.IsWaiting) return;
             deltaPending += Pointer.current.delta.value.y;
         }
 
@@ -159,7 +160,7 @@ namespace Network
         /// </summary>
         private ReplicateData BuildMoveData()
         {
-            if (!IsOwner || Cursor.visible) return default;
+            if (!IsOwner || Cursor.visible || WaitForPlayer.IsWaiting) return default;
 
             ReplicateData md = new(-deltaPending * mouseSensitivity, currentState);
             deltaPending = 0;
@@ -203,14 +204,14 @@ namespace Network
             }
             
             // paddle up/down
-            var xRot = rd.State switch
-            {
-                PaddleState.Middle => 0f,
-                PaddleState.Down => -45f,
-                _ => throw new ArgumentOutOfRangeException()
-            };
             if (!state.IsTickedNonCreated())
             {
+                var xRot = rd.State switch
+                {
+                    PaddleState.Middle => 0f,
+                    PaddleState.Down => -45f,
+                    _ => 0f
+                };
                 var xTorq = Mathf.DeltaAngle(rot.x, xRot) * pFactor;
                 xTorq = Mathf.Clamp(xTorq, -maxPidTorque, maxPidTorque);
                 xTorq *= isLeft ? 1 : -1;
