@@ -250,7 +250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: FishNet.Runtime::FishNet.Managing.Statistic.StatisticsManager
   _runInRelease: 0
   _networkTraffic:
-    _enableMode: 1
+    _enableMode: 0
     _updateClient: 1
     _updateServer: 1
 --- !u!114 &2714528394915111476
