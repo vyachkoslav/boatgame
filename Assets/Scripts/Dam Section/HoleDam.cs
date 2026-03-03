@@ -44,6 +44,8 @@ public class HoleDam : NetworkPuzzle
     {
         if (!holes.Remove(holeObject)) return;
 
+
+        SoundManager.Instance.PlaySound2D("HoleBlocked"); // Plays the sound effect for blocking a hole
         PlayBlockVFX(blockerObject.transform.position);
         Despawn(blockerObject);
         Despawn(holeObject);

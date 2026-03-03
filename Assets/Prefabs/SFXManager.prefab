@@ -91,6 +91,9 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 1cc3c08c2f48e374e81e4b2dddfc65e1, type: 3}
     - {fileID: 8300000, guid: b914e1768905da34491a4af1bb07a601, type: 3}
     - {fileID: 8300000, guid: 6a806e6d938b60a419bf512820464e65, type: 3}
+  - groupID: HoleBlocked
+    clips:
+    - {fileID: 8300000, guid: b0538284e6d367c4280661220d3785d5, type: 3}
 --- !u!1 &4425259432359760040
 GameObject:
   m_ObjectHideFlags: 0
