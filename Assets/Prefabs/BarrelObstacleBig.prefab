@@ -297,7 +297,7 @@ MonoBehaviour:
   - {fileID: 3781064205445099919}
   - {fileID: 5952128604273919291}
   yOffset: 0
-  buoyancyStrength: 5
+  buoyancyStrength: 10
   damping: 1
 --- !u!114 &3385763973812890549
 MonoBehaviour:
@@ -375,7 +375,7 @@ MonoBehaviour:
   _initializeOrder: 0
   _preventDespawnOnDisconnect: 0
   _defaultDespawnType: 0
-  _initializedTimestamp: -8584307137106062084
+  _initializedTimestamp: -8584290402067621986
   NetworkObserver: {fileID: 0}
   _enablePrediction: 0
   _predictionType: 0
@@ -391,14 +391,14 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 3
+  <PrefabId>k__BackingField: 2
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 7120617269527894047
   SceneId: 0
   SerializedTransformProperties:
-    Position: {x: 0, y: 0, z: 0}
-    Rotation: {x: 0, y: 0, z: 0, w: 1}
-    Scale: {x: 1, y: 1, z: 1}
+    Position: {x: -3.38, y: -0.16, z: -3.59}
+    Rotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+    Scale: {x: 2, y: 2, z: 2}
     IsValid: 1
 --- !u!1 &5724202166741763790
 GameObject:
