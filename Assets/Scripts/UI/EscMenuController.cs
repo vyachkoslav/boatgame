@@ -31,8 +31,8 @@ public class EscMenuController : MonoBehaviour
     
     [Header("Audio Sliders")]
     [SerializeField] private Slider masterVolumeSlider;
-    [SerializeField] private Slider sfxVolumeSlider;
-    [SerializeField] private Slider musicVolumeSlider;
+    //[SerializeField] private Slider sfxVolumeSlider;
+    //[SerializeField] private Slider musicVolumeSlider;
     
     [Header("Graphics")]
     [SerializeField] private Slider graphicsSlider;
@@ -83,11 +83,11 @@ public class EscMenuController : MonoBehaviour
         if (masterVolumeSlider != null)
             masterVolumeSlider.onValueChanged.AddListener(OnMasterVolumeChanged);
         
-        if (sfxVolumeSlider != null)
+       /* if (sfxVolumeSlider != null)
             sfxVolumeSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
         
         if (musicVolumeSlider != null)
-            musicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
+            musicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeChanged);*/
         
         if (graphicsSlider != null)
             graphicsSlider.onValueChanged.AddListener(OnGraphicsQualityChanged);
@@ -195,11 +195,11 @@ private void LoadSettings()
         AudioListener.volume = savedVolume;
     }
     
-    if (sfxVolumeSlider != null)
+    /*if (sfxVolumeSlider != null)
         sfxVolumeSlider.value = PlayerPrefs.GetFloat("SFXVolume", 0.8f);
     
     if (musicVolumeSlider != null)
-        musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume", 0.8f);
+        musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume", 0.8f);*/
     
     if (graphicsSlider != null)
     {
