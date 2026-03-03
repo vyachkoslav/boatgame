@@ -1,7 +1,8 @@
 using System;
+using FishNet.Object;
 using UnityEngine;
 
-public class SoundManager : MonoBehaviour
+public class SoundManager : NetworkBehaviour
 {
     private static SoundManager _instance;
 
@@ -25,7 +26,6 @@ public class SoundManager : MonoBehaviour
         else
         {
             _instance = this;
-            DontDestroyOnLoad(gameObject);
         }
     }
 
