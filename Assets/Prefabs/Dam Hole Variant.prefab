@@ -240,7 +240,7 @@ MonoBehaviour:
   _initializeOrder: 0
   _preventDespawnOnDisconnect: 0
   _defaultDespawnType: 0
-  _initializedTimestamp: -8584302778817895516
+  _initializedTimestamp: -8584290456884537297
   NetworkObserver: {fileID: 0}
   _enablePrediction: 0
   _predictionType: 0
@@ -287,6 +287,8 @@ MonoBehaviour:
   - {fileID: 5348461566540205113}
   - {fileID: 2547356582143497017}
   - {fileID: 8870573047569558670}
+  successfulBlockVFXPrefab: {fileID: 7789342170164478883, guid: 0df6b302e2b5df443870c268abdf6a5e, type: 3}
+  vfxDestroyDelay: 2
 --- !u!65 &4085964936372087332
 BoxCollider:
   m_ObjectHideFlags: 0

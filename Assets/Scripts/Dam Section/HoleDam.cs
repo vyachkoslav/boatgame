@@ -10,6 +10,9 @@ public class HoleDam : NetworkPuzzle
     
     private readonly HashSet<GameObject> holes = new();
 
+    [SerializeField] private GameObject successfulBlockVFXPrefab;
+    [SerializeField] private float vfxDestroyDelay = 2f;
+
     protected override void OnPuzzleStart()
     {
         if (IsServerStarted)
@@ -40,7 +43,8 @@ public class HoleDam : NetworkPuzzle
     public void RemoveHole(GameObject holeObject, GameObject blockerObject)
     {
         if (!holes.Remove(holeObject)) return;
-        
+
+        PlayBlockVFX(blockerObject.transform.position);
         Despawn(blockerObject);
         Despawn(holeObject);
         if (HoleCounterHUD.Instance != null)
@@ -48,6 +52,15 @@ public class HoleDam : NetworkPuzzle
 
         if (holes.Count == 0)
             EndPuzzle(State.Success);
+    }
+
+    [ObserversRpc]
+    public void PlayBlockVFX(Vector3 position)
+    {
+        // Creates the particle effect at the point of collision or where the trigger happened, based on parameter
+        GameObject particleEffect = Instantiate(successfulBlockVFXPrefab, position, successfulBlockVFXPrefab.transform.rotation);
+
+        Destroy(particleEffect, vfxDestroyDelay);
     }
 
     public override void OnStopServer()
