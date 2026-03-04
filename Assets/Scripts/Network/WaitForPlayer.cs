@@ -10,7 +10,8 @@ namespace Network
     public class WaitForPlayer : NetworkBehaviour
     {
         private static WaitForPlayer instance;
-        public static bool IsWaiting => !PlayerManager.Instance.BothPlayersAssigned && !instance.spacePressed;
+        public static bool IsWaiting => PlayerManager.Instance == null || instance == null ||
+                                        !PlayerManager.Instance.BothPlayersAssigned && !instance.spacePressed;
         
         private bool spacePressed;
 
