@@ -49,14 +49,8 @@ public class EscMenuController : MonoBehaviour
     [Header("Paddle References")]
     [SerializeField] private PaddlePrediction leftPaddle;
     [SerializeField] private PaddlePrediction rightPaddle;
-    
-    private Resolution[] resolutions = new Resolution[]
-    {
-        new Resolution { width = 1920, height = 1080 },
-        new Resolution { width = 2560, height = 1440 },
-        new Resolution { width = 3840, height = 2160 },
-        new Resolution { width = 1280, height = 720 }
-    };
+
+    private Resolution[] resolutions;
     
     private bool isMenuOpen = false;
     private Keyboard keyboard;
@@ -64,6 +58,15 @@ public class EscMenuController : MonoBehaviour
     
     void Start()
     {
+        resolutions = Screen.resolutions;
+        resolutionDropdown.options.Clear();
+        foreach (var res in resolutions)
+        {
+            resolutionDropdown.options.Add(new TMP_Dropdown.OptionData(res.ToString()));
+            if (Screen.currentResolution.Equals(res))
+                resolutionDropdown.SetValueWithoutNotify(resolutionDropdown.options.Count - 1);
+        }
+        
         keyboard = Keyboard.current;
         
         menuPanel.SetActive(false);
