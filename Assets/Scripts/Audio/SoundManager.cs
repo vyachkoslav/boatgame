@@ -45,6 +45,7 @@ public class SoundManager : NetworkBehaviour
     }*/
 
     //Used for 2D sounds, like menu sounds
+    [ObserversRpc]
     public void PlaySound2D(string soundName)
     {
         sfx2DSource.PlayOneShot(sfxLibrary.GetClipFromName(soundName), sfxvolume);
