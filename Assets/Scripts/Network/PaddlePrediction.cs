@@ -74,7 +74,6 @@ namespace Network
         [SerializeField] private float lowerMaxAngle;
         [SerializeField] private bool isLeft;
 
-        [SerializeField] private float mouseSensitivity = 0.01f;
         [SerializeField] private float maxDelta = 100;
         [SerializeField] private float waterDrag = 20f;
         
@@ -98,10 +97,7 @@ namespace Network
             joint.autoConfigureConnectedAnchor = false;
             joint.connectedAnchor = anchor;
         }
-        public void SetMouseSensitivity(float value)
-        {
-            mouseSensitivity = value;
-        }
+        
         protected override void OnValidate()
         {
             base.OnValidate();
@@ -164,7 +160,7 @@ namespace Network
         {
             if (!IsOwner || Cursor.visible || WaitForPlayer.IsWaiting) return default;
 
-            ReplicateData md = new(-deltaPending * mouseSensitivity, currentState);
+            ReplicateData md = new(-deltaPending * Settings.Sensitivity, currentState);
             deltaPending = 0;
             return md;
         }

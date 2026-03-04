@@ -7,6 +7,7 @@ using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Vivox;
 using UnityEngine;
+using Utility;
 
 namespace Network.Voice
 {
@@ -42,6 +43,13 @@ namespace Network.Voice
             VivoxService.Instance.ChannelJoined -= OnJoinedChannel;
             VivoxService.Instance.ParticipantAddedToChannel -= OnMemberJoin;
             VivoxService.Instance.LoggedIn -= OnLoggedIn;
+        }
+
+        private void Update()
+        {
+            if (VivoxService.Instance == null) return;
+            VivoxService.Instance.SetInputDeviceVolume(Settings.VoiceVolumeIn);
+            VivoxService.Instance.SetOutputDeviceVolume(Settings.VoiceVolumeOut);
         }
 
         private async Task InitVivox()

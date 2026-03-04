@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
-using Network;
+using Utility;
 
 public class EscMenuController : MonoBehaviour
 {
@@ -21,8 +21,8 @@ public class EscMenuController : MonoBehaviour
     
     [Header("Audio Sliders")]
     [SerializeField] private Slider masterVolumeSlider;
-    //[SerializeField] private Slider sfxVolumeSlider;
-    //[SerializeField] private Slider musicVolumeSlider;
+    [SerializeField] private Slider voiceOutVolumeSlider;
+    [SerializeField] private Slider voiceInVolumeSlider;
     
     [Header("Graphics")]
     [SerializeField] private Slider graphicsSlider;
@@ -35,16 +35,11 @@ public class EscMenuController : MonoBehaviour
     
     [Header("Controls")]
     [SerializeField] private Slider sensitivitySlider;
-    
-    [Header("Paddle References")]
-    [SerializeField] private PaddlePrediction leftPaddle;
-    [SerializeField] private PaddlePrediction rightPaddle;
 
     private List<Resolution> resolutions = new();
     
     private bool isMenuOpen = false;
     private Keyboard keyboard;
-    private GameObject currentlyOpenPanel = null;
 
     private const int Fullscreen = 0;
     private const int Windowed = 1;
@@ -92,11 +87,11 @@ public class EscMenuController : MonoBehaviour
         if (masterVolumeSlider != null)
             masterVolumeSlider.onValueChanged.AddListener(OnMasterVolumeChanged);
         
-       /* if (sfxVolumeSlider != null)
-            sfxVolumeSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
+        if (voiceInVolumeSlider != null)
+            voiceInVolumeSlider.onValueChanged.AddListener(OnVoiceInVolumeChanged);
         
-        if (musicVolumeSlider != null)
-            musicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeChanged);*/
+        if (voiceOutVolumeSlider != null)
+            voiceOutVolumeSlider.onValueChanged.AddListener(OnVoiceOutVolumeChanged);
         
         if (graphicsSlider != null)
             graphicsSlider.onValueChanged.AddListener(OnGraphicsQualityChanged);
@@ -143,14 +138,16 @@ public class EscMenuController : MonoBehaviour
         AudioListener.volume = value;
     }
     
-    public void OnSFXVolumeChanged(float value)
+    public void OnVoiceInVolumeChanged(float value)
     {
-        PlayerPrefs.SetFloat("SFXVolume", value);
+        PlayerPrefs.SetInt("VoiceInVolume", (int)value);
+        Settings.VoiceVolumeIn = (int)value;
     }
     
-    public void OnMusicVolumeChanged(float value)
+    public void OnVoiceOutVolumeChanged(float value)
     {
-        PlayerPrefs.SetFloat("MusicVolume", value);
+        PlayerPrefs.SetInt("VoiceOutVolume", (int)value);
+        Settings.VoiceVolumeOut = (int)value;
     }
     
     public void OnGraphicsQualityChanged(float value)
@@ -194,12 +191,7 @@ public class EscMenuController : MonoBehaviour
     public void OnSensitivityChanged(float value)
     {
         PlayerPrefs.SetFloat("Sensitivity", value);
-        
-        if (leftPaddle != null)
-            leftPaddle.SetMouseSensitivity(value);
-        
-        if (rightPaddle != null)
-            rightPaddle.SetMouseSensitivity(value);
+        Settings.Sensitivity = value;
     }
     
 private void LoadSettings()
@@ -211,11 +203,11 @@ private void LoadSettings()
         AudioListener.volume = savedVolume;
     }
     
-    /*if (sfxVolumeSlider != null)
-        sfxVolumeSlider.value = PlayerPrefs.GetFloat("SFXVolume", 0.8f);
+    if (voiceInVolumeSlider != null)
+        voiceInVolumeSlider.value = PlayerPrefs.GetInt("VoiceInVolume", 0);
     
-    if (musicVolumeSlider != null)
-        musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume", 0.8f);*/
+    if (voiceOutVolumeSlider != null)
+        voiceOutVolumeSlider.value = PlayerPrefs.GetInt("VoiceOutVolume", 0);
     
     if (graphicsSlider != null)
     {
@@ -255,12 +247,7 @@ private void LoadSettings()
     {
         float savedSensitivity = PlayerPrefs.GetFloat("Sensitivity", 0.01f);
         sensitivitySlider.value = savedSensitivity;
-        
-        if (leftPaddle != null)
-            leftPaddle.SetMouseSensitivity(savedSensitivity);
-        
-        if (rightPaddle != null)
-            rightPaddle.SetMouseSensitivity(savedSensitivity);
+        Settings.Sensitivity = savedSensitivity;
     }
 }
     
@@ -297,25 +284,6 @@ private void LoadSettings()
     {
         settingsPanel.SetActive(false);
         menuPanel.SetActive(true);
-    }
-    
-    void ToggleDropdown(GameObject panel)
-    {
-        if (panel == null) return;
-        
-        if (currentlyOpenPanel == panel)
-        {
-            panel.SetActive(false);
-            currentlyOpenPanel = null;
-        }
-        else
-        {
-            if (currentlyOpenPanel != null)
-                currentlyOpenPanel.SetActive(false);
-            
-            panel.SetActive(true);
-            currentlyOpenPanel = panel;
-        }
     }
     
     void QuitGame()
