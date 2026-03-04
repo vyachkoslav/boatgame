@@ -18,6 +18,9 @@ public class VictoryScreen : NetworkBehaviour
     [SerializeField] private float panDuration = 8f;
     [SerializeField] private AnimationCurve panCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
     
+    [Header("Delay")]
+    [SerializeField] private float startDelay = 2f; // Delay before victory sequence starts
+    
     [Header("Player Control")]
     [SerializeField] private GameObject playerBoat;
     [SerializeField] private MonoBehaviour cameraControlScript;
@@ -60,6 +63,9 @@ public class VictoryScreen : NetworkBehaviour
     
     IEnumerator VictorySequence()
     {
+        // Delay before anything happens
+        yield return new WaitForSeconds(startDelay);
+        
         float elapsedTime = 0f;
         
         if (cameraControlScript != null)

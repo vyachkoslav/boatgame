@@ -181,6 +181,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  startDelay: 3
   playerBoat: {fileID: 1131831344}
   cameraControlScript: {fileID: 1488211330}
 --- !u!4 &45990234
