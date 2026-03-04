@@ -1299,11 +1299,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 253125976185486715, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
       propertyPath: lowerMaxAngle
-      value: 340
+      value: 355
       objectReference: {fileID: 0}
     - target: {fileID: 253125976185486715, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
       propertyPath: lowerMinAngle
-      value: 200
+      value: 185
       objectReference: {fileID: 0}
     - target: {fileID: 253125976185486715, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
       propertyPath: lowerPaddleAction
@@ -1757,11 +1757,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 253125976185486715, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
       propertyPath: lowerMaxAngle
-      value: 160
+      value: 175
       objectReference: {fileID: 0}
     - target: {fileID: 253125976185486715, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
       propertyPath: lowerMinAngle
-      value: 20
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 253125976185486715, guid: 4bdf81b023406d345bfe700ed3a19d1f, type: 3}
       propertyPath: lowerPaddleAction
