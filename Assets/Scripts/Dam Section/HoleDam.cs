@@ -8,10 +8,14 @@ public class HoleDam : NetworkPuzzle
     [SerializeField] private GameObject holePrefab;
     [SerializeField] private List<GameObject> holesSpots = new();
     
-    private readonly HashSet<GameObject> holes = new();
-
+    [Header("Victory")]
+    [SerializeField] private VictoryScreen victoryScreen;
+    
+    [Header("VFX")]
     [SerializeField] private GameObject successfulBlockVFXPrefab;
     [SerializeField] private float vfxDestroyDelay = 2f;
+    
+    private readonly HashSet<GameObject> holes = new();
 
     protected override void OnPuzzleStart()
     {
@@ -25,6 +29,10 @@ public class HoleDam : NetworkPuzzle
     protected override void OnPuzzleEnd(State state)
     {
         Debug.Log("Puzzle ended " + state);
+        
+        // Trigger victory screen when puzzle succeeds
+        if (state == State.Success && victoryScreen != null)
+            victoryScreen.TriggerVictory();
     }
     
     private void SpawnHolesServer()
@@ -44,7 +52,6 @@ public class HoleDam : NetworkPuzzle
     {
         if (!holes.Remove(holeObject)) return;
 
-
         SoundManager.Instance.PlaySound2D("HoleBlocked"); // Plays the sound effect for blocking a hole
         PlayBlockVFX(blockerObject.transform.position);
         Despawn(blockerObject);
@@ -61,7 +68,6 @@ public class HoleDam : NetworkPuzzle
     {
         // Creates the particle effect at the point of collision or where the trigger happened, based on parameter
         GameObject particleEffect = Instantiate(successfulBlockVFXPrefab, position, successfulBlockVFXPrefab.transform.rotation);
-
         Destroy(particleEffect, vfxDestroyDelay);
     }
 

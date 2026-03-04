@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 45990234}
   - component: {fileID: 45990233}
+  - component: {fileID: 45990235}
   m_Layer: 0
   m_Name: VictoryManager
   m_TagString: Untagged
@@ -148,8 +149,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f482eb600620e264188eb153f358bb31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 45990235}
+  _networkObjectCache: {fileID: 0}
   victoryPanel: {fileID: 966642658}
-  victorySequenceDuration: 10
+  victorySequenceDuration: 60
   mainCamera: {fileID: 1488211332}
   damViewTarget: {fileID: 2085051592}
   panDuration: 8
@@ -194,6 +198,60 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &45990235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45990232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FishNet.Runtime::FishNet.Object.NetworkObject
+  <IsNested>k__BackingField: 0
+  WasActiveDuringEdit: 1
+  WasActiveDuringEdit_Set1: 1
+  <ComponentIndex>k__BackingField: 0
+  <PredictedSpawn>k__BackingField: {fileID: 0}
+  <PredictedOwner>k__BackingField: {fileID: 0}
+  NetworkBehaviours: []
+  InitializedParentNetworkBehaviour: {fileID: 0}
+  InitializedNestedNetworkObjects: []
+  RuntimeParentNetworkBehaviour: {fileID: 0}
+  RuntimeChildNetworkBehaviours: []
+  _isNetworked: 1
+  _isSpawnable: 1
+  _isGlobal: 0
+  _initializeOrder: 0
+  _preventDespawnOnDisconnect: 0
+  _defaultDespawnType: 0
+  _initializedTimestamp: 0
+  NetworkObserver: {fileID: 0}
+  _enablePrediction: 0
+  _predictionType: 0
+  _localReconcileCorrectionType: 2
+  _graphicalObject: {fileID: 0}
+  _detachGraphicalObject: 0
+  _enableStateForwarding: 1
+  _networkTransform: {fileID: 0}
+  _ownerInterpolation: 1
+  _ownerSmoothedProperties: 255
+  _adaptiveInterpolation: 3
+  _spectatorSmoothedProperties: 255
+  _spectatorInterpolation: 2
+  _enableTeleport: 0
+  _teleportThreshold: 1
+  <PrefabId>k__BackingField: 65535
+  <SpawnableCollectionId>k__BackingField: 0
+  <AssetPathHash>k__BackingField: 0
+  SceneId: 2029318143
+  SerializedTransformProperties:
+    Position: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0, w: 0}
+    Scale: {x: 0, y: 0, z: 0}
+    IsValid: 0
 --- !u!1001 &60207292
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -244,7 +302,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2590108036967816713, guid: 46073a7c39347124badb2a8a45a18970, type: 3}
       propertyPath: SceneId
-      value: 2113334781
+      value: 972451327
       objectReference: {fileID: 0}
     - target: {fileID: 2590108036967816713, guid: 46073a7c39347124badb2a8a45a18970, type: 3}
       propertyPath: WasActiveDuringEdit
@@ -884,10 +942,10 @@ RectTransform:
   - {fileID: 1711413572}
   m_Father: {fileID: 966642661}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -100}
+  m_SizeDelta: {x: 600, y: 300}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &173650908
 MonoBehaviour:
@@ -896,7 +954,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 173650906}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
@@ -1143,7 +1201,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3701729843480101288, guid: 55583e615c5f8954e9a90cbfe165bdc6, type: 3}
       propertyPath: SceneId
-      value: 4219452863
+      value: 2843738045
       objectReference: {fileID: 0}
     - target: {fileID: 3701729843480101288, guid: 55583e615c5f8954e9a90cbfe165bdc6, type: 3}
       propertyPath: WasActiveDuringEdit
@@ -1372,7 +1430,7 @@ MonoBehaviour:
   <PrefabId>k__BackingField: 65535
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 0
-  SceneId: 4293645604
+  SceneId: 981266427
   SerializedTransformProperties:
     Position: {x: 0, y: 0, z: 0}
     Rotation: {x: 0, y: 0, z: 0, w: 0}
@@ -2921,7 +2979,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5710345726077529889, guid: be09c51fa3a2f6a4f8e873329311ca8a, type: 3}
       propertyPath: SceneId
-      value: 4236197311
+      value: 3094704061
       objectReference: {fileID: 0}
     - target: {fileID: 5710345726077529889, guid: be09c51fa3a2f6a4f8e873329311ca8a, type: 3}
       propertyPath: WasActiveDuringEdit
@@ -3004,6 +3062,10 @@ PrefabInstance:
       propertyPath: timeToSolve
       value: 300
       objectReference: {fileID: 0}
+    - target: {fileID: 1146339109719280832, guid: 8714012515a51684ea85cc7cc141f6ef, type: 3}
+      propertyPath: victoryScreen
+      value: 
+      objectReference: {fileID: 45990233}
     - target: {fileID: 1223968120984105237, guid: 8714012515a51684ea85cc7cc141f6ef, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.5
@@ -3050,7 +3112,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3650097082855882352, guid: 8714012515a51684ea85cc7cc141f6ef, type: 3}
       propertyPath: SceneId
-      value: 937948527
+      value: 3220664317
       objectReference: {fileID: 0}
     - target: {fileID: 3650097082855882352, guid: 8714012515a51684ea85cc7cc141f6ef, type: 3}
       propertyPath: WasActiveDuringEdit
@@ -3266,8 +3328,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 960, y: 540}
-  m_SizeDelta: {x: 1920, y: 1080}
+  m_AnchoredPosition: {x: 960, y: 200}
+  m_SizeDelta: {x: 600, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &978929186
 GameObject:
@@ -3507,7 +3569,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2177621272909282491, guid: df0249c16a58bfb4ebe45789e7553485, type: 3}
       propertyPath: SceneId
-      value: 947731897
+      value: 4193583101
       objectReference: {fileID: 0}
     - target: {fileID: 3041422878301360289, guid: df0249c16a58bfb4ebe45789e7553485, type: 3}
       propertyPath: m_Name
@@ -3515,7 +3577,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3175658735188406401, guid: df0249c16a58bfb4ebe45789e7553485, type: 3}
       propertyPath: SceneId
-      value: 2926886395
+      value: 4017602557
       objectReference: {fileID: 0}
     - target: {fileID: 3175658735188406401, guid: df0249c16a58bfb4ebe45789e7553485, type: 3}
       propertyPath: WasActiveDuringEdit
@@ -3543,7 +3605,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: ee4b3e0eadc812e4992c4defb23f8eb1, type: 2}
     - target: {fileID: 5352246362120739325, guid: df0249c16a58bfb4ebe45789e7553485, type: 3}
       propertyPath: SceneId
-      value: 1862119417
+      value: 1853877753
       objectReference: {fileID: 0}
     - target: {fileID: 5626249371459808263, guid: df0249c16a58bfb4ebe45789e7553485, type: 3}
       propertyPath: SceneId
@@ -3825,7 +3887,7 @@ MonoBehaviour:
   <PrefabId>k__BackingField: 65535
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 0
-  SceneId: 938472728
+  SceneId: 3095228351
   SerializedTransformProperties:
     Position: {x: 0, y: 0, z: 0}
     Rotation: {x: 0, y: 0, z: 0, w: 0}
@@ -4202,7 +4264,7 @@ MonoBehaviour:
   <PrefabId>k__BackingField: 65535
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 0
-  SceneId: 2012674028
+  SceneId: 3992399289
   SerializedTransformProperties:
     Position: {x: 0, y: 0, z: 0}
     Rotation: {x: 0, y: 0, z: 0, w: 0}
@@ -5293,7 +5355,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2590108036967816713, guid: 46073a7c39347124badb2a8a45a18970, type: 3}
       propertyPath: SceneId
-      value: 1753153017
+      value: 2859756991
       objectReference: {fileID: 0}
     - target: {fileID: 2590108036967816713, guid: 46073a7c39347124badb2a8a45a18970, type: 3}
       propertyPath: WasActiveDuringEdit
@@ -5924,7 +5986,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5710345726077529889, guid: be09c51fa3a2f6a4f8e873329311ca8a, type: 3}
       propertyPath: SceneId
-      value: 3204411321
+      value: 787972029
       objectReference: {fileID: 0}
     - target: {fileID: 5710345726077529889, guid: be09c51fa3a2f6a4f8e873329311ca8a, type: 3}
       propertyPath: WasActiveDuringEdit
@@ -6032,7 +6094,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5710345726077529889, guid: be09c51fa3a2f6a4f8e873329311ca8a, type: 3}
       propertyPath: SceneId
-      value: 1065267193
+      value: 2893966845
       objectReference: {fileID: 0}
     - target: {fileID: 5710345726077529889, guid: be09c51fa3a2f6a4f8e873329311ca8a, type: 3}
       propertyPath: WasActiveDuringEdit
@@ -6337,7 +6399,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2590108036967816713, guid: 46073a7c39347124badb2a8a45a18970, type: 3}
       propertyPath: SceneId
-      value: 2037690367
+      value: 2918678009
       objectReference: {fileID: 0}
     - target: {fileID: 2590108036967816713, guid: 46073a7c39347124badb2a8a45a18970, type: 3}
       propertyPath: WasActiveDuringEdit
@@ -6888,7 +6950,7 @@ MonoBehaviour:
   <PrefabId>k__BackingField: 65535
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 0
-  SceneId: 804728255
+  SceneId: 3186917305
   SerializedTransformProperties:
     Position: {x: 0, y: 0, z: 0}
     Rotation: {x: 0, y: 0, z: 0, w: 0}
@@ -6966,7 +7028,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2590108036967816713, guid: 46073a7c39347124badb2a8a45a18970, type: 3}
       propertyPath: SceneId
-      value: 2859761659
+      value: 1048407487
       objectReference: {fileID: 0}
     - target: {fileID: 2590108036967816713, guid: 46073a7c39347124badb2a8a45a18970, type: 3}
       propertyPath: WasActiveDuringEdit
@@ -7559,7 +7621,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8917627221416256075, guid: 8548159ecfa08d844b202d83d09f731e, type: 3}
       propertyPath: SceneId
-      value: 2826284987
+      value: 1752514493
       objectReference: {fileID: 0}
     - target: {fileID: 8917627221416256075, guid: 8548159ecfa08d844b202d83d09f731e, type: 3}
       propertyPath: WasActiveDuringEdit
@@ -7648,7 +7710,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2590108036967816713, guid: 46073a7c39347124badb2a8a45a18970, type: 3}
       propertyPath: SceneId
-      value: 763276729
+      value: 2146774971
       objectReference: {fileID: 0}
     - target: {fileID: 2590108036967816713, guid: 46073a7c39347124badb2a8a45a18970, type: 3}
       propertyPath: WasActiveDuringEdit
@@ -8266,7 +8328,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 68710322522079517, guid: 79501806912348244ad525f1d34117f4, type: 3}
       propertyPath: SceneId
-      value: 1845342143
+      value: 1836904383
       objectReference: {fileID: 0}
     - target: {fileID: 68710322522079517, guid: 79501806912348244ad525f1d34117f4, type: 3}
       propertyPath: WasActiveDuringEdit
@@ -8800,7 +8862,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2590108036967816713, guid: 46073a7c39347124badb2a8a45a18970, type: 3}
       propertyPath: SceneId
-      value: 4244012539
+      value: 2877288445
       objectReference: {fileID: 0}
     - target: {fileID: 2590108036967816713, guid: 46073a7c39347124badb2a8a45a18970, type: 3}
       propertyPath: WasActiveDuringEdit
@@ -9340,7 +9402,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3587307139343534417, guid: 7a297bb85b58d494a9754d277ed938a4, type: 3}
       propertyPath: SceneId
-      value: 964001277
+      value: 3195940799
       objectReference: {fileID: 0}
     - target: {fileID: 3587307139343534417, guid: 7a297bb85b58d494a9754d277ed938a4, type: 3}
       propertyPath: WasActiveDuringEdit
