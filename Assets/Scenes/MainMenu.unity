@@ -1256,7 +1256,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2016853427750921251, guid: f5e3c536fbf304241b13cccae4b9245a, type: 3}
       propertyPath: SceneId
-      value: 2528743099
+      value: 2013235455
       objectReference: {fileID: 0}
     - target: {fileID: 2016853427750921251, guid: f5e3c536fbf304241b13cccae4b9245a, type: 3}
       propertyPath: WasActiveDuringEdit
@@ -3303,6 +3303,7 @@ GameObject:
   - component: {fileID: 1467009187}
   - component: {fileID: 1467009188}
   - component: {fileID: 1467009189}
+  - component: {fileID: 1467009190}
   m_Layer: 0
   m_Name: MainMenu
   m_TagString: Untagged
@@ -3357,6 +3358,18 @@ MonoBehaviour:
   joinConfirmButton: {fileID: 2118422270}
   joinHostInput: {fileID: 524275904}
   joinPortInput: {fileID: 622178018}
+--- !u!114 &1467009190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467009186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc5fd29c2421a943a871f5014a00b14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonClickSound
 --- !u!1 &1490515292 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6429324798076190156, guid: d5f0a3e91dd2d3c4a83e7ed78fff4f75, type: 3}

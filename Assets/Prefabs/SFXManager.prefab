@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5622608714191331241}
   - component: {fileID: 3471385633707412801}
   - component: {fileID: 384299416152266716}
+  - component: {fileID: 95538859777475257}
   - component: {fileID: 2016853427750921251}
   m_Layer: 0
   m_Name: SFXManager
@@ -47,9 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36469b76595d97540ad1024de0d5f21a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
-  _componentIndexCache: 255
+  _componentIndexCache: 0
   _addedNetworkObject: {fileID: 2016853427750921251}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 2016853427750921251}
   sfxLibrary: {fileID: 384299416152266716}
   sfx2DSource: {fileID: 7420732625671070758}
 --- !u!114 &384299416152266716
@@ -94,10 +95,25 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 6a806e6d938b60a419bf512820464e65, type: 3}
   - groupID: HoleBlocked
     clips:
-    - {fileID: 8300000, guid: b0538284e6d367c4280661220d3785d5, type: 3}
+    - {fileID: 8300000, guid: aa751c31e44c7b548b0e851d0431914b, type: 3}
   - groupID: PikeSound
     clips:
     - {fileID: 8300000, guid: 0deefb8c42087554a9aa7888f3721d88, type: 3}
+  - groupID: ClickSound
+    clips:
+    - {fileID: 8300000, guid: 14e10997784888c4fa7031db64838cb5, type: 3}
+--- !u!114 &95538859777475257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2471429918654625907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc5fd29c2421a943a871f5014a00b14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonClickSound
 --- !u!114 &2016853427750921251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,7 +132,8 @@ MonoBehaviour:
   <ComponentIndex>k__BackingField: 0
   <PredictedSpawn>k__BackingField: {fileID: 0}
   <PredictedOwner>k__BackingField: {fileID: 0}
-  NetworkBehaviours: []
+  NetworkBehaviours:
+  - {fileID: 3471385633707412801}
   InitializedParentNetworkBehaviour: {fileID: 0}
   InitializedNestedNetworkObjects: []
   RuntimeParentNetworkBehaviour: {fileID: 0}
@@ -127,7 +144,7 @@ MonoBehaviour:
   _initializeOrder: 0
   _preventDespawnOnDisconnect: 0
   _defaultDespawnType: 0
-  _initializedTimestamp: 0
+  _initializedTimestamp: -8584289705037590487
   NetworkObserver: {fileID: 0}
   _enablePrediction: 0
   _predictionType: 0
@@ -143,15 +160,15 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 65535
+  <PrefabId>k__BackingField: 2
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 6774232401532701889
   SceneId: 0
   SerializedTransformProperties:
     Position: {x: 0, y: 0, z: 0}
-    Rotation: {x: 0, y: 0, z: 0, w: 0}
-    Scale: {x: 0, y: 0, z: 0}
-    IsValid: 0
+    Rotation: {x: 0, y: 0, z: 0, w: 1}
+    Scale: {x: 1, y: 1, z: 1}
+    IsValid: 1
 --- !u!1 &4425259432359760040
 GameObject:
   m_ObjectHideFlags: 0
