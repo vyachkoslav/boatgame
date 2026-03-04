@@ -176,11 +176,8 @@ public class EscMenuController : MonoBehaviour
         {
             case 0:
                 Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
-                Screen.fullScreen = true;
                 break;
             case 1:
-                Screen.fullScreenMode = FullScreenMode.Windowed;
-                Screen.fullScreen = false;
                 if (resolutionDropdown != null)
                 {
                     Resolution res = resolutions[resolutionDropdown.value];
@@ -188,8 +185,7 @@ public class EscMenuController : MonoBehaviour
                 }
                 break;
             case 2:
-                Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
-                Screen.fullScreen = true;
+                Screen.SetResolution(resolutions[0].width, resolutions[0].height, FullScreenMode.FullScreenWindow);
                 break;
         }
         PlayerPrefs.SetInt("WindowMode", index);
@@ -223,34 +219,31 @@ private void LoadSettings()
     
     if (graphicsSlider != null)
     {
-        int savedQuality = PlayerPrefs.GetInt("GraphicsQuality", 1);
+        int savedQuality = PlayerPrefs.GetInt("GraphicsQuality", 3);
         graphicsSlider.value = savedQuality;
         QualitySettings.SetQualityLevel(savedQuality, true);
     }
     
     if (windowModeDropdown != null)
     {
-        int savedMode = PlayerPrefs.GetInt("WindowMode", 0);
+        int savedMode = PlayerPrefs.GetInt("WindowMode", WindowedFullscreen);
         windowModeDropdown.value = savedMode;
         
         switch(savedMode)
         {
             case 0:
                 Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
-                Screen.fullScreen = true;
                 break;
             case 1:
                 Screen.fullScreenMode = FullScreenMode.Windowed;
-                Screen.fullScreen = false;
                 break;
             case 2:
-                Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
-                Screen.fullScreen = true;
+                Screen.SetResolution(resolutions[0].width, resolutions[0].height, FullScreenMode.FullScreenWindow);
                 break;
         }
     }
     
-    if (resolutionDropdown != null)
+    if (resolutionDropdown != null && Screen.fullScreenMode is not FullScreenMode.FullScreenWindow)
     {
         int savedRes = PlayerPrefs.GetInt("ResolutionIndex", 0);
         resolutionDropdown.value = savedRes;
