@@ -21,6 +21,7 @@ public class ObjectSpawner : MonoBehaviour
     [SerializeField] private float initialDelay = 1f;
     [SerializeField] private bool useRandomIntervals = false;
     [SerializeField] private Vector2 randomIntervalRange = new Vector2(1f, 3f);
+    [SerializeField] private float startSpawnDelay = 0.5f; //Delay for each object at the start so they don't spawn all at once
 
 
     [Header("End Zone Settings")]
@@ -106,7 +107,8 @@ public class ObjectSpawner : MonoBehaviour
         spawnTimers = new List<float>();
         for (int i = 0; i < objectsToSpawn.Count; i++)
         {
-            spawnTimers.Add(initialDelay);
+            float timerDelay = initialDelay + (i * startSpawnDelay); // Stagger the initial spawn times
+            spawnTimers.Add(timerDelay);
         }
     }
 

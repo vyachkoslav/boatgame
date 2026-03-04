@@ -3890,8 +3890,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -440}
-  m_SizeDelta: {x: 0, y: -920}
+  m_AnchoredPosition: {x: 0, y: -490}
+  m_SizeDelta: {x: 0, y: -1020}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1712204713
 CanvasRenderer:
@@ -5089,6 +5089,14 @@ PrefabInstance:
     - target: {fileID: 7440253860901218707, guid: 45800f56681275746b3300566a99732b, type: 3}
       propertyPath: m_LocalPosition.z
       value: 5.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 8230501236755842410, guid: 45800f56681275746b3300566a99732b, type: 3}
+      propertyPath: initialDelay
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8230501236755842410, guid: 45800f56681275746b3300566a99732b, type: 3}
+      propertyPath: startSpawnDelay
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8230501236755842410, guid: 45800f56681275746b3300566a99732b, type: 3}
       propertyPath: useRandomIntervals
