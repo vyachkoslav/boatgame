@@ -1,7 +1,8 @@
 using UnityEngine;
 using TMPro;
+using FishNet.Object;
 
-public class HoleCounterHUD : MonoBehaviour
+public class HoleCounterHUD : NetworkBehaviour
 {
     public static HoleCounterHUD Instance { get; private set; }
 
@@ -21,12 +22,14 @@ public class HoleCounterHUD : MonoBehaviour
         holeCountIndicator.text = "";
     }
 
+    [ObserversRpc]
     public void UpdateHoleCount(int holeCount)
     {
         if (holeCountIndicator != null)
             holeCountIndicator.text = "Holes Remaining: " + holeCount;
     }
 
+    [ObserversRpc]
     public void ClearHoleCount()
     {
         if (holeCountIndicator != null)
