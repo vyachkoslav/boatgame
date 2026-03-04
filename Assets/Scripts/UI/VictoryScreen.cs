@@ -3,11 +3,13 @@ using System.Collections;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using FishNet;
+using TMPro;
 
 public class VictoryScreen : NetworkBehaviour
 {
     [Header("UI")]
     [SerializeField] private GameObject victoryPanel;
+    [SerializeField] private TextMeshProUGUI victoryText;
     [SerializeField] private float victorySequenceDuration = 10f;
     
     [Header("Camera Targets")]
@@ -19,7 +21,10 @@ public class VictoryScreen : NetworkBehaviour
     [SerializeField] private AnimationCurve panCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
     
     [Header("Delay")]
-    [SerializeField] private float startDelay = 2f; // Delay before victory sequence starts
+    [SerializeField] private float startDelay = 2f;
+    
+    [Header("Text Settings")]
+    [SerializeField] private float typingSpeed = 0.005f;
     
     [Header("Player Control")]
     [SerializeField] private GameObject playerBoat;
@@ -29,6 +34,8 @@ public class VictoryScreen : NetworkBehaviour
     private Vector3 startPosition;
     private Quaternion startRotation;
     private Transform originalCameraParent;
+    private string victoryMessage = "You win!";
+    private bool hasStarted = false;
     
     public override void OnStartClient()
     {
@@ -55,15 +62,16 @@ public class VictoryScreen : NetworkBehaviour
     
     private void OnVictoryStateChanged(bool prev, bool next, bool asServer)
     {
-        if (next)
+        if (next && !hasStarted)
         {
+            hasStarted = true;
             StartCoroutine(VictorySequence());
         }
     }
     
     IEnumerator VictorySequence()
     {
-        // Delay before anything happens
+        // Add delay before anything happens
         yield return new WaitForSeconds(startDelay);
         
         float elapsedTime = 0f;
@@ -83,12 +91,27 @@ public class VictoryScreen : NetworkBehaviour
             startRotation = mainCamera.transform.rotation;
         }
         
+        // Show panel and type out text
         if (victoryPanel != null)
+        {
             victoryPanel.SetActive(true);
+            
+            // Type out the victory text
+            if (victoryText != null)
+            {
+                victoryText.text = "";
+                foreach (char c in victoryMessage)
+                {
+                    victoryText.text += c;
+                    yield return new WaitForSeconds(typingSpeed);
+                }
+            }
+        }
         
         if (damViewTarget == null)
             yield break;
         
+        // Start camera pan while text is fully displayed
         while (elapsedTime < panDuration)
         {
             elapsedTime += Time.deltaTime;
@@ -109,7 +132,7 @@ public class VictoryScreen : NetworkBehaviour
             mainCamera.transform.rotation = damViewTarget.rotation;
         }
         
-        float remainingTime = victorySequenceDuration - panDuration;
+        float remainingTime = victorySequenceDuration - panDuration - (victoryMessage.Length * typingSpeed);
         if (remainingTime > 0)
             yield return new WaitForSeconds(remainingTime);
     }

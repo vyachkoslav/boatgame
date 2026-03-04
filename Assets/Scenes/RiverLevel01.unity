@@ -153,6 +153,7 @@ MonoBehaviour:
   _addedNetworkObject: {fileID: 45990235}
   _networkObjectCache: {fileID: 0}
   victoryPanel: {fileID: 966642658}
+  victoryText: {fileID: 1711413573}
   victorySequenceDuration: 60
   mainCamera: {fileID: 1488211332}
   damViewTarget: {fileID: 2085051592}
@@ -182,6 +183,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   startDelay: 3
+  typingSpeed: 0.005
   playerBoat: {fileID: 1131831344}
   cameraControlScript: {fileID: 1488211330}
 --- !u!4 &45990234
@@ -8144,7 +8146,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You win!
+  m_text: '""'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9d99565b1f8478e4aa3c06b262de532b, type: 2}
   m_sharedMaterial: {fileID: -1581559051645394538, guid: 9d99565b1f8478e4aa3c06b262de532b, type: 2}
