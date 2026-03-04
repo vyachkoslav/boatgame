@@ -29,24 +29,12 @@ namespace UI
         private void ShowImmediate()
         {
             gameObject.SetActive(true);
-            image.color = new Color(image.color.r, image.color.g, image.color.b, 1f);
-            enabledAfterFullOpacity.SetActive(true);
         }
         
         private IEnumerator Show()
         {
             gameObject.SetActive(true);
-            currentTime = 0;
-            image.color = new Color(image.color.r, image.color.g, image.color.b, 0f);
-            enabledAfterFullOpacity?.SetActive(false);
-            while (currentTime < timeToFullOpacity)
-            {
-                currentTime += Time.deltaTime;
-                image.color = new Color(image.color.r, image.color.g, image.color.b,
-                    Mathf.Clamp01(currentTime / timeToFullOpacity));
-                yield return null;
-            }
-            enabledAfterFullOpacity?.SetActive(true);
+            yield return new WaitForSeconds(timeToFullOpacity);
         }
 
         public static void ShowLoadingScreenImmediate()
