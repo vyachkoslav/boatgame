@@ -332,7 +332,7 @@ MonoBehaviour:
   - {fileID: 3925191984065335611}
   - {fileID: 5568890352516352478}
   yOffset: 0
-  buoyancyStrength: 5
+  buoyancyStrength: 10
   damping: 1
 --- !u!114 &4014038200429099700
 MonoBehaviour:
@@ -410,7 +410,7 @@ MonoBehaviour:
   _initializeOrder: 0
   _preventDespawnOnDisconnect: 0
   _defaultDespawnType: 0
-  _initializedTimestamp: -8584307137106062084
+  _initializedTimestamp: -8584290402067621986
   NetworkObserver: {fileID: 0}
   _enablePrediction: 0
   _predictionType: 0
@@ -426,7 +426,7 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 3
+  <PrefabId>k__BackingField: 0
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 2303121588566826961
   SceneId: 0
