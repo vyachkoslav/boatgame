@@ -10283,42 +10283,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 384299416152266716, guid: f5e3c536fbf304241b13cccae4b9245a, type: 3}
-      propertyPath: soundEffects.Array.size
-      value: 6
+    - target: {fileID: 2016853427750921251, guid: f5e3c536fbf304241b13cccae4b9245a, type: 3}
+      propertyPath: SceneId
+      value: 2113252797
       objectReference: {fileID: 0}
-    - target: {fileID: 384299416152266716, guid: f5e3c536fbf304241b13cccae4b9245a, type: 3}
-      propertyPath: soundEffects.Array.data[5].groupID
-      value: HoleBlocked
-      objectReference: {fileID: 0}
-    - target: {fileID: 384299416152266716, guid: f5e3c536fbf304241b13cccae4b9245a, type: 3}
-      propertyPath: soundEffects.Array.data[5].clips.Array.size
+    - target: {fileID: 2016853427750921251, guid: f5e3c536fbf304241b13cccae4b9245a, type: 3}
+      propertyPath: WasActiveDuringEdit
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 384299416152266716, guid: f5e3c536fbf304241b13cccae4b9245a, type: 3}
-      propertyPath: 'soundEffects.Array.data[5].clips.Array.data[0]'
-      value: 
-      objectReference: {fileID: 8300000, guid: aa751c31e44c7b548b0e851d0431914b, type: 3}
-    - target: {fileID: 384299416152266716, guid: f5e3c536fbf304241b13cccae4b9245a, type: 3}
-      propertyPath: 'soundEffects.Array.data[5].clips.Array.data[1]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 123e4b011f358904ba9996accde6b1b9, type: 3}
-    - target: {fileID: 384299416152266716, guid: f5e3c536fbf304241b13cccae4b9245a, type: 3}
-      propertyPath: 'soundEffects.Array.data[5].clips.Array.data[2]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 07ab9d56422852d4aaa864a5ae89dff5, type: 3}
-    - target: {fileID: 384299416152266716, guid: f5e3c536fbf304241b13cccae4b9245a, type: 3}
-      propertyPath: 'soundEffects.Array.data[5].clips.Array.data[3]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 1cc3c08c2f48e374e81e4b2dddfc65e1, type: 3}
-    - target: {fileID: 384299416152266716, guid: f5e3c536fbf304241b13cccae4b9245a, type: 3}
-      propertyPath: 'soundEffects.Array.data[5].clips.Array.data[4]'
-      value: 
-      objectReference: {fileID: 8300000, guid: b914e1768905da34491a4af1bb07a601, type: 3}
-    - target: {fileID: 384299416152266716, guid: f5e3c536fbf304241b13cccae4b9245a, type: 3}
-      propertyPath: 'soundEffects.Array.data[5].clips.Array.data[5]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 6a806e6d938b60a419bf512820464e65, type: 3}
     - target: {fileID: 2471429918654625907, guid: f5e3c536fbf304241b13cccae4b9245a, type: 3}
       propertyPath: m_Name
       value: SFXManager

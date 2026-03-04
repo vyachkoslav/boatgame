@@ -57,6 +57,7 @@ public class PikeEnemy : MonoBehaviour
                 if (shouldChase) 
                 {
                     currentState = PikeState.Chasing;
+                    SoundManager.Instance.PlaySound2D("PikeSound");
                     animator.SetBool("IsChasing", true);
                 } 
                 break;

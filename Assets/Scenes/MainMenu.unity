@@ -119,6 +119,48 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &12193447 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2471429918654625907, guid: f5e3c536fbf304241b13cccae4b9245a, type: 3}
+  m_PrefabInstance: {fileID: 620303158}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &12193449 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 384299416152266716, guid: f5e3c536fbf304241b13cccae4b9245a, type: 3}
+  m_PrefabInstance: {fileID: 620303158}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12193447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d4f1f40b2fdfb4295e148cb3d65518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SoundLibrary
+--- !u!114 &12193450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12193447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1036523b0f9738478aae83a8ea9e0c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OfflineSoundManager
+  sfxLibrary: {fileID: 12193449}
+  sfx2DSource: {fileID: 1501648337}
+--- !u!114 &12193452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12193447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eaf563b4380f9a41ad3d78131bba17f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OfflineButtonClickSound
 --- !u!1001 &189951797
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1254,9 +1296,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2016853427750921251, guid: f5e3c536fbf304241b13cccae4b9245a, type: 3}
+      propertyPath: SceneId
+      value: 2528743099
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016853427750921251, guid: f5e3c536fbf304241b13cccae4b9245a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016853427750921251, guid: f5e3c536fbf304241b13cccae4b9245a, type: 3}
+      propertyPath: WasActiveDuringEdit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016853427750921251, guid: f5e3c536fbf304241b13cccae4b9245a, type: 3}
+      propertyPath: 'NetworkBehaviours.Array.data[0]'
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2471429918654625907, guid: f5e3c536fbf304241b13cccae4b9245a, type: 3}
       propertyPath: m_Name
-      value: SFXManager
+      value: OfflineSFXManager
       objectReference: {fileID: 0}
     - target: {fileID: 5622608714191331241, guid: f5e3c536fbf304241b13cccae4b9245a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1298,10 +1356,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3471385633707412801, guid: f5e3c536fbf304241b13cccae4b9245a, type: 3}
+    - {fileID: 95538859777475257, guid: f5e3c536fbf304241b13cccae4b9245a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2471429918654625907, guid: f5e3c536fbf304241b13cccae4b9245a, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 12193450}
+    - targetCorrespondingSourceObject: {fileID: 2471429918654625907, guid: f5e3c536fbf304241b13cccae4b9245a, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 12193452}
   m_SourcePrefab: {fileID: 100100000, guid: f5e3c536fbf304241b13cccae4b9245a, type: 3}
 --- !u!1 &622178016
 GameObject:
@@ -1817,10 +1883,14 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4003934790999268314, guid: d5f0a3e91dd2d3c4a83e7ed78fff4f75, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4003934790999268314, guid: d5f0a3e91dd2d3c4a83e7ed78fff4f75, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4003934790999268314, guid: d5f0a3e91dd2d3c4a83e7ed78fff4f75, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4003934790999268314, guid: d5f0a3e91dd2d3c4a83e7ed78fff4f75, type: 3}
@@ -1828,7 +1898,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1467009188}
     - target: {fileID: 4003934790999268314, guid: d5f0a3e91dd2d3c4a83e7ed78fff4f75, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 12193452}
+    - target: {fileID: 4003934790999268314, guid: d5f0a3e91dd2d3c4a83e7ed78fff4f75, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4003934790999268314, guid: d5f0a3e91dd2d3c4a83e7ed78fff4f75, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4003934790999268314, guid: d5f0a3e91dd2d3c4a83e7ed78fff4f75, type: 3}
@@ -1836,11 +1914,23 @@ PrefabInstance:
       value: QuitGame
       objectReference: {fileID: 0}
     - target: {fileID: 4003934790999268314, guid: d5f0a3e91dd2d3c4a83e7ed78fff4f75, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: ButtonSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 4003934790999268314, guid: d5f0a3e91dd2d3c4a83e7ed78fff4f75, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: MainMenuButtons, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4003934790999268314, guid: d5f0a3e91dd2d3c4a83e7ed78fff4f75, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: OfflineButtonClickSound, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4003934790999268314, guid: d5f0a3e91dd2d3c4a83e7ed78fff4f75, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4003934790999268314, guid: d5f0a3e91dd2d3c4a83e7ed78fff4f75, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5842327395935676495, guid: d5f0a3e91dd2d3c4a83e7ed78fff4f75, type: 3}
@@ -3424,7 +3514,24 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 12193452}
+        m_TargetAssemblyTypeName: OfflineButtonClickSound, Assembly-CSharp
+        m_MethodName: ButtonSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
+--- !u!82 &1501648337 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7420732625671070758, guid: f5e3c536fbf304241b13cccae4b9245a, type: 3}
+  m_PrefabInstance: {fileID: 620303158}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1553135227
 GameObject:
   m_ObjectHideFlags: 0
@@ -4831,6 +4938,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 12193452}
+        m_TargetAssemblyTypeName: OfflineButtonClickSound, Assembly-CSharp
+        m_MethodName: ButtonSound
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
