@@ -21,20 +21,17 @@ public class HoleDam : NetworkPuzzle
     {
         if (IsServerStarted)
             SpawnHolesServer();
-            // Updates the hole count on the HUD
-            if (HoleCounterHUD.Instance != null)
-                HoleCounterHUD.Instance.UpdateHoleCount(holes.Count);
     }
 
     protected override void OnPuzzleEnd(State state)
     {
         Debug.Log("Puzzle ended " + state);
-        
+
         // Trigger victory screen when puzzle succeeds
         if (state == State.Success && victoryScreen != null)
             victoryScreen.TriggerVictory();
     }
-    
+
     private void SpawnHolesServer()
     {
         foreach (var spot in holesSpots)
@@ -45,6 +42,7 @@ public class HoleDam : NetworkPuzzle
             Spawn(nob);
             holes.Add(nob.gameObject);
         }
+        RpcUpdateHoles(holes.Count);
     }
 
     [Server]
@@ -56,11 +54,16 @@ public class HoleDam : NetworkPuzzle
         PlayBlockVFX(blockerObject.transform.position);
         Despawn(blockerObject);
         Despawn(holeObject);
-        if (HoleCounterHUD.Instance != null)
-            HoleCounterHUD.Instance.UpdateHoleCount(holes.Count);
+        RpcUpdateHoles(holes.Count);
 
         if (holes.Count == 0)
             EndPuzzle(State.Success);
+    }
+
+    [ObserversRpc]
+    private void RpcUpdateHoles(int count)
+    {
+        HoleCounterHUD.Instance.UpdateHoleCount(count);
     }
 
     [ObserversRpc]
@@ -77,6 +80,7 @@ public class HoleDam : NetworkPuzzle
         {
             Despawn(hole);
         }
+
         if (HoleCounterHUD.Instance != null)
             HoleCounterHUD.Instance.ClearHoleCount();
     }
