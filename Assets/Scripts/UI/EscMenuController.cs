@@ -17,18 +17,6 @@ public class EscMenuController : MonoBehaviour
     [SerializeField] private Button quitButton;
     [SerializeField] private Button backButton;
     
-    [Header("Category Buttons")]
-    [SerializeField] private Button audioButton;
-    [SerializeField] private Button graphicsButton;
-    [SerializeField] private Button resolutionButton;
-    [SerializeField] private Button controlsButton;
-    
-    [Header("Category Panels")]
-    [SerializeField] private GameObject audioPanel;
-    [SerializeField] private GameObject graphicsPanel;
-    [SerializeField] private GameObject resolutionPanel;
-    [SerializeField] private GameObject controlsPanel;
-    
     [Header("Audio Sliders")]
     [SerializeField] private Slider masterVolumeSlider;
     //[SerializeField] private Slider sfxVolumeSlider;
@@ -71,17 +59,11 @@ public class EscMenuController : MonoBehaviour
         
         menuPanel.SetActive(false);
         settingsPanel.SetActive(false);
-        CloseAllCategoryPanels();
         
         resumeButton.onClick.AddListener(CloseMenu);
         settingsButton.onClick.AddListener(OpenSettings);
         backButton.onClick.AddListener(CloseSettings);
         quitButton.onClick.AddListener(QuitGame);
-        
-        audioButton.onClick.AddListener(() => ToggleDropdown(audioPanel));
-        graphicsButton.onClick.AddListener(() => ToggleDropdown(graphicsPanel));
-        resolutionButton.onClick.AddListener(() => ToggleDropdown(resolutionPanel));
-        controlsButton.onClick.AddListener(() => ToggleDropdown(controlsPanel));
         
         if (masterVolumeSlider != null)
             masterVolumeSlider.onValueChanged.AddListener(OnMasterVolumeChanged);
@@ -259,7 +241,6 @@ private void LoadSettings()
         isMenuOpen = true;
         menuPanel.SetActive(true);
         settingsPanel.SetActive(false);
-        CloseAllCategoryPanels();
         
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -270,7 +251,6 @@ private void LoadSettings()
         isMenuOpen = false;
         menuPanel.SetActive(false);
         settingsPanel.SetActive(false);
-        CloseAllCategoryPanels();
 
         if (InstanceFinder.IsClientStarted)
         {
@@ -283,14 +263,12 @@ private void LoadSettings()
     {
         menuPanel.SetActive(false);
         settingsPanel.SetActive(true);
-        CloseAllCategoryPanels();
     }
     
     void CloseSettings()
     {
         settingsPanel.SetActive(false);
         menuPanel.SetActive(true);
-        CloseAllCategoryPanels();
     }
     
     void ToggleDropdown(GameObject panel)
@@ -310,15 +288,6 @@ private void LoadSettings()
             panel.SetActive(true);
             currentlyOpenPanel = panel;
         }
-    }
-    
-    void CloseAllCategoryPanels()
-    {
-        if (audioPanel != null) audioPanel.SetActive(false);
-        if (graphicsPanel != null) graphicsPanel.SetActive(false);
-        if (resolutionPanel != null) resolutionPanel.SetActive(false);
-        if (controlsPanel != null) controlsPanel.SetActive(false);
-        currentlyOpenPanel = null;
     }
     
     void QuitGame()
