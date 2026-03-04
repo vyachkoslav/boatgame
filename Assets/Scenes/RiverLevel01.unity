@@ -4309,14 +4309,6 @@ PrefabInstance:
       propertyPath: WasActiveDuringEdit
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3313064229374554711, guid: df0249c16a58bfb4ebe45789e7553485, type: 3}
-      propertyPath: SceneId
-      value: 1752543227
-      objectReference: {fileID: 0}
-    - target: {fileID: 3313064229374554711, guid: df0249c16a58bfb4ebe45789e7553485, type: 3}
-      propertyPath: WasActiveDuringEdit
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3858115168105533185, guid: df0249c16a58bfb4ebe45789e7553485, type: 3}
       propertyPath: anchor.x
       value: 0.2853999
