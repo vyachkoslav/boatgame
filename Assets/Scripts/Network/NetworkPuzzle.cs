@@ -94,7 +94,7 @@ namespace Network
                     break;
                 default:
                     GlobalObjects.PuzzleHUD.HideTimer();
-                    GlobalObjects.PuzzleHUD.ShowNotification(next == State.Success ? "Done!" : "Failed :(");
+                    GlobalObjects.PuzzleHUD.ShowNotification(next == State.Success ? "Dam fixed!" : "Time's up!");
                     OnPuzzleEnd(next);
                     break;
             }
