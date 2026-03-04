@@ -2,11 +2,11 @@ using System;
 using FishNet.Object;
 using UnityEngine;
 
-public class SoundManager : NetworkBehaviour
+public class OfflineSoundManager : MonoBehaviour
 {
-    private static SoundManager _instance;
+    private static OfflineSoundManager _instance;
 
-    public static SoundManager Instance { get { return _instance; } }
+    public static OfflineSoundManager Instance { get { return _instance; } }
 
     private static float sfxvolume = 1;
     public float SFXvolume { get { return sfxvolume; } set { sfxvolume = value; } }
@@ -45,7 +45,6 @@ public class SoundManager : NetworkBehaviour
     }*/
 
     //Used for 2D sounds, like menu sounds
-    [ObserversRpc]
     public void PlaySound2D(string soundName)
     {
         sfx2DSource.PlayOneShot(sfxLibrary.GetClipFromName(soundName), sfxvolume);

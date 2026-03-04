@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using FishNet;
 using UnityEngine;
 using UnityEngine.UI;
@@ -38,20 +40,42 @@ public class EscMenuController : MonoBehaviour
     [SerializeField] private PaddlePrediction leftPaddle;
     [SerializeField] private PaddlePrediction rightPaddle;
 
-    private Resolution[] resolutions;
+    private List<Resolution> resolutions = new();
     
     private bool isMenuOpen = false;
     private Keyboard keyboard;
     private GameObject currentlyOpenPanel = null;
+
+    private const int Fullscreen = 0;
+    private const int Windowed = 1;
+    private const int WindowedFullscreen = 2;
+
+    private bool Equals(Resolution x, Resolution y)
+    {
+        return x.width == y.width && x.height == y.height;
+    }
     
     void Start()
     {
-        resolutions = Screen.resolutions;
-        resolutionDropdown.options.Clear();
-        foreach (var res in resolutions)
+        foreach (var res in Screen.resolutions)
         {
-            resolutionDropdown.options.Add(new TMP_Dropdown.OptionData(res.ToString()));
-            if (Screen.currentResolution.Equals(res))
+            if (resolutions.Count > 0 && Equals(resolutions[^1], res))
+            {
+                if (res.refreshRateRatio.CompareTo(resolutions[^1].refreshRateRatio) == 1)
+                    resolutions[^1] = res;
+                continue;
+            }
+            resolutions.Add(res);
+        }
+        // higher res on top
+        resolutions.Reverse();
+        
+        resolutionDropdown.options.Clear();
+        var currentRes = Screen.currentResolution;
+        foreach (var res in  resolutions)
+        {
+            resolutionDropdown.options.Add(new TMP_Dropdown.OptionData($"{res.width} x {res.height}"));
+            if (Equals(currentRes, res) && currentRes.refreshRateRatio.Equals(res.refreshRateRatio))
                 resolutionDropdown.SetValueWithoutNotify(resolutionDropdown.options.Count - 1);
         }
         
@@ -91,6 +115,17 @@ public class EscMenuController : MonoBehaviour
     
     void Update()
     {
+        resolutionDropdown.interactable = Screen.fullScreenMode is FullScreenMode.ExclusiveFullScreen or FullScreenMode.Windowed;
+        var mode = Screen.fullScreenMode switch
+        {
+            FullScreenMode.ExclusiveFullScreen => Fullscreen,
+            FullScreenMode.FullScreenWindow => WindowedFullscreen,
+            FullScreenMode.MaximizedWindow => Windowed,
+            FullScreenMode.Windowed => Windowed,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+        windowModeDropdown.SetValueWithoutNotify(mode);
+        
         if (keyboard == null) return;
         
         if (keyboard.escapeKey.wasPressedThisFrame)
@@ -127,7 +162,7 @@ public class EscMenuController : MonoBehaviour
     
     public void OnResolutionChanged(int index)
     {
-        if (index >= 0 && index < resolutions.Length)
+        if (index >= 0 && index < resolutions.Count)
         {
             Resolution res = resolutions[index];
             Screen.SetResolution(res.width, res.height, Screen.fullScreenMode);
@@ -141,11 +176,8 @@ public class EscMenuController : MonoBehaviour
         {
             case 0:
                 Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
-                Screen.fullScreen = true;
                 break;
             case 1:
-                Screen.fullScreenMode = FullScreenMode.Windowed;
-                Screen.fullScreen = false;
                 if (resolutionDropdown != null)
                 {
                     Resolution res = resolutions[resolutionDropdown.value];
@@ -153,8 +185,7 @@ public class EscMenuController : MonoBehaviour
                 }
                 break;
             case 2:
-                Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
-                Screen.fullScreen = true;
+                Screen.SetResolution(resolutions[0].width, resolutions[0].height, FullScreenMode.FullScreenWindow);
                 break;
         }
         PlayerPrefs.SetInt("WindowMode", index);
@@ -188,34 +219,31 @@ private void LoadSettings()
     
     if (graphicsSlider != null)
     {
-        int savedQuality = PlayerPrefs.GetInt("GraphicsQuality", 1);
+        int savedQuality = PlayerPrefs.GetInt("GraphicsQuality", 3);
         graphicsSlider.value = savedQuality;
         QualitySettings.SetQualityLevel(savedQuality, true);
     }
     
     if (windowModeDropdown != null)
     {
-        int savedMode = PlayerPrefs.GetInt("WindowMode", 0);
+        int savedMode = PlayerPrefs.GetInt("WindowMode", WindowedFullscreen);
         windowModeDropdown.value = savedMode;
         
         switch(savedMode)
         {
             case 0:
                 Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
-                Screen.fullScreen = true;
                 break;
             case 1:
                 Screen.fullScreenMode = FullScreenMode.Windowed;
-                Screen.fullScreen = false;
                 break;
             case 2:
-                Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
-                Screen.fullScreen = true;
+                Screen.SetResolution(resolutions[0].width, resolutions[0].height, FullScreenMode.FullScreenWindow);
                 break;
         }
     }
     
-    if (resolutionDropdown != null)
+    if (resolutionDropdown != null && Screen.fullScreenMode is not FullScreenMode.FullScreenWindow)
     {
         int savedRes = PlayerPrefs.GetInt("ResolutionIndex", 0);
         resolutionDropdown.value = savedRes;
