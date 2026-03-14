@@ -11,14 +11,17 @@ public class EscMenuController : MonoBehaviour
 {
     [Header("UI Panels")]
     [SerializeField] private GameObject menuPanel;
+    [SerializeField] private GameObject helpPanel;
     [SerializeField] private GameObject settingsPanel;
     
     [Header("Main Buttons")]
     [SerializeField] private Button resumeButton;
+    [SerializeField] private Button helpButton;
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button quitButton;
-    [SerializeField] private Button backButton;
-    
+    [SerializeField] private Button settingsBackButton;
+    [SerializeField] private Button helpBackButton;
+
     [Header("Audio Sliders")]
     [SerializeField] private Slider masterVolumeSlider;
     [SerializeField] private Slider voiceOutVolumeSlider;
@@ -80,8 +83,10 @@ public class EscMenuController : MonoBehaviour
         settingsPanel.SetActive(false);
         
         resumeButton.onClick.AddListener(CloseMenu);
+        helpButton.onClick.AddListener(OpenHelp);
+        helpBackButton.onClick.AddListener(CloseHelp);
         settingsButton.onClick.AddListener(OpenSettings);
-        backButton.onClick.AddListener(CloseSettings);
+        settingsBackButton.onClick.AddListener(CloseSettings);
         quitButton.onClick.AddListener(QuitGame);
         
         if (masterVolumeSlider != null)
@@ -256,7 +261,8 @@ private void LoadSettings()
         isMenuOpen = true;
         menuPanel.SetActive(true);
         settingsPanel.SetActive(false);
-        
+        helpPanel.SetActive(false);
+
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
@@ -266,12 +272,25 @@ private void LoadSettings()
         isMenuOpen = false;
         menuPanel.SetActive(false);
         settingsPanel.SetActive(false);
+        helpPanel.SetActive(false);
 
         if (InstanceFinder.IsClientStarted)
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
         }
+    }
+
+    void OpenHelp()
+    {
+        menuPanel.SetActive(false);
+        helpPanel.SetActive(true);
+    }
+
+    void CloseHelp()
+    {
+        helpPanel.SetActive(false);
+        menuPanel.SetActive(true);
     }
     
     void OpenSettings()
