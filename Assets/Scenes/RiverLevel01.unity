@@ -2179,6 +2179,7 @@ GameObject:
   - component: {fileID: 301262932}
   - component: {fileID: 301262933}
   - component: {fileID: 301262931}
+  - component: {fileID: 301262934}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -2372,6 +2373,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HoleCounterHUD
   holeCountIndicator: {fileID: 2135513480}
+--- !u!114 &301262934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301262925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5339e1e59b218146bf3054335f686a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GoalInstructions
+  goalText: Get to the dam in the distance.
+  HUDNotification: {fileID: 113735807}
+  TutorialUI: {fileID: 1595363841}
+  startDelay: 3
+  typingSpeed: 0.04
+  visibleDuration: 5
 --- !u!1 &302490869
 GameObject:
   m_ObjectHideFlags: 0
@@ -3001,7 +3020,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3794048636270128499, guid: 78db161a31f5485478889e785126fd08, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -25.299927
+      value: -25.299805
       objectReference: {fileID: 0}
     - target: {fileID: 4046478397508451357, guid: 78db161a31f5485478889e785126fd08, type: 3}
       propertyPath: m_LocalScale.x
@@ -3086,6 +3105,14 @@ PrefabInstance:
     - target: {fileID: 7402260107525595398, guid: 78db161a31f5485478889e785126fd08, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -400
+      objectReference: {fileID: 0}
+    - target: {fileID: 8272016240140776043, guid: 78db161a31f5485478889e785126fd08, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 148.6001
+      objectReference: {fileID: 0}
+    - target: {fileID: 8272016240140776043, guid: 78db161a31f5485478889e785126fd08, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -95.700195
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

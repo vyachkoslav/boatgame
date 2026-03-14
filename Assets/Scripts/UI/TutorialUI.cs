@@ -53,6 +53,8 @@ namespace UI
         private Elements e;
         private static TutorialUI instance;
 
+        public bool IsTutorialComplete { get; private set; }
+
         private void Awake()
         {
             Assert.IsNull(instance);
@@ -117,6 +119,7 @@ namespace UI
             e.PaddleControls.visible = false;
             yield return new WaitForSeconds(0.5f);
             yield return DisplayCameraControls();
+            IsTutorialComplete = true;
         }
 
         private IEnumerator DrawText(Label label, string text, float letterDelay)
